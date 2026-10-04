@@ -1,6 +1,18 @@
+import HeaderBox from "@/components/HeaderBox"
+
 const Home = () => {
+    const user = { firstName: "John", lastName: "Doe" }
     return (
-        <div>Home</div>
+        <section className="home">
+            <div className="home-content">
+                <header className="home-header">
+                    <HeaderBox title={<>
+                        Welcome
+                        <span className="text-bankGradient">&nbsp; {user.firstName}</span>
+                        </>} subtext="This is the subtext for the home page." />
+                </header>
+            </div>
+        </section>
     )
 }
 
