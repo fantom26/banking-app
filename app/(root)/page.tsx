@@ -11,7 +11,7 @@ const Home = () => {
                         Welcome
                         <span className="text-bankGradient">&nbsp; {user.firstName}</span>
                         </>} subtext="This is the subtext for the home page." />
-                        <TotalBalanceBox accounts={[]} totalBanks={3} totalCurrentBalance={1000} />
+                        <TotalBalanceBox accounts={[]} totalBanks={3} totalCurrentBalance={12345.67} />
                 </header>
             </div>
         </section>
