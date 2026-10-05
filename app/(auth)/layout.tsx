@@ -1,7 +1,3 @@
-export default function RootLayout({ children }: LayoutProps<"/">) {
-  return (
-    <main>
-        {children}
-    </main>
-  );
+export default function RootLayout({ children }: LayoutProps<'/'>) {
+  return <main>{children}</main>
 }

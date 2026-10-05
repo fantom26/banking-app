@@ -1,14 +1,9 @@
-import CountUp from "react-countup"
+import CountUp from 'react-countup'
 
-const AnimatedCounter = ({amount}: {amount: number}) => {
+const AnimatedCounter = ({ amount }: { amount: number }) => {
   return (
     <>
-        <CountUp
-            decimals={2}
-            decimal=","
-            prefix="$"
-            end={amount} 
-        />
+      <CountUp decimals={2} decimal=',' prefix='$' end={amount} />
     </>
   )
 }
