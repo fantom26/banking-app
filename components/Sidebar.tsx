@@ -4,8 +4,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
+import { cn } from 'cn'
+
 import { sidebarLinks } from '@/constants'
-import { cn } from '@/lib/utils'
 
 const Sidebar = () => {
   const pathName = usePathname()

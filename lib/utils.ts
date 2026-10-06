@@ -1,6 +1,4 @@
-import { type ClassValue, clsx } from 'clsx'
 import qs from 'query-string'
-import { twMerge } from 'tailwind-merge'
 import { z } from 'zod'
 
 export const signInFormSchema = z.object({
@@ -19,10 +17,6 @@ export const signUpFormSchema = z.object({
   dateOfBirth: z.string().min(3),
   ssn: z.string().min(3)
 })
-
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
-}
 
 // FORMAT DATE TIME
 export const formatDateTime = (dateString: Date) => {
