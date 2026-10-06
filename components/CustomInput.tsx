@@ -1,19 +1,21 @@
-import { Control, FieldPath } from 'react-hook-form'
-import { z } from 'zod'
-
-import { signInFormSchema } from '@/lib/utils'
+import { Control, FieldPath, FieldValues } from 'react-hook-form'
 
 import { FormControl, FormField, FormLabel, FormMessage } from './ui/form'
 import { Input } from './ui/input'
 
-interface CustomInput {
-  control: Control<z.infer<typeof signInFormSchema>>
-  name: FieldPath<z.infer<typeof signInFormSchema>>
+interface CustomInputProps<T extends FieldValues> {
+  control: Control<T>
+  name: FieldPath<T>
   label: string
   placeholder: string
 }
 
-const CustomInput = ({ control, name, label, placeholder }: CustomInput) => {
+const CustomInput = <T extends FieldValues>({
+  control,
+  name,
+  label,
+  placeholder
+}: CustomInputProps<T>) => {
   return (
     <FormField
       control={control}
