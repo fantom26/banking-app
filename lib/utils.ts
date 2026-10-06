@@ -1,6 +1,24 @@
 import { type ClassValue, clsx } from 'clsx'
 import qs from 'query-string'
 import { twMerge } from 'tailwind-merge'
+import { z } from 'zod'
+
+export const signInFormSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8)
+})
+
+export const signUpFormSchema = z.object({
+  ...signInFormSchema.shape,
+  firstName: z.string().min(3),
+  lastName: z.string().min(3),
+  address1: z.string().max(50),
+  city: z.string().max(50),
+  state: z.string().min(2).max(2),
+  postalCode: z.string().min(3).max(6),
+  dateOfBirth: z.string().min(3),
+  ssn: z.string().min(3)
+})
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
