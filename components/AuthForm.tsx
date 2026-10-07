@@ -1,28 +1,28 @@
 'use client'
 
-import { useState } from 'react'
-
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2 } from 'lucide-react'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
 
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
-import { signInFormSchema, signUpFormSchema } from '@/lib/utils'
+import { signIn, signUp } from '@/lib/actions/auth.actions'
+import {
+  signInFormSchema,
+  type SignInParams,
+  signUpFormSchema,
+  type SignUpParams
+} from '@/lib/utils'
 
 import CustomInput from './CustomInput'
 
-type AuthFormValues = z.infer<typeof signInFormSchema> | z.infer<typeof signUpFormSchema>
+type AuthFormValues = SignInParams | SignUpParams
 
 const AuthForm = ({ type }: AuthFormProps) => {
-  const router = useRouter()
-  const [user, setUser] = useState(null)
-  const [isLoading, setIsLoading] = useState(false)
+  const user = null
 
   const formSchema = type === 'sign-in' ? signInFormSchema : signUpFormSchema
 
@@ -30,20 +30,27 @@ const AuthForm = ({ type }: AuthFormProps) => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: '',
-      password: ''
+      password: '',
+      firstName: '',
+      lastName: '',
+      address1: '',
+      city: '',
+      state: '',
+      postalCode: '',
+      dateOfBirth: '',
+      ssn: ''
     }
   })
 
-  const onSubmit = async (data: AuthFormValues) => {
-    setIsLoading(true)
+  const { isSubmitting, errors } = form.formState
 
-    try {
-      //logic
-    } catch (error) {
-      console.log(error)
-    } finally {
-      setIsLoading(false)
-    }
+  const onSubmit = async (data: AuthFormValues) => {
+    const result =
+      type === 'sign-up' && 'firstName' in data
+        ? await signUp(data)
+        : await signIn({ email: data.email, password: data.password })
+
+    if (result?.error) form.setError('root', { message: result.error })
   }
 
   return (
@@ -83,8 +90,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
                       name='lastName'
                       label='Last Name'
                       placeholder='Enter your first name'
-                    />{' '}
-                    2Code has comments. Press enter to view.
+                    />
                   </div>
                   <CustomInput
                     control={form.control}
@@ -143,9 +149,11 @@ const AuthForm = ({ type }: AuthFormProps) => {
                 placeholder='Enter your password'
               />
 
+              {errors.root && <p className='form-message'>{errors.root.message}</p>}
+
               <div className='flex flex-col gap-4'>
-                <Button type='submit' disabled={isLoading} className='form-btn'>
-                  {isLoading ? (
+                <Button type='submit' disabled={isSubmitting} className='form-btn'>
+                  {isSubmitting ? (
                     <>
                       <Loader2 size={20} className='animate-spin' /> &nbsp; Loading...
                     </>

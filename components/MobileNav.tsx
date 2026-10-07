@@ -9,7 +9,9 @@ import { cn } from 'cn'
 import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { sidebarLinks } from '@/constants'
 
-const MobileNav = () => {
+import Footer from './Footer'
+
+const MobileNav = ({ user }: MobileNavProps) => {
   const pathname = usePathname()
 
   return (
@@ -64,6 +66,8 @@ const MobileNav = () => {
                 )
               })}
             </nav>
+
+            <Footer user={user} type='mobile' />
           </div>
         </SheetContent>
       </Sheet>

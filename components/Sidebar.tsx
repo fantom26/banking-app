@@ -8,7 +8,9 @@ import { cn } from 'cn'
 
 import { sidebarLinks } from '@/constants'
 
-const Sidebar = () => {
+import Footer from './Footer'
+
+const Sidebar = ({ user }: SiderbarProps) => {
   const pathName = usePathname()
 
   return (
@@ -45,6 +47,8 @@ const Sidebar = () => {
           )
         })}
       </nav>
+
+      <Footer user={user} />
     </aside>
   )
 }

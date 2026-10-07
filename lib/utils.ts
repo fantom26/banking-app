@@ -12,11 +12,14 @@ export const signUpFormSchema = z.object({
   lastName: z.string().min(3),
   address1: z.string().max(50),
   city: z.string().max(50),
-  state: z.string().min(2).max(2),
+  state: z.string().length(2),
   postalCode: z.string().min(3).max(6),
-  dateOfBirth: z.string().min(3),
+  dateOfBirth: z.iso.date(),
   ssn: z.string().min(3)
 })
+
+export type SignInParams = z.infer<typeof signInFormSchema>
+export type SignUpParams = z.infer<typeof signUpFormSchema>
 
 // FORMAT DATE TIME
 export const formatDateTime = (dateString: Date) => {

@@ -5,38 +5,16 @@ declare type SearchParamProps = {
 
 // ========================================
 
-declare type SignUpParams = {
-  firstName: string
-  lastName: string
-  address1: string
-  city: string
-  state: string
-  postalCode: string
-  dateOfBirth: string
-  ssn: string
-  email: string
-  password: string
-}
-
-declare type LoginUser = {
-  email: string
-  password: string
-}
-
 declare type User = {
-  $id: string
+  id: string
   email: string
-  userId: string
-  dwollaCustomerUrl: string
-  dwollaCustomerId: string
   firstName: string
   lastName: string
-  address1: string
-  city: string
-  state: string
-  postalCode: string
-  dateOfBirth: string
-  ssn: string
+  address1: string | null
+  city: string | null
+  state: string | null
+  postalCode: string | null
+  dateOfBirth: string | null
 }
 
 declare type NewUserParams = {
@@ -201,6 +179,7 @@ declare interface TotalBalanceBoxProps {
 
 declare interface FooterProps {
   user: User
+  type?: 'mobile' | 'desktop'
 }
 
 declare interface RightSidebarProps {
@@ -281,11 +260,6 @@ declare interface CreateTransactionProps {
 
 declare interface getTransactionsByBankIdProps {
   bankId: string
-}
-
-declare interface signInProps {
-  email: string
-  password: string
 }
 
 declare interface getUserInfoProps {
