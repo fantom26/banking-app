@@ -32,7 +32,6 @@ export async function signUp(input: unknown): Promise<SignUpActionResult> {
 
   const supabase = await createClient()
 
-  // Creates the auth user, sets the session cookies, and the trigger creates the public.users row.
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
@@ -74,7 +73,6 @@ export async function signUp(input: unknown): Promise<SignUpActionResult> {
   } catch (err) {
     console.error('Sign-up failed, rolling back the new user:', err)
 
-    // Deleting the auth user cascades to public.users, so the email can sign up again.
     await admin.auth.admin.deleteUser(userId)
     await supabase.auth.signOut()
 

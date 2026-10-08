@@ -30,19 +30,18 @@ declare type Account = {
   id: string
   availableBalance: number
   currentBalance: number
-  officialName: string
+  officialName: string | null
   mask: string
   institutionId: string
   name: string
   type: string
   subtype: string
-  appwriteItemId: string
+  bankRecordId: string
   sharableId: string
 }
 
 declare type Transaction = {
   id: string
-  $id: string
   name: string
   paymentChannel: string
   type: string
@@ -51,21 +50,20 @@ declare type Transaction = {
   pending: boolean
   category: string
   date: string
-  image: string
-  type: string
-  $createdAt: string
-  channel: string
-  senderBankId: string
-  receiverBankId: string
+  image: string | null
+  // Set only for transfers between users (stored in the database, not Plaid)
+  channel?: string
+  senderBankId?: string
+  receiverBankId?: string
 }
 
 declare type Bank = {
-  $id: string
-  accountId: string
-  bankId: string
+  id: string
+  userId: string
+  bankId: string // Plaid item_id
+  accountId: string // Plaid account_id
   accessToken: string
   fundingSourceUrl: string
-  userId: string
   sharableId: string
 }
 
@@ -117,7 +115,7 @@ declare interface CreditCardProps {
 
 declare interface BankInfoProps {
   account: Account
-  appwriteItemId?: string
+  bankRecordId?: string
   type: 'full' | 'card'
 }
 
@@ -170,7 +168,7 @@ declare interface BankDropdownProps {
 
 declare interface BankTabItemProps {
   account: Account
-  appwriteItemId?: string
+  bankRecordId?: string
 }
 
 declare interface TotalBalanceBoxProps {
@@ -187,7 +185,7 @@ declare interface FooterProps {
 declare interface RightSidebarProps {
   user: User
   transactions: Transaction[]
-  banks: Bank[] & Account[]
+  banks: Account[]
 }
 
 declare interface SiderbarProps {
@@ -197,7 +195,7 @@ declare interface SiderbarProps {
 declare interface RecentTransactionsProps {
   accounts: Account[]
   transactions: Transaction[]
-  appwriteItemId: string
+  bankRecordId: string
   page: number
 }
 
@@ -218,10 +216,6 @@ declare interface CategoryProps {
   category: CategoryCount
 }
 
-declare interface DoughnutChartProps<T> {
-  data: T[]
-}
-
 declare interface PaymentTransferFormProps {
   accounts: Account[]
 }
@@ -232,7 +226,8 @@ declare interface getAccountsProps {
 }
 
 declare interface getAccountProps {
-  appwriteItemId: string
+  bankRecordId: string
+  userId: string
 }
 
 declare interface getInstitutionProps {
@@ -286,7 +281,8 @@ declare interface getBanksProps {
 }
 
 declare interface getBankProps {
-  documentId: string
+  bankRecordId: string
+  userId: string
 }
 
 declare interface getBankByAccountIdProps {
