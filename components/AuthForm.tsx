@@ -1,5 +1,7 @@
 'use client'
 
+import { useState } from 'react'
+
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -18,11 +20,12 @@ import {
 } from '@/lib/utils'
 
 import CustomInput from './CustomInput'
+import PlaidLink from './PlaidLinks'
 
 type AuthFormValues = SignInParams | SignUpParams
 
 const AuthForm = ({ type }: AuthFormProps) => {
-  const user = null
+  const [user, setUser] = useState<User | null>(null)
 
   const formSchema = type === 'sign-in' ? signInFormSchema : signUpFormSchema
 
@@ -50,7 +53,8 @@ const AuthForm = ({ type }: AuthFormProps) => {
         ? await signUp(data)
         : await signIn({ email: data.email, password: data.password })
 
-    if (result?.error) form.setError('root', { message: result.error })
+    if ('user' in result) setUser(result.user)
+    else form.setError('root', { message: result.error })
   }
 
   return (
@@ -71,7 +75,9 @@ const AuthForm = ({ type }: AuthFormProps) => {
         </div>
       </header>
       {user ? (
-        <div className='flex flex-col gap-4'>{/* PlaidLink */}</div>
+        <div className='flex flex-col gap-4'>
+          <PlaidLink user={user} variant='primary' />
+        </div>
       ) : (
         <>
           <Form {...form}>

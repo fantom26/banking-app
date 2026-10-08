@@ -15,6 +15,8 @@ declare type User = {
   state: string | null
   postalCode: string | null
   dateOfBirth: string | null
+  dwollaCustomerId: string | null
+  dwollaCustomerUrl: string | null
 }
 
 declare type NewUserParams = {
@@ -268,7 +270,6 @@ declare interface getUserInfoProps {
 
 declare interface exchangePublicTokenProps {
   publicToken: string
-  user: User
 }
 
 declare interface createBankAccountProps {

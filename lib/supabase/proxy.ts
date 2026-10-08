@@ -46,9 +46,13 @@ export async function updateSession(request: NextRequest) {
 
   const { pathname } = request.nextUrl
   const isAuthRoute = AUTH_ROUTES.some((route) => pathname.startsWith(route))
+  // Server Actions are POSTs to the page they run on. A redirect breaks the action
+  // response, and each action checks auth itself.
+  const isServerAction = request.headers.has('next-action')
 
   if (!isAuthenticated && !isAuthRoute) return redirectTo(request, '/sign-in', supabaseResponse)
-  if (isAuthenticated && isAuthRoute) return redirectTo(request, '/', supabaseResponse)
+  if (isAuthenticated && isAuthRoute && !isServerAction)
+    return redirectTo(request, '/', supabaseResponse)
 
   return supabaseResponse
 }

@@ -6,12 +6,55 @@ export type Json = string | number | boolean | null | { [key: string]: Json | un
 export type Database = {
   public: {
     Tables: {
-      profiles: {
+      banks: {
+        Row: {
+          access_token: string
+          account_id: string
+          bank_id: string
+          created_at: string
+          funding_source_url: string
+          id: string
+          user_id: string
+          sharable_id: string
+        }
+        Insert: {
+          access_token: string
+          account_id: string
+          bank_id: string
+          created_at?: string
+          funding_source_url: string
+          id?: string
+          user_id: string
+          sharable_id: string
+        }
+        Update: {
+          access_token?: string
+          account_id?: string
+          bank_id?: string
+          created_at?: string
+          funding_source_url?: string
+          id?: string
+          user_id?: string
+          sharable_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'banks_user_id_fkey'
+            columns: ['user_id']
+            isOneToOne: false
+            referencedRelation: 'users'
+            referencedColumns: ['id']
+          }
+        ]
+      }
+      users: {
         Row: {
           address1: string | null
           city: string | null
           created_at: string
           date_of_birth: string | null
+          dwolla_customer_id: string | null
+          dwolla_customer_url: string | null
           first_name: string
           id: string
           last_name: string
@@ -23,6 +66,8 @@ export type Database = {
           city?: string | null
           created_at?: string
           date_of_birth?: string | null
+          dwolla_customer_id?: string | null
+          dwolla_customer_url?: string | null
           first_name: string
           id: string
           last_name: string
@@ -34,6 +79,8 @@ export type Database = {
           city?: string | null
           created_at?: string
           date_of_birth?: string | null
+          dwolla_customer_id?: string | null
+          dwolla_customer_url?: string | null
           first_name?: string
           id?: string
           last_name?: string

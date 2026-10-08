@@ -35,9 +35,14 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
+## Dwolla note
+
+Payments go through [Dwolla](https://www.dwolla.com), which only supports US customers and US bank accounts. Sign-up therefore needs US address data (2-letter state, SSN last 4, etc.). The app is US-only, and Plaid Link is limited to US institutions.
+
 ## Future ideas
 
 [] add i18n
 [] change app branding
 [] when the transaction is clicked the information about it will occur in the right sidebar?
 [] bank cards could have an animation where user can pick one of them
+[] let users link a bank later (sidebar / My Banks "Connect bank"). Right now, reloading /sign-up after signing up sends the user to / without a linked bank.
