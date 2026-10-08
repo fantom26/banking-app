@@ -45,4 +45,3 @@ Payments go through [Dwolla](https://www.dwolla.com), which only supports US cus
 [] change app branding
 [] when the transaction is clicked the information about it will occur in the right sidebar?
 [] bank cards could have an animation where user can pick one of them
-[] let users link a bank later (sidebar / My Banks "Connect bank"). Right now, reloading /sign-up after signing up sends the user to / without a linked bank.
