@@ -47,6 +47,80 @@ export type Database = {
           }
         ]
       }
+      transactions: {
+        Row: {
+          amount: number
+          category: string
+          channel: string
+          created_at: string
+          email: string
+          id: string
+          name: string
+          receiver_bank_id: string
+          receiver_id: string
+          sender_bank_id: string
+          sender_id: string
+          transfer_url: string | null
+        }
+        Insert: {
+          amount: number
+          category?: string
+          channel?: string
+          created_at?: string
+          email: string
+          id?: string
+          name: string
+          receiver_bank_id: string
+          receiver_id: string
+          sender_bank_id: string
+          sender_id: string
+          transfer_url?: string | null
+        }
+        Update: {
+          amount?: number
+          category?: string
+          channel?: string
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string
+          receiver_bank_id?: string
+          receiver_id?: string
+          sender_bank_id?: string
+          sender_id?: string
+          transfer_url?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'transactions_receiver_bank_id_fkey'
+            columns: ['receiver_bank_id']
+            isOneToOne: false
+            referencedRelation: 'banks'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'transactions_receiver_id_fkey'
+            columns: ['receiver_id']
+            isOneToOne: false
+            referencedRelation: 'users'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'transactions_sender_bank_id_fkey'
+            columns: ['sender_bank_id']
+            isOneToOne: false
+            referencedRelation: 'banks'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'transactions_sender_id_fkey'
+            columns: ['sender_id']
+            isOneToOne: false
+            referencedRelation: 'users'
+            referencedColumns: ['id']
+          }
+        ]
+      }
       users: {
         Row: {
           address1: string | null

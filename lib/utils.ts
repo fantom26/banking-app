@@ -18,8 +18,20 @@ export const signUpFormSchema = z.object({
   ssn: z.string().min(3)
 })
 
+export const transferFormSchema = z.object({
+  email: z.string().email('Invalid email address'),
+  name: z.string().min(4, 'Transfer note is too short'),
+  amount: z
+    .string()
+    .regex(/^\d+(\.\d{1,2})?$/, 'Enter an amount like 5.00')
+    .refine((value) => Number(value) > 0, 'Amount must be greater than 0'),
+  senderBank: z.string().min(1, 'Please select a valid bank account'),
+  sharableId: z.string().min(8, 'Please select a valid sharable Id')
+})
+
 export type SignInParams = z.infer<typeof signInFormSchema>
 export type SignUpParams = z.infer<typeof signUpFormSchema>
+export type TransferFormParams = z.infer<typeof transferFormSchema>
 
 // FORMAT DATE TIME
 export const formatDateTime = (dateString: Date) => {

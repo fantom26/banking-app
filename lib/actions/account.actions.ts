@@ -1,6 +1,7 @@
 import { type AccountBase, type CountryCode, type Transaction as PlaidTransaction } from 'plaid'
 
 import { plaidClient } from '../plaid'
+import { getTransactionsByBankId } from './transaction.actions'
 import { getBank, getBanks } from './user.actions'
 
 import 'server-only'
@@ -30,12 +31,13 @@ export async function getAccount({ bankRecordId, userId }: getAccountProps) {
 
   const { accountData, institutionId } = await getPlaidAccount(bank)
 
-  const [institution, transactions] = await Promise.all([
+  const [institution, plaidTransactions, transferTransactions] = await Promise.all([
     getInstitution({ institutionId }),
-    getTransactions({ accessToken: bank.accessToken })
+    getTransactions({ accessToken: bank.accessToken }),
+    getTransactionsByBankId({ bankId: bank.id, accountId: bank.accountId })
   ])
 
-  const sortedTransactions = [...transactions].sort(
+  const sortedTransactions = [...transferTransactions, ...plaidTransactions].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   )
 

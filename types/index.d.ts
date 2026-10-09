@@ -247,16 +247,18 @@ declare interface CreateFundingSourceOptions {
 
 declare interface CreateTransactionProps {
   name: string
-  amount: string
+  amount: number
+  email: string
   senderId: string
   senderBankId: string
   receiverId: string
   receiverBankId: string
-  email: string
+  transferUrl: string
 }
 
 declare interface getTransactionsByBankIdProps {
-  bankId: string
+  bankId: string // banks.id
+  accountId: string // Plaid account_id, copied onto each transaction
 }
 
 declare interface getUserInfoProps {
@@ -285,6 +287,6 @@ declare interface getBankProps {
   userId: string
 }
 
-declare interface getBankByAccountIdProps {
-  accountId: string
+declare interface getBankBySharableIdProps {
+  sharableId: string
 }

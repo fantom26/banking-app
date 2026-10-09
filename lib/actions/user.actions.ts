@@ -86,3 +86,19 @@ export async function getBank({ bankRecordId, userId }: getBankProps): Promise<B
 
   return data ? toBank(data) : null
 }
+
+export async function getBankBySharableId({
+  sharableId
+}: getBankBySharableIdProps): Promise<Bank | null> {
+  const admin = createAdminClient()
+
+  const { data, error } = await admin
+    .from('banks')
+    .select('*')
+    .eq('sharable_id', sharableId)
+    .maybeSingle()
+
+  if (error) throw new Error(`Failed to load bank: ${error.message}`)
+
+  return data ? toBank(data) : null
+}
