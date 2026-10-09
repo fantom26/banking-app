@@ -48,6 +48,32 @@ export const topCategoryStyles = {
     },
     icon: '/icons/coins.svg'
   },
+  TRANSFER_IN: {
+    bg: 'bg-emerald-50',
+    circleBg: 'bg-emerald-100',
+    text: {
+      main: 'text-emerald-900',
+      count: 'text-emerald-700'
+    },
+    progress: {
+      bg: 'bg-emerald-100',
+      indicator: 'bg-emerald-700'
+    },
+    icon: '/icons/bank-transfer.svg'
+  },
+  LOAN_PAYMENTS: {
+    bg: 'bg-orange-50',
+    circleBg: 'bg-orange-100',
+    text: {
+      main: 'text-orange-900',
+      count: 'text-orange-700'
+    },
+    progress: {
+      bg: 'bg-orange-100',
+      indicator: 'bg-orange-700'
+    },
+    icon: '/icons/credit-card.svg'
+  },
   default: {
     bg: 'bg-pink-25',
     circleBg: 'bg-pink-100',
