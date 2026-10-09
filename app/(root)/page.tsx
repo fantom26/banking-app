@@ -1,6 +1,7 @@
 import { z } from 'zod'
 
 import HeaderBox from '@/components/HeaderBox'
+import RecentTransactions from '@/components/RecentTransactions'
 import RightSidebar from '@/components/RightSidebar'
 import TotalBalanceBox from '@/components/TotalBalanceBox'
 import { getAccount, getAccounts } from '@/lib/actions/account.actions'
@@ -38,6 +39,12 @@ const Home = async ({ searchParams }: PageProps<'/'>) => {
             totalCurrentBalance={accounts.totalCurrentBalance}
           />
         </header>
+        <RecentTransactions
+          accounts={accounts.data}
+          transactions={account?.transactions ?? []}
+          bankRecordId={bankRecordId ?? ''}
+          page={1}
+        />
       </div>
       <RightSidebar
         user={user}

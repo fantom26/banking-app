@@ -115,7 +115,7 @@ declare interface CreditCardProps {
 
 declare interface BankInfoProps {
   account: Account
-  bankRecordId?: string
+  isActive: boolean
   type: 'full' | 'card'
 }
 
@@ -168,7 +168,7 @@ declare interface BankDropdownProps {
 
 declare interface BankTabItemProps {
   account: Account
-  bankRecordId?: string
+  isActive: boolean
 }
 
 declare interface TotalBalanceBoxProps {
