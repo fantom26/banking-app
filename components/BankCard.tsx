@@ -6,7 +6,7 @@ import { formatAmount } from '@/lib/utils'
 const BankCard = ({ account, userName }: CreditCardProps) => {
   return (
     <div className='flex flex-col'>
-      <Link href='/' className='bank-card'>
+      <Link href={`/transaction-history/?id=${account.bankRecordId}`} className='bank-card'>
         <div className='bank-card_content'>
           <div>
             <h2 className='text-16 font-semibold text-white'>{account.name || userName}</h2>
@@ -21,7 +21,7 @@ const BankCard = ({ account, userName }: CreditCardProps) => {
               <h3 className='text-12 font-semibold text-white'>●● / ●●</h3>
             </div>
             <p className='text-14 font-semibold tracking-[1.1px] text-white'>
-              ●●●● ●●●● ●●●● <span className='text-16'>1234</span>
+              ●●●● ●●●● ●●●● <span className='text-16'>{account.mask}</span>
             </p>
           </article>
         </div>

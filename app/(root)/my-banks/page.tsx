@@ -1,5 +1,29 @@
-const MyBanks = () => {
-  return <div>My Banks page</div>
-}
+import BankCard from '@/components/BankCard'
+import HeaderBox from '@/components/HeaderBox'
+import { getAccounts } from '@/lib/actions/account.actions'
+import { getLoggedInUser } from '@/lib/actions/user.actions'
 
-export default MyBanks
+export default async function MyBanks() {
+  const user = await getLoggedInUser()
+  if (!user) return null
+
+  const accounts = await getAccounts({ userId: user.id })
+
+  return (
+    <section className='flex'>
+      <div className='my-banks'>
+        <HeaderBox title='My Bank Accounts' subtext='Effortlessly manage your banking activites.' />
+
+        <div className='space-y-4'>
+          <h2 className='header-2'>Your cards</h2>
+          <div className='flex flex-wrap gap-6'>
+            {accounts &&
+              accounts.data.map((a: Account) => (
+                <BankCard key={a.id} account={a} userName={user?.firstName} />
+              ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
