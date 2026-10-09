@@ -3,7 +3,9 @@ import Link from 'next/link'
 
 import { formatAmount } from '@/lib/utils'
 
-const BankCard = ({ account, userName }: CreditCardProps) => {
+import Copy from './Copy'
+
+const BankCard = ({ account, userName, showBalance }: CreditCardProps) => {
   return (
     <div className='flex flex-col'>
       <Link href={`/transaction-history/?id=${account.bankRecordId}`} className='bank-card'>
@@ -45,6 +47,8 @@ const BankCard = ({ account, userName }: CreditCardProps) => {
           className='absolute top-0 left-0'
         />
       </Link>
+
+      {showBalance && <Copy title={account.sharableId} />}
     </div>
   )
 }

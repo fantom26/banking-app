@@ -19,7 +19,7 @@ export default async function MyBanks() {
           <div className='flex flex-wrap gap-6'>
             {accounts &&
               accounts.data.map((a: Account) => (
-                <BankCard key={a.id} account={a} userName={user?.firstName} />
+                <BankCard key={a.id} account={a} userName={user?.firstName} showBalance />
               ))}
           </div>
         </div>
