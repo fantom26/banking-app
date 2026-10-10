@@ -69,8 +69,6 @@ declare type Bank = {
 
 declare type AccountTypes = 'depository' | 'credit' | 'loan ' | 'investment' | 'other'
 
-declare type Category = 'Food and Drink' | 'Travel' | 'Transfer'
-
 declare type CategoryCount = {
   name: string
   count: number

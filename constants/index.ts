@@ -22,7 +22,7 @@ export const sidebarLinks = [
 ]
 
 export const topCategoryStyles = {
-  'Food and Drink': {
+  FOOD_AND_DRINK: {
     bg: 'bg-blue-25',
     circleBg: 'bg-blue-100',
     text: {
@@ -32,10 +32,9 @@ export const topCategoryStyles = {
     progress: {
       bg: 'bg-blue-100',
       indicator: 'bg-blue-700'
-    },
-    icon: '/icons/monitor.svg'
+    }
   },
-  Travel: {
+  TRAVEL: {
     bg: 'bg-success-25',
     circleBg: 'bg-success-100',
     text: {
@@ -45,8 +44,7 @@ export const topCategoryStyles = {
     progress: {
       bg: 'bg-success-100',
       indicator: 'bg-success-700'
-    },
-    icon: '/icons/coins.svg'
+    }
   },
   TRANSFER_IN: {
     bg: 'bg-emerald-50',
@@ -58,8 +56,7 @@ export const topCategoryStyles = {
     progress: {
       bg: 'bg-emerald-100',
       indicator: 'bg-emerald-700'
-    },
-    icon: '/icons/bank-transfer.svg'
+    }
   },
   LOAN_PAYMENTS: {
     bg: 'bg-orange-50',
@@ -71,8 +68,7 @@ export const topCategoryStyles = {
     progress: {
       bg: 'bg-orange-100',
       indicator: 'bg-orange-700'
-    },
-    icon: '/icons/credit-card.svg'
+    }
   },
   default: {
     bg: 'bg-pink-25',
@@ -84,31 +80,24 @@ export const topCategoryStyles = {
     progress: {
       bg: 'bg-pink-100',
       indicator: 'bg-pink-700'
-    },
-    icon: '/icons/shopping-bag.svg'
+    }
   }
 }
 
 export const transactionCategoryStyles = {
-  'Food and Drink': {
+  FOOD_AND_DRINK: {
     borderColor: 'border-pink-600',
     backgroundColor: 'bg-pink-500',
     textColor: 'text-pink-700',
     chipBackgroundColor: 'bg-inherit'
   },
-  Payment: {
+  BANK_FEES: {
     borderColor: 'border-success-600',
     backgroundColor: 'bg-green-600',
     textColor: 'text-success-700',
     chipBackgroundColor: 'bg-inherit'
   },
-  'Bank Fees': {
-    borderColor: 'border-success-600',
-    backgroundColor: 'bg-green-600',
-    textColor: 'text-success-700',
-    chipBackgroundColor: 'bg-inherit'
-  },
-  Transfer: {
+  TRANSFER_OUT: {
     borderColor: 'border-red-700',
     backgroundColor: 'bg-red-700',
     textColor: 'text-red-700',
@@ -126,7 +115,7 @@ export const transactionCategoryStyles = {
     textColor: 'text-[#027A48]',
     chipBackgroundColor: 'bg-[#ECFDF3]'
   },
-  Travel: {
+  TRAVEL: {
     borderColor: 'border-[#0047AB]',
     backgroundColor: 'bg-blue-500',
     textColor: 'text-blue-700',

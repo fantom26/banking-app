@@ -52,15 +52,17 @@ export async function getTransactionsByBankId({
 }
 
 function toTransaction(row: TransactionRow, bankId: string, accountId: string): Transaction {
+  const isSender = row.sender_bank_id === bankId
+
   return {
     id: row.id,
     name: row.name,
     paymentChannel: row.channel,
-    type: row.sender_bank_id === bankId ? 'debit' : 'credit',
+    type: isSender ? 'debit' : 'credit',
     accountId,
     amount: row.amount,
     pending: false,
-    category: row.category,
+    category: isSender ? 'TRANSFER_OUT' : 'TRANSFER_IN',
     date: row.created_at,
     image: null,
     channel: row.channel,
