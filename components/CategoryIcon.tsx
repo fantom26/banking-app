@@ -1,48 +1,28 @@
-import {
-  ArrowDownLeft,
-  ArrowLeftRight,
-  Briefcase,
-  CarFront,
-  CreditCard,
-  Film,
-  Hammer,
-  HeartPulse,
-  House,
-  Landmark,
-  type LucideIcon,
-  Percent,
-  Plane,
-  Scissors,
-  Shapes,
-  ShoppingBag,
-  Utensils,
-  Wrench
-} from 'lucide-react'
+import Icon, { type IconName } from './Icon'
 
 // Keys are Plaid's personal_finance_category primaries:
 // https://plaid.com/documents/pfc-taxonomy-all.csv
-const categoryIcons: Record<string, LucideIcon> = {
-  INCOME: Briefcase,
-  TRANSFER_IN: ArrowDownLeft,
-  TRANSFER_OUT: ArrowLeftRight,
-  LOAN_PAYMENTS: CreditCard,
-  BANK_FEES: Percent,
-  ENTERTAINMENT: Film,
-  FOOD_AND_DRINK: Utensils,
-  GENERAL_MERCHANDISE: ShoppingBag,
-  HOME_IMPROVEMENT: Hammer,
-  MEDICAL: HeartPulse,
-  PERSONAL_CARE: Scissors,
-  GENERAL_SERVICES: Wrench,
-  GOVERNMENT_AND_NON_PROFIT: Landmark,
-  TRANSPORTATION: CarFront,
-  TRAVEL: Plane,
-  RENT_AND_UTILITIES: House
+const categoryIcons: Record<string, IconName> = {
+  INCOME: 'briefcase',
+  TRANSFER_IN: 'arrow-down-left',
+  TRANSFER_OUT: 'arrow-left-right',
+  LOAN_PAYMENTS: 'credit-card',
+  BANK_FEES: 'percent',
+  ENTERTAINMENT: 'film',
+  FOOD_AND_DRINK: 'utensils',
+  GENERAL_MERCHANDISE: 'shopping-bag',
+  HOME_IMPROVEMENT: 'hammer',
+  MEDICAL: 'heart-pulse',
+  PERSONAL_CARE: 'scissors',
+  GENERAL_SERVICES: 'wrench',
+  GOVERNMENT_AND_NON_PROFIT: 'landmark',
+  TRANSPORTATION: 'car-front',
+  TRAVEL: 'plane',
+  RENT_AND_UTILITIES: 'house'
 }
 
-const CategoryIcon = ({ category, className }: { category: string; className?: string }) => {
-  const Icon = categoryIcons[category] ?? Shapes
-  return <Icon aria-hidden className={className} />
-}
+const CategoryIcon = ({ category, className }: { category: string; className?: string }) => (
+  <Icon name={categoryIcons[category] ?? 'shapes'} className={className} />
+)
 
 export default CategoryIcon

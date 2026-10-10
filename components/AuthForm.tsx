@@ -6,7 +6,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Loader2 } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 
 import { Button } from '@/components/ui/button'
@@ -20,6 +19,7 @@ import {
 } from '@/lib/utils'
 
 import CustomInput from './CustomInput'
+import Icon from './Icon'
 import PlaidLink from './PlaidLinks'
 
 type AuthFormValues = SignInParams | SignUpParams
@@ -161,7 +161,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
                 <Button type='submit' disabled={isSubmitting} className='form-btn'>
                   {isSubmitting ? (
                     <>
-                      <Loader2 size={20} className='animate-spin' /> &nbsp; Loading...
+                      <Icon name='loader' className='size-5 animate-spin' /> &nbsp; Loading...
                     </>
                   ) : type === 'sign-in' ? (
                     'Sign In'

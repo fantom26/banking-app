@@ -1,11 +1,12 @@
 'use client'
 
-import Image from 'next/image'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 import { cn } from 'cn'
 
 import { formatAmount, formUrlQuery, getAccountTypeColors } from '@/lib/utils'
+
+import Icon from './Icon'
 
 const BankInfo = ({ account, isActive, type }: BankInfoProps) => {
   const router = useRouter()
@@ -32,13 +33,7 @@ const BankInfo = ({ account, isActive, type }: BankInfoProps) => {
       })}
     >
       <figure className={`flex-center h-fit rounded-full bg-blue-100 ${colors.lightBg}`}>
-        <Image
-          src='/icons/connect-bank.svg'
-          width={20}
-          height={20}
-          alt={account.subtype}
-          className='m-2 min-w-5'
-        />
+        <Icon name='landmark' className='m-2 size-5 min-w-5 text-gray-500' />
       </figure>
       <div className='flex w-full flex-1 flex-col justify-center gap-1'>
         <div className='bank-info_content'>

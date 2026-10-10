@@ -1,21 +1,23 @@
-export const sidebarLinks = [
+import type { IconName } from '@/components/Icon'
+
+export const sidebarLinks: { icon: IconName; route: string; label: string }[] = [
   {
-    imgURL: '/icons/home.svg',
+    icon: 'house',
     route: '/',
     label: 'Home'
   },
   {
-    imgURL: '/icons/dollar-circle.svg',
+    icon: 'circle-dollar-sign',
     route: '/my-banks',
     label: 'My Banks'
   },
   {
-    imgURL: '/icons/transaction.svg',
+    icon: 'receipt-text',
     route: '/transaction-history',
     label: 'Transaction History'
   },
   {
-    imgURL: '/icons/money-send.svg',
+    icon: 'send',
     route: '/payment-transfer',
     label: 'Transfer Funds'
   }

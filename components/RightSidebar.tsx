@@ -1,10 +1,10 @@
-import Image from 'next/image'
 import Link from 'next/link'
 
 import { countTransactionCategories } from '@/lib/utils'
 
 import BankCard from './BankCard'
 import Category from './Category'
+import Icon from './Icon'
 
 const RightSidebar = ({ user, banks, transactions }: RightSidebarProps) => {
   const categories: CategoryCount[] = countTransactionCategories(transactions)
@@ -31,7 +31,7 @@ const RightSidebar = ({ user, banks, transactions }: RightSidebarProps) => {
         <div className='flex w-full justify-between'>
           <h2 className='header-2'>My Banks</h2>
           <Link href='/' className='flex gap-2'>
-            <Image src='/icons/plus.svg' width={20} height={20} alt='plus' />
+            <Icon name='plus' className='size-5 text-gray-600' />
             <h2 className='text-14 font-semibold text-gray-600'>Add Bank</h2>
           </Link>
         </div>

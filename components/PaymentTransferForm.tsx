@@ -5,13 +5,13 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Loader2 } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 
 import { transferFunds } from '@/lib/actions/transfer.actions'
 import { type TransferFormParams, transferFormSchema } from '@/lib/utils'
 
 import { BankDropdown } from './BankDropdown'
+import Icon from './Icon'
 import { Button } from './ui/button'
 import {
   Form,
@@ -201,7 +201,7 @@ const PaymentTransferForm = ({ accounts }: PaymentTransferFormProps) => {
           <Button type='submit' className='payment-transfer_btn' disabled={isLoading}>
             {isLoading ? (
               <>
-                <Loader2 size={20} className='animate-spin' /> &nbsp; Sending...
+                <Icon name='loader' className='size-5 animate-spin' /> &nbsp; Sending...
               </>
             ) : (
               'Transfer Funds'

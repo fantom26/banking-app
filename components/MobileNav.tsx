@@ -10,6 +10,7 @@ import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from '@/com
 import { sidebarLinks } from '@/constants'
 
 import Footer from './Footer'
+import Icon from './Icon'
 
 const MobileNav = ({ user }: MobileNavProps) => {
   const pathname = usePathname()
@@ -17,14 +18,8 @@ const MobileNav = ({ user }: MobileNavProps) => {
   return (
     <section className='w-fulll max-w-[264px]'>
       <Sheet>
-        <SheetTrigger>
-          <Image
-            src='/icons/hamburger.svg'
-            width={30}
-            height={30}
-            alt='menu'
-            className='cursor-pointer'
-          />
+        <SheetTrigger aria-label='Open navigation'>
+          <Icon name='menu' className='size-[30px] cursor-pointer text-gray-700' />
         </SheetTrigger>
         <SheetContent side='left' className='border-none bg-white'>
           <SheetTitle className='sr-only'>Navigation</SheetTitle>
@@ -45,14 +40,9 @@ const MobileNav = ({ user }: MobileNavProps) => {
                         'bg-bank-gradient': isActive
                       })}
                     >
-                      <Image
-                        src={item.imgURL}
-                        alt={item.label}
-                        width={20}
-                        height={20}
-                        className={cn({
-                          'brightness-[3] invert-0': isActive
-                        })}
+                      <Icon
+                        name={item.icon}
+                        className={cn('size-5 shrink-0 text-gray-500', { 'text-white': isActive })}
                       />
                       <p
                         className={cn('text-16 font-semibold text-black-2', {

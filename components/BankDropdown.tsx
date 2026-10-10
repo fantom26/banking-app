@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 
-import Image from 'next/image'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 import {
@@ -14,6 +13,8 @@ import {
   SelectTrigger
 } from '@/components/ui/select'
 import { formatAmount, formUrlQuery } from '@/lib/utils'
+
+import Icon from './Icon'
 
 export const BankDropdown = ({ accounts = [], setValue, otherStyles }: BankDropdownProps) => {
   const searchParams = useSearchParams()
@@ -46,7 +47,7 @@ export const BankDropdown = ({ accounts = [], setValue, otherStyles }: BankDropd
       disabled={!hasAccounts}
     >
       <SelectTrigger className={`flex w-full bg-white gap-3 md:w-[300px] ${otherStyles}`}>
-        <Image src='icons/credit-card.svg' width={20} height={20} alt='account' />
+        <Icon name='credit-card' className='size-5 shrink-0 text-gray-500' />
         <p className={`line-clamp-1 w-full text-left ${selected ? '' : 'text-gray-500'}`}>
           {selected?.name ?? placeholder}
         </p>

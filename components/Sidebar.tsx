@@ -9,6 +9,7 @@ import { cn } from 'cn'
 import { sidebarLinks } from '@/constants'
 
 import Footer from './Footer'
+import Icon from './Icon'
 import PlaidLink from './PlaidLinks'
 
 const Sidebar = ({ user }: SiderbarProps) => {
@@ -36,12 +37,9 @@ const Sidebar = ({ user }: SiderbarProps) => {
               href={link.route}
               className={cn('sidebar-link', { 'bg-bank-gradient': isActive })}
             >
-              <Image
-                className={cn({ 'brightness-[3] invert-0': isActive })}
-                src={link.imgURL}
-                width={24}
-                height={24}
-                alt={link.label}
+              <Icon
+                name={link.icon}
+                className={cn('size-6 shrink-0 text-gray-500', { 'text-white': isActive })}
               />
               <p className={cn('sidebar-label', { 'text-white!': isActive })}>{link.label}</p>
             </Link>

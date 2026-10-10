@@ -1,6 +1,6 @@
-import Image from 'next/image'
-
 import { signOut } from '@/lib/actions/auth.actions'
+
+import Icon from './Icon'
 
 const Footer = ({ user, type = 'desktop' }: FooterProps) => {
   const isMobile = type === 'mobile'
@@ -24,7 +24,7 @@ const Footer = ({ user, type = 'desktop' }: FooterProps) => {
           className={isMobile ? 'footer_image-mobile' : 'footer_image'}
           aria-label='Log out'
         >
-          <Image src='/icons/logout.svg' fill alt='' />
+          <Icon name='log-out' className='size-5 text-gray-500' />
         </button>
       </form>
     </footer>

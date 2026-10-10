@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { formatAmount } from '@/lib/utils'
 
 import Copy from './Copy'
+import Icon from './Icon'
 
 const BankCard = ({ account, userName, showBalance }: CreditCardProps) => {
   return (
@@ -29,7 +30,7 @@ const BankCard = ({ account, userName, showBalance }: CreditCardProps) => {
         </div>
 
         <div className='bank-card_icon'>
-          <Image src='/icons/Paypass.svg' width={20} height={24} alt='pay' />
+          <Icon name='nfc' className='size-6 text-white' />
           <Image
             src='/icons/mastercard.svg'
             width={45}
