@@ -1,7 +1,7 @@
-import HeaderBox from '@/components/HeaderBox'
-import PaymentTransferForm from '@/components/PaymentTransferForm'
-import { getAccounts } from '@/lib/actions/account.actions'
-import { getLoggedInUser } from '@/lib/actions/user.actions'
+import { getAccounts } from '@/app/_lib/actions/account.actions'
+import { getLoggedInUser } from '@/app/_lib/actions/user.actions'
+import HeaderBox from '@/app/(root)/_components/HeaderBox'
+import PaymentTransferForm from '@/app/(root)/payment-transfer/_components/PaymentTransferForm'
 
 export default async function Transfer() {
   const user = await getLoggedInUser()

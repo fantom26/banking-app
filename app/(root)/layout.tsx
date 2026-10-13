@@ -1,9 +1,9 @@
 import Image from 'next/image'
 import { redirect } from 'next/navigation'
 
-import MobileNav from '@/components/MobileNav'
-import Sidebar from '@/components/Sidebar'
-import { getLoggedInUser } from '@/lib/actions/user.actions'
+import { getLoggedInUser } from '@/app/_lib/actions/user.actions'
+import MobileNav from '@/app/(root)/_components/MobileNav'
+import Sidebar from '@/app/(root)/_components/Sidebar'
 
 export default async function RootLayout({ children }: LayoutProps<'/'>) {
   const user = await getLoggedInUser()

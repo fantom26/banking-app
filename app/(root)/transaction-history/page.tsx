@@ -1,9 +1,9 @@
-import HeaderBox from '@/components/HeaderBox'
-import { Pagination } from '@/components/Pagination'
-import TransactionsTable from '@/components/TransactionsTable'
-import { getAccount, getAccounts } from '@/lib/actions/account.actions'
-import { getLoggedInUser } from '@/lib/actions/user.actions'
-import { formatAmount } from '@/lib/utils'
+import { getAccount, getAccounts } from '@/app/_lib/actions/account.actions'
+import { getLoggedInUser } from '@/app/_lib/actions/user.actions'
+import { formatAmount } from '@/app/_lib/utils'
+import HeaderBox from '@/app/(root)/_components/HeaderBox'
+import { Pagination } from '@/app/(root)/_components/Pagination'
+import TransactionsTable from '@/app/(root)/_components/TransactionsTable'
 
 export default async function TransactionHistory({
   searchParams
