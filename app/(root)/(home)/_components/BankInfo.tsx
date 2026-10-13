@@ -27,9 +27,9 @@ const BankInfo = ({ account, isActive, type }: BankInfoProps) => {
     <div
       onClick={handleBankChange}
       className={cn(`bank-info ${colors.bg}`, {
-        'shadow-sm border-blue-700': type === 'card' && isActive,
+        'border-blue-700 shadow-sm': type === 'card' && isActive,
         'rounded-xl': type === 'card',
-        'hover:shadow-sm cursor-pointer': type === 'card'
+        'cursor-pointer hover:shadow-sm': type === 'card'
       })}
     >
       <figure className={`flex-center h-fit rounded-full bg-blue-100 ${colors.lightBg}`}>
@@ -37,12 +37,12 @@ const BankInfo = ({ account, isActive, type }: BankInfoProps) => {
       </figure>
       <div className='flex w-full flex-1 flex-col justify-center gap-1'>
         <div className='bank-info_content'>
-          <h2 className={`text-16 line-clamp-1 flex-1 font-bold text-blue-900 ${colors.title}`}>
+          <h2 className={`line-clamp-1 flex-1 text-16 font-bold text-blue-900 ${colors.title}`}>
             {account.name}
           </h2>
           {type === 'full' && (
             <p
-              className={`text-12 rounded-full px-3 py-1 font-medium text-blue-700 ${colors.subText} ${colors.lightBg}`}
+              className={`rounded-full px-3 py-1 text-12 font-medium text-blue-700 ${colors.subText} ${colors.lightBg}`}
             >
               {account.subtype}
             </p>

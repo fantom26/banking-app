@@ -15,12 +15,12 @@ const Category = ({ category }: CategoryProps) => {
   topCategoryStyles.default
 
   return (
-    <div className={cn('gap-[18px] flex p-4 rounded-xl', bg)}>
+    <div className={cn('flex gap-[18px] rounded-xl p-4', bg)}>
       <figure className={cn('flex-center size-10 rounded-full', circleBg)}>
         <CategoryIcon category={category.name} className={cn('size-5', count)} />
       </figure>
       <div className='flex w-full flex-1 flex-col gap-2'>
-        <div className='text-14 flex justify-between'>
+        <div className='flex justify-between text-14'>
           <h2 className={cn('font-medium', main)}>{category.name}</h2>
           <h3 className={cn('font-normal', count)}>{category.count}</h3>
         </div>

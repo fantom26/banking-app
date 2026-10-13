@@ -32,7 +32,7 @@ const CustomInput = <T extends FieldValues>({
                 {...field}
               />
             </FormControl>
-            <FormMessage className='form-message mt-2' />
+            <FormMessage className='mt-2 form-message' />
           </div>
         </div>
       )}

@@ -120,12 +120,12 @@
 
 @layer components {
   .sheet-content button {
-    @apply focus:ring-0! focus-visible:ring-transparent! focus:ring-offset-0! focus-visible:ring-offset-0! focus-visible:outline-hidden! focus-visible:border-none!;
+    @apply focus:ring-0! focus:ring-offset-0! focus-visible:border-none! focus-visible:ring-transparent! focus-visible:ring-offset-0! focus-visible:outline-hidden!;
   }
 }
 
 @utility input-class {
-  @apply text-16 placeholder:text-16 rounded-lg border border-gray-300 text-gray-900 placeholder:text-gray-500;
+  @apply rounded-lg border border-gray-300 text-16 text-gray-900 placeholder:text-16 placeholder:text-gray-500;
 }
 
 @utility flex-center {
@@ -181,7 +181,7 @@
 }
 
 @utility home-content {
-  @apply no-scrollbar flex w-full flex-1 flex-col gap-8 px-5 sm:px-8 py-7 lg:py-12 xl:max-h-screen xl:overflow-y-scroll;
+  @apply no-scrollbar flex w-full flex-1 flex-col gap-8 px-5 py-7 sm:px-8 lg:py-12 xl:max-h-screen xl:overflow-y-scroll;
 }
 
 @utility home-header {
@@ -201,7 +201,7 @@
 }
 
 @utility total-balance-amount {
-  @apply text-24 lg:text-30 flex-1 font-semibold text-gray-900;
+  @apply flex-1 text-24 font-semibold text-gray-900 lg:text-30;
 }
 
 @utility recent-transactions {
@@ -209,19 +209,19 @@
 }
 
 @utility view-all-btn {
-  @apply text-14 rounded-lg border border-gray-300 px-4 py-2.5 font-semibold text-gray-700;
+  @apply rounded-lg border border-gray-300 px-4 py-2.5 text-14 font-semibold text-gray-700;
 }
 
 @utility recent-transactions-label {
-  @apply text-20 md:text-24 font-semibold text-gray-900;
+  @apply text-20 font-semibold text-gray-900 md:text-24;
 }
 
 @utility recent-transactions-tablist {
-  @apply custom-scrollbar mb-8 flex w-full flex-nowrap;
+  @apply mb-8 flex custom-scrollbar w-full flex-nowrap;
 }
 
 @utility right-sidebar {
-  @apply no-scrollbar hidden! h-screen! max-h-screen! flex-col! border-l! border-gray-200! xl:flex! w-[355px]! xl:overflow-y-scroll!;
+  @apply no-scrollbar hidden! h-screen! max-h-screen! w-[355px]! flex-col! border-l! border-gray-200! xl:flex! xl:overflow-y-scroll!;
 }
 
 @utility profile-banner {
@@ -233,7 +233,7 @@
 }
 
 @utility profile-img {
-  @apply flex-center absolute -top-8 size-24 rounded-full bg-gray-100 border-8 border-white p-2 shadow-profile;
+  @apply absolute -top-8 flex-center size-24 rounded-full border-8 border-white bg-gray-100 p-2 shadow-profile;
 }
 
 @utility profile-details {
@@ -277,11 +277,11 @@
 }
 
 @utility header-box-title {
-  @apply text-24 lg:text-30 font-semibold text-gray-900;
+  @apply text-24 font-semibold text-gray-900 lg:text-30;
 }
 
 @utility header-box-subtext {
-  @apply text-14 lg:text-16 font-normal text-gray-600;
+  @apply text-14 font-normal text-gray-600 lg:text-16;
 }
 
 @utility bank-card {
@@ -289,7 +289,7 @@
 }
 
 @utility bank-card_content {
-  @apply relative z-10 flex size-full max-w-[228px] flex-col justify-between rounded-l-[20px] bg-gray-700 bg-bank-gradient px-5 pb-4 pt-5;
+  @apply relative z-10 flex size-full max-w-[228px] flex-col justify-between rounded-l-[20px] bg-gray-700 bg-bank-gradient px-5 pt-5 pb-4;
 }
 
 @utility bank-card_icon {
@@ -297,15 +297,15 @@
 }
 
 @utility bank-info {
-  @apply gap-[18px] flex p-4 transition-all border bg-blue-25 border-transparent;
+  @apply flex gap-[18px] border border-transparent bg-blue-25 p-4 transition-all;
 }
 
 @utility category-badge {
-  @apply flex-center truncate w-fit gap-1 rounded-2xl border-[1.5px] py-[2px] pl-1.5 pr-2;
+  @apply flex-center w-fit gap-1 truncate rounded-2xl border-[1.5px] py-[2px] pr-2 pl-1.5;
 }
 
 @utility banktab-item {
-  @apply gap-[18px] border-b-2 flex px-2 sm:px-4 py-2 transition-all;
+  @apply flex gap-[18px] border-b-2 px-2 py-2 transition-all sm:px-4;
 }
 
 @utility mobilenav-sheet {
@@ -313,11 +313,11 @@
 }
 
 @utility mobilenav-sheet_close {
-  @apply flex gap-3 items-center p-4 rounded-lg w-full max-w-60;
+  @apply flex w-full max-w-60 items-center gap-3 rounded-lg p-4;
 }
 
 @utility plaidlink-primary {
-  @apply text-16 rounded-lg border border-bankGradient bg-bank-gradient font-semibold text-white shadow-form;
+  @apply rounded-lg border border-bankGradient bg-bank-gradient text-16 font-semibold text-white shadow-form;
 }
 
 @utility plaidlink-ghost {
@@ -325,11 +325,11 @@
 }
 
 @utility plaidlink-default {
-  @apply flex justify-start! cursor-pointer gap-3 rounded-lg bg-transparent! flex-row;
+  @apply flex cursor-pointer flex-row justify-start! gap-3 rounded-lg bg-transparent!;
 }
 
 @utility auth-asset {
-  @apply flex h-screen w-full sticky top-0 items-center justify-end bg-sky-1 max-lg:hidden;
+  @apply sticky top-0 flex h-screen w-full items-center justify-end bg-sky-1 max-lg:hidden;
 }
 
 @utility auth-form {
@@ -341,7 +341,7 @@
 }
 
 @utility form-label {
-  @apply text-14 w-full max-w-[280px] font-medium text-gray-700;
+  @apply w-full max-w-[280px] text-14 font-medium text-gray-700;
 }
 
 @utility form-message {
@@ -349,11 +349,11 @@
 }
 
 @utility form-btn {
-  @apply text-16 rounded-lg border border-bankGradient bg-bank-gradient font-semibold text-white shadow-form;
+  @apply rounded-lg border border-bankGradient bg-bank-gradient text-16 font-semibold text-white shadow-form;
 }
 
 @utility form-link {
-  @apply text-14 cursor-pointer font-medium text-bankGradient;
+  @apply cursor-pointer text-14 font-medium text-bankGradient;
 }
 
 @utility payment-transfer {
@@ -369,7 +369,7 @@
 }
 
 @utility payment-transfer_form-details {
-  @apply flex flex-col gap-1 border-t border-gray-200 pb-5 pt-6;
+  @apply flex flex-col gap-1 border-t border-gray-200 pt-6 pb-5;
 }
 
 @utility payment-transfer_btn-box {
@@ -377,7 +377,7 @@
 }
 
 @utility payment-transfer_btn {
-  @apply text-14! w-full! bg-bank-gradient! font-semibold! text-white! shadow-form!;
+  @apply w-full! bg-bank-gradient! text-14! font-semibold! text-white! shadow-form!;
 }
 
 @utility root-layout {
@@ -409,7 +409,7 @@
 }
 
 @utility footer_image {
-  @apply relative size-5 max-xl:w-full max-xl:flex max-xl:justify-center max-xl:items-center;
+  @apply relative size-5 max-xl:flex max-xl:w-full max-xl:items-center max-xl:justify-center;
 }
 
 @utility footer_image-mobile {
@@ -417,15 +417,15 @@
 }
 
 @utility sidebar {
-  @apply sticky left-0 top-0 flex h-screen w-fit flex-col justify-between border-r border-gray-200 bg-white pt-8 text-white max-md:hidden sm:p-4 xl:p-6 2xl:w-[355px];
+  @apply sticky top-0 left-0 flex h-screen w-fit flex-col justify-between border-r border-gray-200 bg-white pt-8 text-white max-md:hidden sm:p-4 xl:p-6 2xl:w-[355px];
 }
 
 @utility sidebar-logo {
-  @apply 2xl:text-26 font-ibm-plex-serif text-[26px] font-bold text-black-1 max-xl:hidden;
+  @apply font-ibm-plex-serif text-[26px] font-bold text-black-1 max-xl:hidden 2xl:text-26;
 }
 
 @utility sidebar-link {
-  @apply flex gap-3 items-center py-1 md:p-3 2xl:p-4 rounded-lg justify-center xl:justify-start;
+  @apply flex items-center justify-center gap-3 rounded-lg py-1 md:p-3 xl:justify-start 2xl:p-4;
 }
 
 @utility sidebar-label {

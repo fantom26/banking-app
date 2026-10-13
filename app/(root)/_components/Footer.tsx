@@ -11,10 +11,10 @@ const Footer = ({ user, type = 'desktop' }: FooterProps) => {
       </div>
 
       <div className={isMobile ? 'footer_email-mobile' : 'footer_email'}>
-        <h1 className='text-14 truncate font-semibold text-gray-700'>
+        <h1 className='truncate text-14 font-semibold text-gray-700'>
           {user.firstName} {user.lastName}
         </h1>
-        <p className='text-14 truncate font-normal text-gray-600'>{user.email}</p>
+        <p className='truncate text-14 font-normal text-gray-600'>{user.email}</p>
       </div>
 
       <form action={signOut}>

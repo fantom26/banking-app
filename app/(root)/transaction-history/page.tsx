@@ -54,7 +54,7 @@ export default async function TransactionHistory({
           </div>
           <div className='transactions-account-balance'>
             <p className='text-14'>Current balance</p>
-            <p className='text-24 text-center font-bold'>
+            <p className='text-center text-24 font-bold'>
               {formatAmount(account.data.currentBalance)}
             </p>
           </div>

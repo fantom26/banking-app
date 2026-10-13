@@ -45,7 +45,7 @@ export const BankDropdown = ({ accounts = [], setValue, otherStyles }: BankDropd
       onValueChange={(value) => handleBankChange(value)}
       disabled={!hasAccounts}
     >
-      <SelectTrigger className={`flex w-full bg-white gap-3 md:w-[300px] ${otherStyles}`}>
+      <SelectTrigger className={`flex w-full gap-3 bg-white md:w-[300px] ${otherStyles}`}>
         <Icon name='credit-card' className='size-5 shrink-0 text-gray-500' />
         <p className={`line-clamp-1 w-full text-left ${selected ? '' : 'text-gray-500'}`}>
           {selected?.name ?? placeholder}
@@ -66,7 +66,7 @@ export const BankDropdown = ({ accounts = [], setValue, otherStyles }: BankDropd
               value={account.bankRecordId}
               className='cursor-pointer border-t'
             >
-              <div className='flex flex-col '>
+              <div className='flex flex-col'>
                 <p className='text-16 font-medium'>{account.name}</p>
                 <p className='text-14 font-medium text-blue-600'>
                   {formatAmount(account.currentBalance)}
