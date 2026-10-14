@@ -131,6 +131,48 @@ function toTransaction(transaction: PlaidTransaction): Transaction {
     pending: transaction.pending,
     category: transaction.personal_finance_category?.primary ?? 'OTHER',
     date: transaction.date,
-    image: transaction.logo_url ?? null
+    image: transaction.logo_url ?? null,
+    details: {
+      source: 'plaid',
+      merchantName: transaction.merchant_name ?? null,
+      website: transaction.website ?? null,
+      originalDescription: transaction.original_description ?? null,
+      categoryDetailed: transaction.personal_finance_category?.detailed ?? null,
+      currency: transaction.iso_currency_code ?? transaction.unofficial_currency_code,
+      authorizedDate: transaction.authorized_date,
+      datetime: transaction.datetime,
+      pendingTransactionId: transaction.pending_transaction_id,
+      checkNumber: transaction.check_number ?? null,
+      accountOwner: transaction.account_owner,
+      location: withoutEmpty({
+        Address: transaction.location.address,
+        City: transaction.location.city,
+        Region: transaction.location.region,
+        'Postal code': transaction.location.postal_code,
+        Country: transaction.location.country,
+        'Store number': transaction.location.store_number
+      }),
+      paymentMeta: withoutEmpty({
+        'Reference number': transaction.payment_meta.reference_number,
+        Payee: transaction.payment_meta.payee,
+        Payer: transaction.payment_meta.payer,
+        'By order of': transaction.payment_meta.by_order_of,
+        'Payment method': transaction.payment_meta.payment_method,
+        'Payment processor': transaction.payment_meta.payment_processor,
+        Reason: transaction.payment_meta.reason
+      }),
+      counterparties: (transaction.counterparties ?? []).map(({ name, type, website }) => ({
+        name,
+        type,
+        website
+      }))
+    }
   }
+}
+
+// Keeps only the fields Plaid filled in, keyed by the label shown in the details sidebar.
+function withoutEmpty(fields: Record<string, string | null>) {
+  return Object.fromEntries(
+    Object.entries(fields).filter((entry): entry is [string, string] => Boolean(entry[1]))
+  )
 }

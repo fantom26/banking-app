@@ -2,15 +2,16 @@ import Link from 'next/link'
 
 import Icon from '@/app/_components/Icon'
 import BankCard from '@/app/(root)/_components/BankCard'
+import RightSidebar from '@/app/(root)/_components/RightSidebar'
 import { countTransactionCategories } from '@/app/(root)/(home)/_lib/utils'
 
 import Category from './Category'
 
-const RightSidebar = ({ user, banks, transactions }: RightSidebarProps) => {
+const HomeRightSidebar = ({ user, banks, transactions }: RightSidebarProps) => {
   const categories: CategoryCount[] = countTransactionCategories(transactions)
 
   return (
-    <aside className='right-sidebar'>
+    <RightSidebar>
       <section className='flex flex-col pb-8'>
         <div className='profile-banner' />
         <div className='profile'>
@@ -67,8 +68,8 @@ const RightSidebar = ({ user, banks, transactions }: RightSidebarProps) => {
           </div>
         </div>
       </section>
-    </aside>
+    </RightSidebar>
   )
 }
 
-export default RightSidebar
+export default HomeRightSidebar

@@ -55,7 +55,34 @@ declare type Transaction = {
   channel?: string
   senderBankId?: string
   receiverBankId?: string
+  // Extra fields for the transaction details sidebar
+  details?: TransactionDetails
 }
+
+// Plaid sends null for most of these fields when it doesn't know the value.
+declare type TransactionDetails =
+  | {
+      source: 'plaid'
+      merchantName: string | null
+      website: string | null
+      originalDescription: string | null
+      categoryDetailed: string | null
+      currency: string | null
+      authorizedDate: string | null
+      datetime: string | null
+      pendingTransactionId: string | null
+      checkNumber: string | null
+      accountOwner: string | null
+      location: Record<string, string>
+      paymentMeta: Record<string, string>
+      counterparties: { name: string; type: string; website: string | null }[]
+    }
+  | {
+      source: 'transfer'
+      direction: 'sent' | 'received'
+      email: string
+      transferUrl: string | null
+    }
 
 declare type Bank = {
   id: string
@@ -208,6 +235,9 @@ declare interface CategoryBadgeProps {
 
 declare interface TransactionTableProps {
   transactions: Transaction[]
+  // Adds the Actions column whose "More" item opens the details sidebar
+  showActions?: boolean
+  selectedId?: string
 }
 
 declare interface CategoryProps {

@@ -67,6 +67,12 @@ function toTransaction(row: TransactionRow, bankId: string, accountId: string): 
     image: null,
     channel: row.channel,
     senderBankId: row.sender_bank_id,
-    receiverBankId: row.receiver_bank_id
+    receiverBankId: row.receiver_bank_id,
+    details: {
+      source: 'transfer',
+      direction: isSender ? 'sent' : 'received',
+      email: row.email,
+      transferUrl: row.transfer_url
+    }
   }
 }

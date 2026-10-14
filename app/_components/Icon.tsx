@@ -17,6 +17,7 @@ import {
   type LucideIcon,
   type LucideProps,
   Menu,
+  MoreHorizontal,
   Nfc,
   Percent,
   Plane,
@@ -59,7 +60,8 @@ const icons = {
   shapes: Shapes,
   'shopping-bag': ShoppingBag,
   utensils: Utensils,
-  wrench: Wrench
+  wrench: Wrench,
+  'more-horizontal': MoreHorizontal
 } satisfies Record<string, LucideIcon>
 
 export type IconName = keyof typeof icons
