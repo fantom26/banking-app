@@ -1,9 +1,7 @@
 'use server'
 
-import { hasLocale } from 'next-intl'
-
 import { redirect } from '@/app/_i18n/navigation'
-import { routing } from '@/app/_i18n/routing'
+import { toLocale } from '@/app/_i18n/routing'
 import { createAdminClient } from '@/app/_lib/supabase/admin'
 import { createClient } from '@/app/_lib/supabase/server'
 import { lastPathSegment, signInFormSchema, signUpFormSchema } from '@/app/_lib/utils'
@@ -15,9 +13,6 @@ type AuthActionResult = { error: string }
 type SignUpActionResult = AuthActionResult | { user: User }
 
 // next/root-params is unavailable in Server Actions, so callers pass the current locale
-const toLocale = (locale: unknown) =>
-  hasLocale(routing.locales, locale) ? locale : routing.defaultLocale
-
 export async function signIn(input: unknown, locale: unknown): Promise<AuthActionResult> {
   const parsed = signInFormSchema.safeParse(input)
   if (!parsed.success) return { error: 'Invalid email or password' }

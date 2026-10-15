@@ -1,3 +1,4 @@
+import { hasLocale } from 'next-intl'
 import { defineRouting } from 'next-intl/routing'
 
 export const routing = defineRouting({
@@ -8,6 +9,10 @@ export const routing = defineRouting({
 })
 
 export type Locale = (typeof routing.locales)[number]
+
+// For locales that arrive untyped, e.g. as a Server Action argument
+export const toLocale = (locale: unknown): Locale =>
+  hasLocale(routing.locales, locale) ? locale : routing.defaultLocale
 
 // Each language is named in its own language, so these are not translated
 export const localeLabels: Record<Locale, string> = {

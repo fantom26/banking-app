@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react'
 
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { PlaidLinkOnSuccess, PlaidLinkOptions, usePlaidLink } from 'react-plaid-link'
 
 import { Button } from '@/app/_components/ui/button'
@@ -14,18 +14,19 @@ import Icon from './Icon'
 const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
   const router = useRouter()
   const t = useTranslations('PlaidLink')
+  const locale = useLocale()
 
   const [token, setToken] = useState('')
 
   useEffect(() => {
     const getLinkToken = async () => {
-      const data = await createLinkToken()
+      const data = await createLinkToken(locale)
 
       setToken(data?.linkToken)
     }
 
     getLinkToken()
-  }, [user])
+  }, [user, locale])
 
   const onSuccess = useCallback<PlaidLinkOnSuccess>(
     async (publicToken: string | null) => {

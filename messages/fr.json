@@ -1,7 +1,212 @@
 {
+  "Metadata": {
+    "title": "Horizon",
+    "description": "Horizon est une application bancaire qui vous aide à gérer vos finances et à atteindre vos objectifs financiers."
+  },
+  "Common": {
+    "logoAlt": "Logo Horizon"
+  },
+  "Auth": {
+    "signInTitle": "Connexion",
+    "signUpTitle": "Inscription",
+    "linkAccountTitle": "Associer un compte",
+    "enterDetails": "Veuillez saisir vos informations",
+    "linkAccountSubtitle": "Associez votre compte pour commencer",
+    "fields": {
+      "firstName": {
+        "label": "Prénom",
+        "placeholder": "Saisissez votre prénom"
+      },
+      "lastName": {
+        "label": "Nom",
+        "placeholder": "Saisissez votre nom"
+      },
+      "address1": {
+        "label": "Adresse",
+        "placeholder": "Saisissez votre adresse"
+      },
+      "city": {
+        "label": "Ville",
+        "placeholder": "Saisissez votre ville"
+      },
+      "state": {
+        "label": "État",
+        "placeholder": "Exemple : NY"
+      },
+      "postalCode": {
+        "label": "Code postal",
+        "placeholder": "Exemple : 11101"
+      },
+      "dateOfBirth": {
+        "label": "Date de naissance",
+        "placeholder": "AAAA-MM-JJ"
+      },
+      "ssn": {
+        "label": "SSN",
+        "placeholder": "Exemple : 1234"
+      },
+      "email": {
+        "label": "E-mail",
+        "placeholder": "Saisissez votre e-mail"
+      },
+      "password": {
+        "label": "Mot de passe",
+        "placeholder": "Saisissez votre mot de passe"
+      }
+    },
+    "signInButton": "Se connecter",
+    "signUpButton": "S’inscrire",
+    "loading": "Chargement…",
+    "noAccount": "Vous n’avez pas de compte ?",
+    "haveAccount": "Vous avez déjà un compte ?",
+    "signUpLink": "S’inscrire",
+    "signInLink": "Se connecter",
+    "imageAlt": "Image d’authentification"
+  },
+  "Navigation": {
+    "home": "Accueil",
+    "myBanks": "Mes banques",
+    "transactionHistory": "Historique des transactions",
+    "transferFunds": "Transférer des fonds",
+    "openMenu": "Ouvrir la navigation",
+    "menuTitle": "Navigation",
+    "logOut": "Se déconnecter"
+  },
+  "PlaidLink": {
+    "connectBank": "Connecter une banque"
+  },
   "HomePage": {
     "welcome": "Bonjour <highlight>{name}</highlight> !",
-    "subtext": "Ceci est le sous-texte de la page d'accueil."
+    "subtext": "Ceci est le sous-texte de la page d’accueil.",
+    "recentTransactions": "Transactions récentes",
+    "viewAll": "Tout voir",
+    "myBanks": "Mes banques",
+    "addBank": "Ajouter une banque",
+    "topCategories": "Principales catégories",
+    "bankAccounts": "Comptes bancaires : {count}",
+    "totalCurrentBalance": "Solde actuel total",
+    "chartLabel": "Banques"
+  },
+  "Pagination": {
+    "previous": "Précédent",
+    "next": "Suivant"
+  },
+  "Transactions": {
+    "columns": {
+      "transaction": "Transaction",
+      "amount": "Montant",
+      "status": "Statut",
+      "date": "Date",
+      "channel": "Canal",
+      "category": "Catégorie",
+      "actions": "Actions"
+    },
+    "actionsLabel": "Actions sur la transaction",
+    "more": "Plus"
+  },
+  "TransactionDetails": {
+    "title": "Détails de la transaction",
+    "empty": "Sélectionnez une transaction et cliquez sur Plus pour voir ses détails.",
+    "close": "Fermer",
+    "sections": {
+      "overview": "Aperçu",
+      "merchant": "Commerçant",
+      "location": "Emplacement",
+      "paymentInfo": "Informations de paiement",
+      "counterparty": "Contrepartie",
+      "counterpartyNumbered": "Contrepartie {index}",
+      "transfer": "Virement"
+    },
+    "rows": {
+      "date": "Date",
+      "authorized": "Autorisée le",
+      "channel": "Canal",
+      "category": "Catégorie",
+      "currency": "Devise",
+      "checkNumber": "Numéro de chèque",
+      "accountOwner": "Titulaire du compte",
+      "transactionId": "ID de transaction",
+      "pendingTransactionId": "ID de transaction en attente",
+      "name": "Nom",
+      "website": "Site web",
+      "description": "Description",
+      "type": "Type",
+      "direction": "Sens",
+      "recipientEmail": "E-mail du destinataire",
+      "dwollaTransferId": "ID de virement Dwolla"
+    },
+    "direction": {
+      "sent": "Envoyé",
+      "received": "Reçu"
+    },
+    "location": {
+      "address": "Adresse",
+      "city": "Ville",
+      "region": "Région",
+      "postalCode": "Code postal",
+      "country": "Pays",
+      "storeNumber": "Numéro de magasin"
+    },
+    "paymentMeta": {
+      "referenceNumber": "Numéro de référence",
+      "payee": "Bénéficiaire",
+      "payer": "Payeur",
+      "byOrderOf": "Par ordre de",
+      "paymentMethod": "Moyen de paiement",
+      "paymentProcessor": "Prestataire de paiement",
+      "reason": "Motif"
+    }
+  },
+  "MyBanks": {
+    "title": "Mes comptes bancaires",
+    "subtext": "Gérez vos opérations bancaires en toute simplicité.",
+    "yourCards": "Vos cartes"
+  },
+  "Transfer": {
+    "title": "Virement",
+    "subtext": "Indiquez les détails ou remarques concernant le virement",
+    "sourceBankLabel": "Banque d’origine",
+    "sourceBankDescription": "Sélectionnez le compte bancaire à débiter",
+    "noteLabel": "Note de virement (facultatif)",
+    "noteDescription": "Ajoutez toute information ou instruction supplémentaire concernant le virement",
+    "notePlaceholder": "Écrivez une courte note ici",
+    "recipientHeading": "Coordonnées bancaires",
+    "recipientDescription": "Saisissez les coordonnées bancaires du destinataire",
+    "emailLabel": "E-mail du destinataire",
+    "emailPlaceholder": "ex. : jean.dupont@gmail.com",
+    "sharableIdLabel": "ID partageable Plaid du destinataire",
+    "sharableIdPlaceholder": "Saisissez le numéro de compte public",
+    "amountLabel": "Montant",
+    "amountPlaceholder": "ex. : 5.00",
+    "submit": "Transférer des fonds",
+    "sending": "Envoi…",
+    "genericError": "Une erreur s’est produite. Veuillez réessayer.",
+    "bankPlaceholder": "Sélectionnez une banque",
+    "noBanks": "Aucun compte bancaire associé",
+    "bankListLabel": "Sélectionnez une banque à afficher"
+  },
+  "TransactionHistory": {
+    "title": "Historique des transactions",
+    "subtext": "Consultez les détails de votre banque et vos transactions.",
+    "currentBalance": "Solde actuel",
+    "loadError": "Impossible de charger le compte"
+  },
+  "Validation": {
+    "invalidEmail": "Adresse e-mail invalide",
+    "passwordMin": "Le mot de passe doit contenir au moins 8 caractères",
+    "firstNameMin": "Le prénom doit contenir au moins 3 caractères",
+    "lastNameMin": "Le nom doit contenir au moins 3 caractères",
+    "addressMax": "L’adresse doit contenir au plus 50 caractères",
+    "cityMax": "La ville doit contenir au plus 50 caractères",
+    "stateLength": "Utilisez le code d’État à 2 lettres, p. ex. NY",
+    "postalCodeLength": "Le code postal doit contenir entre 3 et 6 caractères",
+    "dateOfBirth": "Saisissez une date comme 1990-01-31",
+    "ssnMin": "Le SSN doit contenir au moins 3 caractères",
+    "transferNoteMin": "La note de virement est trop courte",
+    "amountFormat": "Saisissez un montant comme 5.00",
+    "amountPositive": "Le montant doit être supérieur à 0",
+    "senderBankRequired": "Veuillez sélectionner un compte bancaire valide",
+    "sharableIdMin": "Veuillez saisir un ID partageable valide"
   },
   "LanguageSwitcher": {
     "label": "Langue"

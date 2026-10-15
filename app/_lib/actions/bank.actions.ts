@@ -9,6 +9,7 @@ import {
   type Products
 } from 'plaid'
 
+import { toLocale } from '@/app/_i18n/routing'
 import { plaidClient } from '@/app/_lib/plaid'
 import { createAdminClient } from '@/app/_lib/supabase/admin'
 import { parseStringify } from '@/app/_lib/utils'
@@ -19,7 +20,8 @@ import { getLoggedInUser } from './user.actions'
 // Every export here is a public endpoint, so the user always comes from the session,
 // never from the client.
 
-export const createLinkToken = async () => {
+// Plaid Link supports every app locale, so its UI follows the page language
+export const createLinkToken = async (locale: unknown) => {
   try {
     const user = await getLoggedInUser()
     if (!user) throw new Error('Not authenticated')
@@ -30,7 +32,7 @@ export const createLinkToken = async () => {
       },
       client_name: `${user.firstName} ${user.lastName}`,
       products: ['auth', 'transactions'] as Products[],
-      language: 'en',
+      language: toLocale(locale),
       country_codes: ['US'] as CountryCode[]
     })
 
