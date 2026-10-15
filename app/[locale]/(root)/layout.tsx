@@ -2,10 +2,10 @@ import Image from 'next/image'
 import { redirect } from 'next/navigation'
 
 import { getLoggedInUser } from '@/app/_lib/actions/user.actions'
-import MobileNav from '@/app/(root)/_components/MobileNav'
-import Sidebar from '@/app/(root)/_components/Sidebar'
+import MobileNav from '@/app/[locale]/(root)/_components/MobileNav'
+import Sidebar from '@/app/[locale]/(root)/_components/Sidebar'
 
-export default async function RootLayout({ children }: LayoutProps<'/'>) {
+export default async function RootLayout({ children }: LayoutProps<'/[locale]'>) {
   const user = await getLoggedInUser()
   if (!user) redirect('/sign-in')
 

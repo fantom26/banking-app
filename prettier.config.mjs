@@ -10,7 +10,7 @@ const prettierConfig = {
   bracketSpacing: true,
   endOfLine: 'lf',
   plugins: ['prettier-plugin-tailwindcss'],
-  tailwindStylesheet: './app/globals.css'
+  tailwindStylesheet: './app/[locale]/globals.css'
 }
 
 export default prettierConfig

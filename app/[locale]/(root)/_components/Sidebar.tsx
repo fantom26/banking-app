@@ -8,7 +8,7 @@ import { cn } from 'cn'
 
 import Icon from '@/app/_components/Icon'
 import PlaidLink from '@/app/_components/PlaidLinks'
-import { sidebarLinks } from '@/app/(root)/_lib/constants'
+import { sidebarLinks } from '@/app/[locale]/(root)/_lib/constants'
 
 import Footer from './Footer'
 

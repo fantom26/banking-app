@@ -3,15 +3,15 @@ import qs from 'query-string'
 import { getAccount, getAccounts } from '@/app/_lib/actions/account.actions'
 import { getLoggedInUser } from '@/app/_lib/actions/user.actions'
 import { formatAmount } from '@/app/_lib/utils'
-import HeaderBox from '@/app/(root)/_components/HeaderBox'
-import { Pagination } from '@/app/(root)/_components/Pagination'
-import RightSidebar from '@/app/(root)/_components/RightSidebar'
-import TransactionsTable from '@/app/(root)/_components/TransactionsTable'
-import TransactionDetails from '@/app/(root)/transaction-history/_components/TransactionDetails'
+import HeaderBox from '@/app/[locale]/(root)/_components/HeaderBox'
+import { Pagination } from '@/app/[locale]/(root)/_components/Pagination'
+import RightSidebar from '@/app/[locale]/(root)/_components/RightSidebar'
+import TransactionsTable from '@/app/[locale]/(root)/_components/TransactionsTable'
+import TransactionDetails from '@/app/[locale]/(root)/transaction-history/_components/TransactionDetails'
 
 export default async function TransactionHistory({
   searchParams
-}: PageProps<'/transaction-history'>) {
+}: PageProps<'/[locale]/transaction-history'>) {
   const { id, page, tx } = await searchParams
   const currentPage = Number(page as string) || 1
   const user = await getLoggedInUser()

@@ -1,6 +1,10 @@
 import { IBM_Plex_Serif, Inter } from 'next/font/google'
+import { notFound } from 'next/navigation'
 
 import type { Metadata } from 'next'
+import { hasLocale, NextIntlClientProvider } from 'next-intl'
+
+import { routing } from '@/app/_i18n/routing'
 
 import './globals.css'
 
@@ -24,10 +28,15 @@ export const metadata: Metadata = {
   }
 }
 
-export default function RootLayout({ children }: LayoutProps<'/'>) {
+export default async function RootLayout({ children, params }: LayoutProps<'/[locale]'>) {
+  const { locale } = await params
+  if (!hasLocale(routing.locales, locale)) notFound()
+
   return (
-    <html lang='en' className={`${inter.variable} ${ibmPlexSerif.variable} h-full antialiased`}>
-      <body className='flex min-h-full flex-col'>{children}</body>
+    <html lang={locale} className={`${inter.variable} ${ibmPlexSerif.variable} h-full antialiased`}>
+      <body className='flex min-h-full flex-col'>
+        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+      </body>
     </html>
   )
 }

@@ -1,8 +1,8 @@
 import Link from 'next/link'
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/app/_components/ui/tabs'
-import { Pagination } from '@/app/(root)/_components/Pagination'
-import TransactionsTable from '@/app/(root)/_components/TransactionsTable'
+import { Pagination } from '@/app/[locale]/(root)/_components/Pagination'
+import TransactionsTable from '@/app/[locale]/(root)/_components/TransactionsTable'
 
 import BankInfo from './BankInfo'
 import { BankTabItem } from './BankTabItem'

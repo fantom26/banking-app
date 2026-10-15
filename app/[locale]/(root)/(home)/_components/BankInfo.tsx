@@ -6,7 +6,7 @@ import { cn } from 'cn'
 
 import Icon from '@/app/_components/Icon'
 import { formatAmount, formUrlQuery } from '@/app/_lib/utils'
-import { getAccountTypeColors } from '@/app/(root)/(home)/_lib/utils'
+import { getAccountTypeColors } from '@/app/[locale]/(root)/(home)/_lib/utils'
 
 const BankInfo = ({ account, isActive, type }: BankInfoProps) => {
   const router = useRouter()

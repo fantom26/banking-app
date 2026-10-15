@@ -6,7 +6,7 @@ import {
   getTransactionStatus,
   removeSpecialCharacters
 } from '@/app/_lib/utils'
-import { CategoryBadge } from '@/app/(root)/_components/TransactionsTable'
+import { CategoryBadge } from '@/app/[locale]/(root)/_components/TransactionsTable'
 
 type TransactionDetailsProps = {
   transaction?: Transaction

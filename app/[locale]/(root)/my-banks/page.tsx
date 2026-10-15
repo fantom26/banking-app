@@ -1,7 +1,7 @@
 import { getAccounts } from '@/app/_lib/actions/account.actions'
 import { getLoggedInUser } from '@/app/_lib/actions/user.actions'
-import BankCard from '@/app/(root)/_components/BankCard'
-import HeaderBox from '@/app/(root)/_components/HeaderBox'
+import BankCard from '@/app/[locale]/(root)/_components/BankCard'
+import HeaderBox from '@/app/[locale]/(root)/_components/HeaderBox'
 
 export default async function MyBanks() {
   const user = await getLoggedInUser()

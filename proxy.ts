@@ -1,9 +1,14 @@
 import type { NextRequest } from 'next/server'
 
+import createMiddleware from 'next-intl/middleware'
+
+import { routing } from '@/app/_i18n/routing'
 import { updateSession } from '@/app/_lib/supabase/proxy'
 
+const handleI18nRouting = createMiddleware(routing)
+
 export async function proxy(request: NextRequest) {
-  return updateSession(request)
+  return updateSession(request, handleI18nRouting)
 }
 
 export const config = {

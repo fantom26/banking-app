@@ -14,7 +14,7 @@ import {
   SheetTitle,
   SheetTrigger
 } from '@/app/_components/ui/sheet'
-import { sidebarLinks } from '@/app/(root)/_lib/constants'
+import { sidebarLinks } from '@/app/[locale]/(root)/_lib/constants'
 
 import Footer from './Footer'
 

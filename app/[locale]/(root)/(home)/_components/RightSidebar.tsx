@@ -1,9 +1,9 @@
 import Link from 'next/link'
 
 import Icon from '@/app/_components/Icon'
-import BankCard from '@/app/(root)/_components/BankCard'
-import RightSidebar from '@/app/(root)/_components/RightSidebar'
-import { countTransactionCategories } from '@/app/(root)/(home)/_lib/utils'
+import BankCard from '@/app/[locale]/(root)/_components/BankCard'
+import RightSidebar from '@/app/[locale]/(root)/_components/RightSidebar'
+import { countTransactionCategories } from '@/app/[locale]/(root)/(home)/_lib/utils'
 
 import Category from './Category'
 

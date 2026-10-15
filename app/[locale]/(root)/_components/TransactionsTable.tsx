@@ -14,8 +14,8 @@ import {
   getTransactionStatus,
   removeSpecialCharacters
 } from '@/app/_lib/utils'
-import TransactionActions from '@/app/(root)/_components/TransactionActions'
-import { transactionCategoryStyles } from '@/app/(root)/_lib/constants'
+import TransactionActions from '@/app/[locale]/(root)/_components/TransactionActions'
+import { transactionCategoryStyles } from '@/app/[locale]/(root)/_lib/constants'
 
 export const CategoryBadge = ({ category }: CategoryBadgeProps) => {
   const { borderColor, backgroundColor, textColor, chipBackgroundColor } =
