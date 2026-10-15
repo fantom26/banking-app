@@ -1,0 +1,6 @@
+{
+  "HomePage": {
+    "welcome": "Hello {name}!",
+    "subtext": "This is the subtext for the home page."
+  }
+}

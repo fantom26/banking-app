@@ -1,0 +1,6 @@
+{
+  "HomePage": {
+    "welcome": "¡Hola, {name}!",
+    "subtext": "Este es el subtexto de la página de inicio."
+  }
+}
