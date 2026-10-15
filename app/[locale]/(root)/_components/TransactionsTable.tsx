@@ -1,4 +1,5 @@
 import { cn } from 'cn'
+import { useFormatter } from 'next-intl'
 
 import {
   Table,
@@ -8,12 +9,7 @@ import {
   TableHeader,
   TableRow
 } from '@/app/_components/ui/table'
-import {
-  formatAmount,
-  formatDateTime,
-  getTransactionStatus,
-  removeSpecialCharacters
-} from '@/app/_lib/utils'
+import { getTransactionStatus, removeSpecialCharacters } from '@/app/_lib/utils'
 import TransactionActions from '@/app/[locale]/(root)/_components/TransactionActions'
 import { transactionCategoryStyles } from '@/app/[locale]/(root)/_lib/constants'
 
@@ -31,6 +27,8 @@ export const CategoryBadge = ({ category }: CategoryBadgeProps) => {
 }
 
 const TransactionsTable = ({ transactions, showActions, selectedId }: TransactionTableProps) => {
+  const format = useFormatter()
+
   return (
     <Table>
       <TableHeader className='bg-[#f9fafb]'>
@@ -47,16 +45,16 @@ const TransactionsTable = ({ transactions, showActions, selectedId }: Transactio
       <TableBody>
         {transactions.map((t: Transaction) => {
           const status = getTransactionStatus(new Date(t.date))
-          const amount = formatAmount(t.amount)
+          const amount = format.number(t.amount, 'currency')
 
           const isDebit = t.type === 'debit'
-          const isCredit = t.type === 'credit'
+          const isNegative = isDebit || t.amount < 0
 
           return (
             <TableRow
               key={t.id}
               className={cn(
-                isDebit || amount[0] === '-' ? 'bg-[#FFFBFA]' : 'bg-[#F6FEF9]',
+                isNegative ? 'bg-[#FFFBFA]' : 'bg-[#F6FEF9]',
                 '!over:bg-none !border-b-DEFAULT',
                 t.id === selectedId && 'outline-2 -outline-offset-2 outline-blue-500'
               )}
@@ -70,16 +68,16 @@ const TransactionsTable = ({ transactions, showActions, selectedId }: Transactio
               </TableCell>
               <TableCell
                 className={`pr-10 pl-2 font-semibold ${
-                  isDebit || amount[0] === '-' ? 'text-[#f04438]' : 'text-[#039855]'
+                  isNegative ? 'text-[#f04438]' : 'text-[#039855]'
                 }`}
               >
-                {isDebit ? `-${amount}` : isCredit ? amount : amount}
+                {isDebit ? `-${amount}` : amount}
               </TableCell>
               <TableCell className='pr-10 pl-2'>
                 <CategoryBadge category={status} />
               </TableCell>
               <TableCell className='min-w-32 pr-10 pl-2'>
-                {formatDateTime(new Date(t.date)).dateTime}
+                {format.dateTime(new Date(t.date), 'withTime')}
               </TableCell>
               <TableCell className='min-w-24 pr-10 pl-2 capitalize'>{t.paymentChannel}</TableCell>
               <TableCell className='pr-10 pl-2 max-md:hidden'>

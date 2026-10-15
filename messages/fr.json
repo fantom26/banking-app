@@ -1,0 +1,9 @@
+{
+  "HomePage": {
+    "welcome": "Bonjour <highlight>{name}</highlight> !",
+    "subtext": "Ceci est le sous-texte de la page d'accueil."
+  },
+  "LanguageSwitcher": {
+    "label": "Langue"
+  }
+}

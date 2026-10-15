@@ -1,12 +1,15 @@
 import Image from 'next/image'
 
+import { useFormatter } from 'next-intl'
+
 import Icon from '@/app/_components/Icon'
 import { Link } from '@/app/_i18n/navigation'
-import { formatAmount } from '@/app/_lib/utils'
 
 import Copy from './Copy'
 
 const BankCard = ({ account, userName, showBalance }: CreditCardProps) => {
+  const format = useFormatter()
+
   return (
     <div className='flex flex-col'>
       <Link href={`/transaction-history/?id=${account.bankRecordId}`} className='bank-card'>
@@ -14,7 +17,7 @@ const BankCard = ({ account, userName, showBalance }: CreditCardProps) => {
           <div>
             <h2 className='text-16 font-semibold text-white'>{account.name || userName}</h2>
             <p className='font-ibm-plex-serif font-black text-white'>
-              {formatAmount(account.currentBalance)}
+              {format.number(account.currentBalance, 'currency')}
             </p>
           </div>
 
@@ -45,6 +48,7 @@ const BankCard = ({ account, userName, showBalance }: CreditCardProps) => {
           width={316}
           height={190}
           alt='lines'
+          loading='eager'
           className='absolute top-0 left-0'
         />
       </Link>

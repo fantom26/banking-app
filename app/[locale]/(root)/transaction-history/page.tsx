@@ -1,8 +1,8 @@
+import { getFormatter } from 'next-intl/server'
 import qs from 'query-string'
 
 import { getAccount, getAccounts } from '@/app/_lib/actions/account.actions'
 import { getLoggedInUser } from '@/app/_lib/actions/user.actions'
-import { formatAmount } from '@/app/_lib/utils'
 import HeaderBox from '@/app/[locale]/(root)/_components/HeaderBox'
 import { Pagination } from '@/app/[locale]/(root)/_components/Pagination'
 import RightSidebar from '@/app/[locale]/(root)/_components/RightSidebar'
@@ -13,6 +13,7 @@ export default async function TransactionHistory({
   searchParams
 }: PageProps<'/[locale]/transaction-history'>) {
   const { id, page, tx } = await searchParams
+  const format = await getFormatter()
   const currentPage = Number(page as string) || 1
   const user = await getLoggedInUser()
   if (!user) return null
@@ -71,7 +72,7 @@ export default async function TransactionHistory({
             <div className='transactions-account-balance'>
               <p className='text-14'>Current balance</p>
               <p className='text-center text-24 font-bold'>
-                {formatAmount(account.data.currentBalance)}
+                {format.number(account.data.currentBalance, 'currency')}
               </p>
             </div>
           </div>

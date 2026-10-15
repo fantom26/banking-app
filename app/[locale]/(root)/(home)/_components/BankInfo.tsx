@@ -3,14 +3,16 @@
 import { useRouter, useSearchParams } from 'next/navigation'
 
 import { cn } from 'cn'
+import { useFormatter } from 'next-intl'
 
 import Icon from '@/app/_components/Icon'
-import { formatAmount, formUrlQuery } from '@/app/_lib/utils'
+import { formUrlQuery } from '@/app/_lib/utils'
 import { getAccountTypeColors } from '@/app/[locale]/(root)/(home)/_lib/utils'
 
 const BankInfo = ({ account, isActive, type }: BankInfoProps) => {
   const router = useRouter()
   const searchParams = useSearchParams()
+  const format = useFormatter()
 
   const handleBankChange = () => {
     const newUrl = formUrlQuery({
@@ -50,7 +52,7 @@ const BankInfo = ({ account, isActive, type }: BankInfoProps) => {
         </div>
 
         <p className={`text-16 font-medium text-blue-700 ${colors.subText}`}>
-          {formatAmount(account.currentBalance)}
+          {format.number(account.currentBalance, 'currency')}
         </p>
       </div>
     </div>

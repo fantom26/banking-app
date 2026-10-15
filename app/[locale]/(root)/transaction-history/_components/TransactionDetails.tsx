@@ -1,11 +1,7 @@
+import { useFormatter } from 'next-intl'
+
 import { Link } from '@/app/_i18n/navigation'
-import {
-  formatAmount,
-  formatDateTime,
-  getTransactionStatus,
-  lastPathSegment,
-  removeSpecialCharacters
-} from '@/app/_lib/utils'
+import { getTransactionStatus, lastPathSegment, removeSpecialCharacters } from '@/app/_lib/utils'
 import { CategoryBadge } from '@/app/[locale]/(root)/_components/TransactionsTable'
 
 type TransactionDetailsProps = {
@@ -52,6 +48,8 @@ const humanize = (value: string) => {
 }
 
 const TransactionDetails = ({ transaction, closeHref }: TransactionDetailsProps) => {
+  const format = useFormatter()
+
   if (!transaction) {
     return (
       <section className='flex flex-col gap-2 px-6 py-8'>
@@ -67,9 +65,9 @@ const TransactionDetails = ({ transaction, closeHref }: TransactionDetailsProps)
   const plaid = details?.source === 'plaid' ? details : null
   const transfer = details?.source === 'transfer' ? details : null
 
-  const amount = formatAmount(transaction.amount)
+  const amount = format.number(transaction.amount, 'currency')
   const isDebit = transaction.type === 'debit'
-  const isNegative = isDebit || amount[0] === '-'
+  const isNegative = isDebit || transaction.amount < 0
   const status = transaction.pending
     ? 'Processing'
     : getTransactionStatus(new Date(transaction.date))
@@ -99,10 +97,10 @@ const TransactionDetails = ({ transaction, closeHref }: TransactionDetailsProps)
       <DetailSection
         title='Overview'
         rows={[
-          ['Date', formatDateTime(new Date(plaid?.datetime ?? transaction.date)).dateTime],
+          ['Date', format.dateTime(new Date(plaid?.datetime ?? transaction.date), 'withTime')],
           [
             'Authorized',
-            plaid?.authorizedDate && formatDateTime(new Date(plaid.authorizedDate)).dateOnly
+            plaid?.authorizedDate && format.dateTime(new Date(plaid.authorizedDate), 'date')
           ],
           ['Channel', humanize(transaction.paymentChannel)],
           ['Category', plaid?.categoryDetailed && humanize(plaid.categoryDetailed)],

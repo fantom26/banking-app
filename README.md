@@ -39,6 +39,22 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 Payments go through [Dwolla](https://www.dwolla.com), which only supports US customers and US bank accounts. Sign-up therefore needs US address data (2-letter state, SSN last 4, etc.). The app is US-only, and Plaid Link is limited to US institutions.
 
+## Decisions
+
+### Locales: English, Spanish, French
+
+The app is US-only (see the Dwolla note), so the locales target people who live in the US:
+
+- **en** is the default and has unprefixed URLs (`/sign-in`).
+- **es** (`/es`): Spanish is the most widely spoken language in the US after English.
+- **fr** (`/fr`): French is supported by Plaid Link, and it also covers Canadian French speakers. Plain `fr` was chosen over `fr-CA` to match Plaid's language codes. Serving Canadian customers would take more than a locale: Plaid would need `country_codes: ['CA']`, and payments would need a provider other than Dwolla.
+
+### Formatting
+
+- Amounts are always USD, because Dwolla only moves dollars. Only the formatting follows the locale: `-$1,234.50` (en), `-1234,50 US$` (es), `-1 234,50 $US` (fr).
+- Times are rendered in UTC so server and client output match. Plaid's date-only values parse as UTC midnight, so UTC also keeps them on the right day.
+- Money and dates go through next-intl's named formats in `app/_i18n/formats.ts`. Don't call `Intl` or `toLocaleString` directly.
+
 ## Future ideas
 
 [] add i18n

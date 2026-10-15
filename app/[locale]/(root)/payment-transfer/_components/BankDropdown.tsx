@@ -4,6 +4,8 @@ import { useState } from 'react'
 
 import { useRouter, useSearchParams } from 'next/navigation'
 
+import { useFormatter } from 'next-intl'
+
 import Icon from '@/app/_components/Icon'
 import {
   Select,
@@ -13,11 +15,12 @@ import {
   SelectLabel,
   SelectTrigger
 } from '@/app/_components/ui/select'
-import { formatAmount, formUrlQuery } from '@/app/_lib/utils'
+import { formUrlQuery } from '@/app/_lib/utils'
 
 export const BankDropdown = ({ accounts = [], setValue, otherStyles }: BankDropdownProps) => {
   const searchParams = useSearchParams()
   const router = useRouter()
+  const format = useFormatter()
   const [selected, setSeclected] = useState<Account | undefined>()
 
   const handleBankChange = (id: string) => {
@@ -69,7 +72,7 @@ export const BankDropdown = ({ accounts = [], setValue, otherStyles }: BankDropd
               <div className='flex flex-col'>
                 <p className='text-16 font-medium'>{account.name}</p>
                 <p className='text-14 font-medium text-blue-600'>
-                  {formatAmount(account.currentBalance)}
+                  {format.number(account.currentBalance, 'currency')}
                 </p>
               </div>
             </SelectItem>
