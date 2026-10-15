@@ -1,10 +1,3 @@
-declare type SearchParamProps = {
-  params: { [key: string]: string }
-  searchParams: { [key: string]: string | string[] | undefined }
-}
-
-// ========================================
-
 declare type User = {
   id: string
   email: string
@@ -19,20 +12,12 @@ declare type User = {
   dwollaCustomerUrl: string | null
 }
 
-declare type NewUserParams = {
-  userId: string
-  email: string
-  name: string
-  password: string
-}
-
 declare type Account = {
   id: string
   availableBalance: number
   currentBalance: number
   officialName: string | null
   mask: string
-  institutionId: string
   name: string
   type: string
   subtype: string
@@ -102,11 +87,6 @@ declare type CategoryCount = {
   totalCount: number
 }
 
-declare type Receiver = {
-  firstName: string
-  lastName: string
-}
-
 declare type TransferParams = {
   sourceFundingSourceUrl: string
   destinationFundingSourceUrl: string
@@ -153,14 +133,6 @@ declare interface MobileNavProps {
   user: User
 }
 
-declare interface PageHeaderProps {
-  topTitle: string
-  bottomTitle: string
-  topDescription: string
-  bottomDescription: string
-  connectBank?: boolean
-}
-
 declare interface PaginationProps {
   page: number
   totalPages: number
@@ -168,18 +140,8 @@ declare interface PaginationProps {
 
 declare interface PlaidLinkProps {
   user: User
-  variant?: 'primary' | 'ghost'
-  dwollaCustomerId?: string
+  variant?: 'primary'
 }
-
-// declare type User = sdk.Models.Document & {
-//   accountId: string;
-//   email: string;
-//   name: string;
-//   items: string[];
-//   accessToken: string;
-//   image: string;
-// };
 
 declare interface AuthFormProps {
   type: 'sign-in' | 'sign-up'
@@ -224,11 +186,6 @@ declare interface RecentTransactionsProps {
   page: number
 }
 
-declare interface TransactionHistoryTableProps {
-  transactions: Transaction[]
-  page: number
-}
-
 declare interface CategoryBadgeProps {
   category: string
 }
@@ -258,10 +215,6 @@ declare interface getAccountProps {
   userId: string
 }
 
-declare interface getInstitutionProps {
-  institutionId: string
-}
-
 declare interface getTransactionsProps {
   accessToken: string
 }
@@ -287,10 +240,6 @@ declare interface CreateTransactionProps {
 declare interface getTransactionsByBankIdProps {
   bankId: string // banks.id
   accountId: string // Plaid account_id, copied onto each transaction
-}
-
-declare interface getUserInfoProps {
-  userId: string
 }
 
 declare interface exchangePublicTokenProps {

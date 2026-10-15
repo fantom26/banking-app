@@ -1,4 +1,4 @@
-import { type AccountBase, type CountryCode, type Transaction as PlaidTransaction } from 'plaid'
+import { type AccountBase, type Transaction as PlaidTransaction } from 'plaid'
 
 import { plaidClient } from '@/app/_lib/plaid'
 
@@ -11,12 +11,7 @@ export async function getAccounts({ userId }: getAccountsProps) {
   const banks = await getBanks({ userId })
 
   const accounts = await Promise.all(
-    banks.map(async (bank) => {
-      const { accountData, institutionId } = await getPlaidAccount(bank)
-      const institution = await getInstitution({ institutionId })
-
-      return toAccount(accountData, institution.institution_id, bank)
-    })
+    banks.map(async (bank) => toAccount(await getPlaidAccount(bank), bank))
   )
 
   const totalBanks = accounts.length
@@ -30,10 +25,8 @@ export async function getAccount({ bankRecordId, userId }: getAccountProps) {
   const bank = await getBank({ bankRecordId, userId })
   if (!bank) return null
 
-  const { accountData, institutionId } = await getPlaidAccount(bank)
-
-  const [institution, plaidTransactions, transferTransactions] = await Promise.all([
-    getInstitution({ institutionId }),
+  const [accountData, plaidTransactions, transferTransactions] = await Promise.all([
+    getPlaidAccount(bank),
     getTransactions({ accessToken: bank.accessToken }),
     getTransactionsByBankId({ bankId: bank.id, accountId: bank.accountId })
   ])
@@ -43,18 +36,9 @@ export async function getAccount({ bankRecordId, userId }: getAccountProps) {
   )
 
   return {
-    data: toAccount(accountData, institution.institution_id, bank),
+    data: toAccount(accountData, bank),
     transactions: sortedTransactions
   }
-}
-
-export async function getInstitution({ institutionId }: getInstitutionProps) {
-  const institutionResponse = await plaidClient.institutionsGetById({
-    institution_id: institutionId,
-    country_codes: ['US'] as CountryCode[]
-  })
-
-  return institutionResponse.data.institution
 }
 
 export async function getTransactions({ accessToken }: getTransactionsProps) {
@@ -98,18 +82,16 @@ async function getPlaidAccount(bank: Bank) {
   })
 
   const accountData = accountsResponse.data.accounts[0]
-  const institutionId = accountsResponse.data.item.institution_id
-  if (!accountData || !institutionId) throw new Error(`Plaid account not found for bank ${bank.id}`)
+  if (!accountData) throw new Error(`Plaid account not found for bank ${bank.id}`)
 
-  return { accountData, institutionId }
+  return accountData
 }
 
-function toAccount(accountData: AccountBase, institutionId: string, bank: Bank): Account {
+function toAccount(accountData: AccountBase, bank: Bank): Account {
   return {
     id: accountData.account_id,
     availableBalance: accountData.balances.available ?? 0,
     currentBalance: accountData.balances.current ?? 0,
-    institutionId,
     name: accountData.name,
     officialName: accountData.official_name,
     mask: accountData.mask ?? '',
