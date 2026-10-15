@@ -389,7 +389,11 @@
 }
 
 @utility footer {
-  @apply flex cursor-pointer items-center justify-between gap-2 py-6;
+  @apply flex flex-col gap-2 py-6;
+}
+
+@utility footer_row {
+  @apply flex cursor-pointer items-center justify-between gap-2;
 }
 
 @utility footer_name {
