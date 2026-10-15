@@ -44,6 +44,18 @@ declare type Transaction = {
   details?: TransactionDetails
 }
 
+declare type LocationField =
+  'address' | 'city' | 'region' | 'postalCode' | 'country' | 'storeNumber'
+
+declare type PaymentMetaField =
+  | 'referenceNumber'
+  | 'payee'
+  | 'payer'
+  | 'byOrderOf'
+  | 'paymentMethod'
+  | 'paymentProcessor'
+  | 'reason'
+
 // Plaid sends null for most of these fields when it doesn't know the value.
 declare type TransactionDetails =
   | {
@@ -58,8 +70,8 @@ declare type TransactionDetails =
       pendingTransactionId: string | null
       checkNumber: string | null
       accountOwner: string | null
-      location: Record<string, string>
-      paymentMeta: Record<string, string>
+      location: Partial<Record<LocationField, string>>
+      paymentMeta: Partial<Record<PaymentMetaField, string>>
       counterparties: { name: string; type: string; website: string | null }[]
     }
   | {

@@ -55,6 +55,12 @@ The app is US-only (see the Dwolla note), so the locales target people who live 
 - Times are rendered in UTC so server and client output match. Plaid's date-only values parse as UTC midnight, so UTC also keeps them on the right day.
 - Money and dates go through next-intl's named formats in `app/_i18n/formats.ts`. Don't call `Intl` or `toLocaleString` directly.
 
+### Translations
+
+- `messages/en.json` is the source of truth, and message keys are type-checked against it.
+- Other locales override English key by key. A string that isn't translated yet shows in English instead of failing.
+- Form validation errors are message keys in the zod schemas (`app/_lib/utils.ts`), translated where `FormMessage` renders them.
+
 ## Future ideas
 
 [] add i18n

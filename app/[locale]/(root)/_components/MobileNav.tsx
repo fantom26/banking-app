@@ -3,6 +3,7 @@
 import Image from 'next/image'
 
 import { cn } from 'cn'
+import { useTranslations } from 'next-intl'
 
 import Icon from '@/app/_components/Icon'
 import {
@@ -20,17 +21,19 @@ import Footer from './Footer'
 
 const MobileNav = ({ user }: MobileNavProps) => {
   const pathname = usePathname()
+  const t = useTranslations('Navigation')
+  const tCommon = useTranslations('Common')
 
   return (
     <section className='w-full max-w-[264px]'>
       <Sheet>
-        <SheetTrigger aria-label='Open navigation'>
+        <SheetTrigger aria-label={t('openMenu')}>
           <Icon name='menu' className='size-[30px] cursor-pointer text-gray-700' />
         </SheetTrigger>
         <SheetContent side='left' className='border-none bg-white'>
-          <SheetTitle className='sr-only'>Navigation</SheetTitle>
+          <SheetTitle className='sr-only'>{t('menuTitle')}</SheetTitle>
           <Link href='/' className='flex cursor-pointer items-center gap-1 px-4'>
-            <Image src='/icons/logo.svg' width={34} height={34} alt='Horizon logo' />
+            <Image src='/icons/logo.svg' width={34} height={34} alt={tCommon('logoAlt')} />
             <h2 className='font-ibm-plex-serif text-26 font-bold text-black-1'>Horizon</h2>
           </Link>
           <div className='mobilenav-sheet'>
@@ -55,7 +58,7 @@ const MobileNav = ({ user }: MobileNavProps) => {
                           'text-white': isActive
                         })}
                       >
-                        {item.label}
+                        {t(item.key)}
                       </p>
                     </Link>
                   </SheetClose>

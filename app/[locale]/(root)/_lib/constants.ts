@@ -1,25 +1,30 @@
 import type { IconName } from '@/app/_components/Icon'
 
-export const sidebarLinks: { icon: IconName; route: string; label: string }[] = [
+// key is a Navigation message key
+export const sidebarLinks: {
+  icon: IconName
+  route: string
+  key: 'home' | 'myBanks' | 'transactionHistory' | 'transferFunds'
+}[] = [
   {
     icon: 'house',
     route: '/',
-    label: 'Home'
+    key: 'home'
   },
   {
     icon: 'circle-dollar-sign',
     route: '/my-banks',
-    label: 'My Banks'
+    key: 'myBanks'
   },
   {
     icon: 'receipt-text',
     route: '/transaction-history',
-    label: 'Transaction History'
+    key: 'transactionHistory'
   },
   {
     icon: 'send',
     route: '/payment-transfer',
-    label: 'Transfer Funds'
+    key: 'transferFunds'
   }
 ]
 

@@ -1,4 +1,4 @@
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 
 import Icon from '@/app/_components/Icon'
 import { signOut } from '@/app/_lib/actions/auth.actions'
@@ -8,6 +8,7 @@ import LanguageSwitcher from './LanguageSwitcher'
 const Footer = ({ user, type = 'desktop' }: FooterProps) => {
   const isMobile = type === 'mobile'
   const locale = useLocale()
+  const t = useTranslations('Navigation')
 
   return (
     <footer className='footer'>
@@ -28,7 +29,7 @@ const Footer = ({ user, type = 'desktop' }: FooterProps) => {
           <button
             type='submit'
             className={isMobile ? 'footer_image-mobile' : 'footer_image'}
-            aria-label='Log out'
+            aria-label={t('logOut')}
           >
             <Icon name='log-out' className='size-5 text-gray-500' />
           </button>

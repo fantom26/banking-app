@@ -1,3 +1,5 @@
+import { useTranslations } from 'next-intl'
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/app/_components/ui/tabs'
 import { Link } from '@/app/_i18n/navigation'
 import { Pagination } from '@/app/[locale]/(root)/_components/Pagination'
@@ -12,6 +14,7 @@ const RecentTransactions = ({
   bankRecordId,
   page = 1
 }: RecentTransactionsProps) => {
+  const t = useTranslations('HomePage')
   const rowsPerPage = 10
   const totalPages = Math.ceil(transactions.length / rowsPerPage)
 
@@ -23,9 +26,9 @@ const RecentTransactions = ({
   return (
     <section className='recent-transactions'>
       <header className='flex items-center justify-between'>
-        <h2 className='recent-transactions-label'>Recent transactions</h2>
+        <h2 className='recent-transactions-label'>{t('recentTransactions')}</h2>
         <Link href={`/transaction-history/?id=${bankRecordId}`} className='view-all-btn'>
-          View all
+          {t('viewAll')}
         </Link>
       </header>
 

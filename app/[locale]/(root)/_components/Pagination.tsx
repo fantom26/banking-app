@@ -2,6 +2,8 @@
 
 import { useRouter, useSearchParams } from 'next/navigation'
 
+import { useTranslations } from 'next-intl'
+
 import Icon from '@/app/_components/Icon'
 import { Button } from '@/app/_components/ui/button'
 import { formUrlQuery } from '@/app/_lib/utils'
@@ -9,6 +11,7 @@ import { formUrlQuery } from '@/app/_lib/utils'
 export const Pagination = ({ page, totalPages }: PaginationProps) => {
   const router = useRouter()
   const searchParams = useSearchParams()!
+  const t = useTranslations('Pagination')
 
   const handleNavigation = (type: 'prev' | 'next') => {
     const pageNumber = type === 'prev' ? page - 1 : page + 1
@@ -32,7 +35,7 @@ export const Pagination = ({ page, totalPages }: PaginationProps) => {
         disabled={Number(page) <= 1}
       >
         <Icon name='arrow-left' className='mr-2 size-5 text-gray-600' />
-        Prev
+        {t('previous')}
       </Button>
       <p className='flex items-center px-2 text-14'>
         {page} / {totalPages}
@@ -44,7 +47,7 @@ export const Pagination = ({ page, totalPages }: PaginationProps) => {
         onClick={() => handleNavigation('next')}
         disabled={Number(page) >= totalPages}
       >
-        Next
+        {t('next')}
         <Icon name='arrow-right' className='ml-2 size-5 text-gray-600' />
       </Button>
     </div>

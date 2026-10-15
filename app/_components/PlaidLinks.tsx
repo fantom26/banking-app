@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react'
 
+import { useTranslations } from 'next-intl'
 import { PlaidLinkOnSuccess, PlaidLinkOptions, usePlaidLink } from 'react-plaid-link'
 
 import { Button } from '@/app/_components/ui/button'
@@ -12,6 +13,7 @@ import Icon from './Icon'
 
 const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
   const router = useRouter()
+  const t = useTranslations('PlaidLink')
 
   const [token, setToken] = useState('')
 
@@ -45,12 +47,12 @@ const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
 
   return variant === 'primary' ? (
     <Button onClick={() => open()} disabled={!ready} className='plaidlink-primary'>
-      Connect bank
+      {t('connectBank')}
     </Button>
   ) : (
     <Button onClick={() => open()} className='plaidlink-default'>
       <Icon name='landmark' className='size-6 text-gray-500' />
-      <p className='text-[16px] font-semibold text-black-2'>Connect bank</p>
+      <p className='text-[16px] font-semibold text-black-2'>{t('connectBank')}</p>
     </Button>
   )
 }

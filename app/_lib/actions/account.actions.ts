@@ -127,21 +127,21 @@ function toTransaction(transaction: PlaidTransaction): Transaction {
       checkNumber: transaction.check_number ?? null,
       accountOwner: transaction.account_owner,
       location: withoutEmpty({
-        Address: transaction.location.address,
-        City: transaction.location.city,
-        Region: transaction.location.region,
-        'Postal code': transaction.location.postal_code,
-        Country: transaction.location.country,
-        'Store number': transaction.location.store_number
+        address: transaction.location.address,
+        city: transaction.location.city,
+        region: transaction.location.region,
+        postalCode: transaction.location.postal_code,
+        country: transaction.location.country,
+        storeNumber: transaction.location.store_number
       }),
       paymentMeta: withoutEmpty({
-        'Reference number': transaction.payment_meta.reference_number,
-        Payee: transaction.payment_meta.payee,
-        Payer: transaction.payment_meta.payer,
-        'By order of': transaction.payment_meta.by_order_of,
-        'Payment method': transaction.payment_meta.payment_method,
-        'Payment processor': transaction.payment_meta.payment_processor,
-        Reason: transaction.payment_meta.reason
+        referenceNumber: transaction.payment_meta.reference_number,
+        payee: transaction.payment_meta.payee,
+        payer: transaction.payment_meta.payer,
+        byOrderOf: transaction.payment_meta.by_order_of,
+        paymentMethod: transaction.payment_meta.payment_method,
+        paymentProcessor: transaction.payment_meta.payment_processor,
+        reason: transaction.payment_meta.reason
       }),
       counterparties: (transaction.counterparties ?? []).map(({ name, type, website }) => ({
         name,
@@ -152,9 +152,9 @@ function toTransaction(transaction: PlaidTransaction): Transaction {
   }
 }
 
-// Keeps only the fields Plaid filled in, keyed by the label shown in the details sidebar.
-function withoutEmpty(fields: Record<string, string | null>) {
+// Keeps only the fields Plaid filled in. The details sidebar translates the field names.
+function withoutEmpty<Field extends string>(fields: Record<Field, string | null>) {
   return Object.fromEntries(
     Object.entries(fields).filter((entry): entry is [string, string] => Boolean(entry[1]))
-  )
+  ) as Partial<Record<Field, string>>
 }

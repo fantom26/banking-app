@@ -1,32 +1,33 @@
 import qs from 'query-string'
 import { z } from 'zod'
 
+// Error messages are keys of the Validation messages; FormMessage translates them
 export const signInFormSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8)
+  email: z.string().email('invalidEmail'),
+  password: z.string().min(8, 'passwordMin')
 })
 
 export const signUpFormSchema = z.object({
   ...signInFormSchema.shape,
-  firstName: z.string().min(3),
-  lastName: z.string().min(3),
-  address1: z.string().max(50),
-  city: z.string().max(50),
-  state: z.string().length(2),
-  postalCode: z.string().min(3).max(6),
-  dateOfBirth: z.iso.date(),
-  ssn: z.string().min(3)
+  firstName: z.string().min(3, 'firstNameMin'),
+  lastName: z.string().min(3, 'lastNameMin'),
+  address1: z.string().max(50, 'addressMax'),
+  city: z.string().max(50, 'cityMax'),
+  state: z.string().length(2, 'stateLength'),
+  postalCode: z.string().min(3, 'postalCodeLength').max(6, 'postalCodeLength'),
+  dateOfBirth: z.iso.date('dateOfBirth'),
+  ssn: z.string().min(3, 'ssnMin')
 })
 
 export const transferFormSchema = z.object({
-  email: z.string().email('Invalid email address'),
-  name: z.string().min(4, 'Transfer note is too short'),
+  email: z.string().email('invalidEmail'),
+  name: z.string().min(4, 'transferNoteMin'),
   amount: z
     .string()
-    .regex(/^\d+(\.\d{1,2})?$/, 'Enter an amount like 5.00')
-    .refine((value) => Number(value) > 0, 'Amount must be greater than 0'),
-  senderBank: z.string().min(1, 'Please select a valid bank account'),
-  sharableId: z.string().min(8, 'Please select a valid sharable Id')
+    .regex(/^\d+(\.\d{1,2})?$/, 'amountFormat')
+    .refine((value) => Number(value) > 0, 'amountPositive'),
+  senderBank: z.string().min(1, 'senderBankRequired'),
+  sharableId: z.string().min(8, 'sharableIdMin')
 })
 
 export type SignInParams = z.infer<typeof signInFormSchema>

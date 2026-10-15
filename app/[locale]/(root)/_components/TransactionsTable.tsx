@@ -1,5 +1,5 @@
 import { cn } from 'cn'
-import { useFormatter } from 'next-intl'
+import { useFormatter, useTranslations } from 'next-intl'
 
 import {
   Table,
@@ -28,18 +28,19 @@ export const CategoryBadge = ({ category }: CategoryBadgeProps) => {
 
 const TransactionsTable = ({ transactions, showActions, selectedId }: TransactionTableProps) => {
   const format = useFormatter()
+  const tColumn = useTranslations('Transactions.columns')
 
   return (
     <Table>
       <TableHeader className='bg-[#f9fafb]'>
         <TableRow>
-          <TableHead className='px-2'>Transaction</TableHead>
-          <TableHead className='px-2'>Amount</TableHead>
-          <TableHead className='px-2'>Status</TableHead>
-          <TableHead className='px-2'>Date</TableHead>
-          <TableHead className='px-2 max-md:hidden'>Channel</TableHead>
-          <TableHead className='px-2 max-md:hidden'>Category</TableHead>
-          {showActions && <TableHead className='px-2 text-right'>Actions</TableHead>}
+          <TableHead className='px-2'>{tColumn('transaction')}</TableHead>
+          <TableHead className='px-2'>{tColumn('amount')}</TableHead>
+          <TableHead className='px-2'>{tColumn('status')}</TableHead>
+          <TableHead className='px-2'>{tColumn('date')}</TableHead>
+          <TableHead className='px-2 max-md:hidden'>{tColumn('channel')}</TableHead>
+          <TableHead className='px-2 max-md:hidden'>{tColumn('category')}</TableHead>
+          {showActions && <TableHead className='px-2 text-right'>{tColumn('actions')}</TableHead>}
         </TableRow>
       </TableHeader>
       <TableBody>

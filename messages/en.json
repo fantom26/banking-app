@@ -1,7 +1,182 @@
 {
+  "Metadata": {
+    "title": "Horizon",
+    "description": "Horizon is a banking app that helps you manage your finances and achieve your financial goals."
+  },
+  "Common": {
+    "logoAlt": "Horizon logo"
+  },
+  "Auth": {
+    "signInTitle": "Sign In",
+    "signUpTitle": "Sign Up",
+    "linkAccountTitle": "Link Account",
+    "enterDetails": "Please enter your details",
+    "linkAccountSubtitle": "Link your account to get started",
+    "fields": {
+      "firstName": { "label": "First Name", "placeholder": "Enter your first name" },
+      "lastName": { "label": "Last Name", "placeholder": "Enter your last name" },
+      "address1": { "label": "Address", "placeholder": "Enter your specific address" },
+      "city": { "label": "City", "placeholder": "Enter your city" },
+      "state": { "label": "State", "placeholder": "Example: NY" },
+      "postalCode": { "label": "Postal Code", "placeholder": "Example: 11101" },
+      "dateOfBirth": { "label": "Date of Birth", "placeholder": "YYYY-MM-DD" },
+      "ssn": { "label": "SSN", "placeholder": "Example: 1234" },
+      "email": { "label": "Email", "placeholder": "Enter your email" },
+      "password": { "label": "Password", "placeholder": "Enter your password" }
+    },
+    "signInButton": "Sign In",
+    "signUpButton": "Sign Up",
+    "loading": "Loading...",
+    "noAccount": "Don't have an account?",
+    "haveAccount": "Already have an account?",
+    "signUpLink": "Sign up",
+    "signInLink": "Sign in",
+    "imageAlt": "Auth image"
+  },
+  "Navigation": {
+    "home": "Home",
+    "myBanks": "My Banks",
+    "transactionHistory": "Transaction History",
+    "transferFunds": "Transfer Funds",
+    "openMenu": "Open navigation",
+    "menuTitle": "Navigation",
+    "logOut": "Log out"
+  },
+  "PlaidLink": {
+    "connectBank": "Connect bank"
+  },
   "HomePage": {
     "welcome": "Hello <highlight>{name}</highlight>!",
-    "subtext": "This is the subtext for the home page."
+    "subtext": "This is the subtext for the home page.",
+    "recentTransactions": "Recent transactions",
+    "viewAll": "View all",
+    "myBanks": "My Banks",
+    "addBank": "Add Bank",
+    "topCategories": "Top categories",
+    "bankAccounts": "Bank Accounts: {count}",
+    "totalCurrentBalance": "Total Current Balance",
+    "chartLabel": "Banks"
+  },
+  "Pagination": {
+    "previous": "Prev",
+    "next": "Next"
+  },
+  "Transactions": {
+    "columns": {
+      "transaction": "Transaction",
+      "amount": "Amount",
+      "status": "Status",
+      "date": "Date",
+      "channel": "Channel",
+      "category": "Category",
+      "actions": "Actions"
+    },
+    "actionsLabel": "Transaction actions",
+    "more": "More"
+  },
+  "TransactionDetails": {
+    "title": "Transaction details",
+    "empty": "Select a transaction and click More to see its details.",
+    "close": "Close",
+    "sections": {
+      "overview": "Overview",
+      "merchant": "Merchant",
+      "location": "Location",
+      "paymentInfo": "Payment info",
+      "counterparty": "Counterparty",
+      "counterpartyNumbered": "Counterparty {index}",
+      "transfer": "Transfer"
+    },
+    "rows": {
+      "date": "Date",
+      "authorized": "Authorized",
+      "channel": "Channel",
+      "category": "Category",
+      "currency": "Currency",
+      "checkNumber": "Check number",
+      "accountOwner": "Account owner",
+      "transactionId": "Transaction ID",
+      "pendingTransactionId": "Pending transaction ID",
+      "name": "Name",
+      "website": "Website",
+      "description": "Description",
+      "type": "Type",
+      "direction": "Direction",
+      "recipientEmail": "Recipient email",
+      "dwollaTransferId": "Dwolla transfer ID"
+    },
+    "direction": {
+      "sent": "Sent",
+      "received": "Received"
+    },
+    "location": {
+      "address": "Address",
+      "city": "City",
+      "region": "Region",
+      "postalCode": "Postal code",
+      "country": "Country",
+      "storeNumber": "Store number"
+    },
+    "paymentMeta": {
+      "referenceNumber": "Reference number",
+      "payee": "Payee",
+      "payer": "Payer",
+      "byOrderOf": "By order of",
+      "paymentMethod": "Payment method",
+      "paymentProcessor": "Payment processor",
+      "reason": "Reason"
+    }
+  },
+  "MyBanks": {
+    "title": "My Bank Accounts",
+    "subtext": "Effortlessly manage your banking activities.",
+    "yourCards": "Your cards"
+  },
+  "Transfer": {
+    "title": "Payment Transfer",
+    "subtext": "Please provide any specific details or notes related to the payment transfer",
+    "sourceBankLabel": "Select Source Bank",
+    "sourceBankDescription": "Select the bank account you want to transfer funds from",
+    "noteLabel": "Transfer Note (Optional)",
+    "noteDescription": "Please provide any additional information or instructions related to the transfer",
+    "notePlaceholder": "Write a short note here",
+    "recipientHeading": "Bank account details",
+    "recipientDescription": "Enter the bank account details of the recipient",
+    "emailLabel": "Recipient's Email Address",
+    "emailPlaceholder": "ex: johndoe@gmail.com",
+    "sharableIdLabel": "Receiver's Plaid Sharable Id",
+    "sharableIdPlaceholder": "Enter the public account number",
+    "amountLabel": "Amount",
+    "amountPlaceholder": "ex: 5.00",
+    "submit": "Transfer Funds",
+    "sending": "Sending...",
+    "genericError": "Something went wrong. Please try again.",
+    "bankPlaceholder": "Select a bank",
+    "noBanks": "No bank accounts linked",
+    "bankListLabel": "Select a bank to display"
+  },
+  "TransactionHistory": {
+    "title": "Transaction History",
+    "subtext": "See your bank details and transactions.",
+    "currentBalance": "Current balance",
+    "loadError": "Couldn't fetch account"
+  },
+  "Validation": {
+    "invalidEmail": "Invalid email address",
+    "passwordMin": "Password must be at least 8 characters",
+    "firstNameMin": "First name must be at least 3 characters",
+    "lastNameMin": "Last name must be at least 3 characters",
+    "addressMax": "Address must be at most 50 characters",
+    "cityMax": "City must be at most 50 characters",
+    "stateLength": "Use the 2-letter state code, e.g. NY",
+    "postalCodeLength": "Postal code must be 3 to 6 characters",
+    "dateOfBirth": "Enter a date like 1990-01-31",
+    "ssnMin": "SSN must be at least 3 characters",
+    "transferNoteMin": "Transfer note is too short",
+    "amountFormat": "Enter an amount like 5.00",
+    "amountPositive": "Amount must be greater than 0",
+    "senderBankRequired": "Please select a valid bank account",
+    "sharableIdMin": "Please select a valid sharable Id"
   },
   "LanguageSwitcher": {
     "label": "Language"

@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 import { useRouter, useSearchParams } from 'next/navigation'
 
-import { useFormatter } from 'next-intl'
+import { useFormatter, useTranslations } from 'next-intl'
 
 import Icon from '@/app/_components/Icon'
 import {
@@ -21,6 +21,7 @@ export const BankDropdown = ({ accounts = [], setValue, otherStyles }: BankDropd
   const searchParams = useSearchParams()
   const router = useRouter()
   const format = useFormatter()
+  const t = useTranslations('Transfer')
   const [selected, setSeclected] = useState<Account | undefined>()
 
   const handleBankChange = (id: string) => {
@@ -40,7 +41,7 @@ export const BankDropdown = ({ accounts = [], setValue, otherStyles }: BankDropd
   }
 
   const hasAccounts = accounts.length > 0
-  const placeholder = hasAccounts ? 'Select a bank' : 'No bank accounts linked'
+  const placeholder = hasAccounts ? t('bankPlaceholder') : t('noBanks')
 
   return (
     <Select
@@ -60,9 +61,7 @@ export const BankDropdown = ({ accounts = [], setValue, otherStyles }: BankDropd
         align='end'
       >
         <SelectGroup>
-          <SelectLabel className='py-2 font-normal text-gray-500'>
-            Select a bank to display
-          </SelectLabel>
+          <SelectLabel className='py-2 font-normal text-gray-500'>{t('bankListLabel')}</SelectLabel>
           {accounts.map((account: Account) => (
             <SelectItem
               key={account.id}

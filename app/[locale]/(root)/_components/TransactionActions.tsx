@@ -2,6 +2,8 @@
 
 import { useRouter, useSearchParams } from 'next/navigation'
 
+import { useTranslations } from 'next-intl'
+
 import Icon from '@/app/_components/Icon'
 import { Button } from '@/app/_components/ui/button'
 import {
@@ -15,6 +17,7 @@ import { formUrlQuery } from '@/app/_lib/utils'
 const TransactionActions = ({ transactionId }: { transactionId: string }) => {
   const router = useRouter()
   const searchParams = useSearchParams()
+  const t = useTranslations('Transactions')
 
   const showDetails = () => {
     const newUrl = formUrlQuery({
@@ -29,12 +32,12 @@ const TransactionActions = ({ transactionId }: { transactionId: string }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant='ghost' size='icon' className='size-8' aria-label='Transaction actions'>
+        <Button variant='ghost' size='icon' className='size-8' aria-label={t('actionsLabel')}>
           <Icon name='more-horizontal' />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className='bg-white' align='end'>
-        <DropdownMenuItem onSelect={showDetails}>More</DropdownMenuItem>
+        <DropdownMenuItem onSelect={showDetails}>{t('more')}</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )

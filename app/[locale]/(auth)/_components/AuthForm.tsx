@@ -5,7 +5,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useForm } from 'react-hook-form'
 
 import Icon from '@/app/_components/Icon'
@@ -27,6 +27,8 @@ type AuthFormValues = SignInParams | SignUpParams
 
 const AuthForm = ({ type }: AuthFormProps) => {
   const locale = useLocale()
+  const t = useTranslations('Auth')
+  const tCommon = useTranslations('Common')
   const [user, setUser] = useState<User | null>(null)
 
   const formSchema = type === 'sign-in' ? signInFormSchema : signUpFormSchema
@@ -63,15 +65,19 @@ const AuthForm = ({ type }: AuthFormProps) => {
     <section className='auth-form'>
       <header className='flex flex-col gap-5 md:gap-8'>
         <Link href='/' className='flex cursor-pointer items-center gap-1'>
-          <Image src='/icons/logo.svg' width={34} height={34} alt='Horizon logo' />
+          <Image src='/icons/logo.svg' width={34} height={34} alt={tCommon('logoAlt')} />
           <h1 className='font-ibm-plex-serif text-26 font-bold text-black-1'>Horizon</h1>
         </Link>
 
         <div className='flex flex-col gap-1 md:gap-3'>
           <h1 className='text-24 font-semibold text-gray-900 lg:text-36'>
-            {user ? 'Link Account' : type === 'sign-in' ? 'Sign In' : 'Sign Up'}
+            {user
+              ? t('linkAccountTitle')
+              : type === 'sign-in'
+                ? t('signInTitle')
+                : t('signUpTitle')}
             <p className='text-16 font-normal text-gray-600'>
-              {user ? 'Link your account to get started' : 'Please enter your details'}
+              {user ? t('linkAccountSubtitle') : t('enterDetails')}
             </p>
           </h1>
         </div>
@@ -90,54 +96,54 @@ const AuthForm = ({ type }: AuthFormProps) => {
                     <CustomInput
                       control={form.control}
                       name='firstName'
-                      label='First Name'
-                      placeholder='Enter your first name'
+                      label={t('fields.firstName.label')}
+                      placeholder={t('fields.firstName.placeholder')}
                     />
                     <CustomInput
                       control={form.control}
                       name='lastName'
-                      label='Last Name'
-                      placeholder='Enter your first name'
+                      label={t('fields.lastName.label')}
+                      placeholder={t('fields.lastName.placeholder')}
                     />
                   </div>
                   <CustomInput
                     control={form.control}
                     name='address1'
-                    label='Address'
-                    placeholder='Enter your specific address'
+                    label={t('fields.address1.label')}
+                    placeholder={t('fields.address1.placeholder')}
                   />
                   <CustomInput
                     control={form.control}
                     name='city'
-                    label='City'
-                    placeholder='Enter your city'
+                    label={t('fields.city.label')}
+                    placeholder={t('fields.city.placeholder')}
                   />
                   <div className='flex gap-4'>
                     <CustomInput
                       control={form.control}
                       name='state'
-                      label='State'
-                      placeholder='Example: NY'
+                      label={t('fields.state.label')}
+                      placeholder={t('fields.state.placeholder')}
                     />
                     <CustomInput
                       control={form.control}
                       name='postalCode'
-                      label='Postal Code'
-                      placeholder='Example: 11101'
+                      label={t('fields.postalCode.label')}
+                      placeholder={t('fields.postalCode.placeholder')}
                     />
                   </div>
                   <div className='flex gap-4'>
                     <CustomInput
                       control={form.control}
                       name='dateOfBirth'
-                      label='Date of Birth'
-                      placeholder='YYYY-MM-DD'
+                      label={t('fields.dateOfBirth.label')}
+                      placeholder={t('fields.dateOfBirth.placeholder')}
                     />
                     <CustomInput
                       control={form.control}
                       name='ssn'
-                      label='SSN'
-                      placeholder='Example: 1234'
+                      label={t('fields.ssn.label')}
+                      placeholder={t('fields.ssn.placeholder')}
                     />
                   </div>
                 </>
@@ -146,15 +152,15 @@ const AuthForm = ({ type }: AuthFormProps) => {
               <CustomInput
                 control={form.control}
                 name='email'
-                label='Email'
-                placeholder='Enter your email'
+                label={t('fields.email.label')}
+                placeholder={t('fields.email.placeholder')}
               />
 
               <CustomInput
                 control={form.control}
                 name='password'
-                label='Password'
-                placeholder='Enter your password'
+                label={t('fields.password.label')}
+                placeholder={t('fields.password.placeholder')}
               />
 
               {errors.root && <p className='form-message'>{errors.root.message}</p>}
@@ -163,12 +169,12 @@ const AuthForm = ({ type }: AuthFormProps) => {
                 <Button type='submit' disabled={isSubmitting} className='form-btn'>
                   {isSubmitting ? (
                     <>
-                      <Icon name='loader' className='size-5 animate-spin' /> &nbsp; Loading...
+                      <Icon name='loader' className='size-5 animate-spin' /> &nbsp; {t('loading')}
                     </>
                   ) : type === 'sign-in' ? (
-                    'Sign In'
+                    t('signInButton')
                   ) : (
-                    'Sign Up'
+                    t('signUpButton')
                   )}
                 </Button>
               </div>
@@ -177,10 +183,10 @@ const AuthForm = ({ type }: AuthFormProps) => {
 
           <footer className='flex justify-center gap-1'>
             <p className='text-14 font-normal text-gray-600'>
-              {type === 'sign-in' ? "Don't have an account?" : 'Already have an account?'}
+              {type === 'sign-in' ? t('noAccount') : t('haveAccount')}
             </p>
             <Link href={type === 'sign-in' ? '/sign-up' : '/sign-in'} className='form-link'>
-              {type === 'sign-in' ? 'Sign up' : 'Sign in'}
+              {type === 'sign-in' ? t('signUpLink') : t('signInLink')}
             </Link>
           </footer>
         </>

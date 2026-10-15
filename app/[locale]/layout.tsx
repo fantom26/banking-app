@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 
 import type { Metadata } from 'next'
 import { hasLocale, NextIntlClientProvider } from 'next-intl'
+import { getTranslations } from 'next-intl/server'
 
 import { routing } from '@/app/_i18n/routing'
 
@@ -19,12 +20,15 @@ const ibmPlexSerif = IBM_Plex_Serif({
   subsets: ['latin']
 })
 
-export const metadata: Metadata = {
-  title: 'Horizon',
-  description:
-    'Horizon is a banking app that helps you manage your finances and achieve your financial goals.',
-  icons: {
-    icon: '/icons/logo.svg'
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('Metadata')
+
+  return {
+    title: t('title'),
+    description: t('description'),
+    icons: {
+      icon: '/icons/logo.svg'
+    }
   }
 }
 

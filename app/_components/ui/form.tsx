@@ -3,6 +3,7 @@ import * as React from 'react'
 import * as LabelPrimitive from '@radix-ui/react-label'
 import { Slot } from '@radix-ui/react-slot'
 import { cn } from 'cn'
+import { type Messages, useTranslations } from 'next-intl'
 import {
   Controller,
   ControllerProps,
@@ -137,7 +138,11 @@ const FormMessage = React.forwardRef<
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, children, ...props }, ref) => {
   const { error, formMessageId } = useFormField()
-  const body = error ? String(error?.message) : children
+  const t = useTranslations('Validation')
+  const message = error?.message
+  // Schema messages are Validation keys; anything else is shown as is
+  const key = message as keyof Messages['Validation']
+  const body = message ? (t.has(key) ? t(key) : message) : children
 
   if (!body) {
     return null

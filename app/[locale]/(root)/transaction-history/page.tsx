@@ -1,4 +1,4 @@
-import { getFormatter } from 'next-intl/server'
+import { getFormatter, getTranslations } from 'next-intl/server'
 import qs from 'query-string'
 
 import { getAccount, getAccounts } from '@/app/_lib/actions/account.actions'
@@ -14,6 +14,7 @@ export default async function TransactionHistory({
 }: PageProps<'/[locale]/transaction-history'>) {
   const { id, page, tx } = await searchParams
   const format = await getFormatter()
+  const t = await getTranslations('TransactionHistory')
   const currentPage = Number(page as string) || 1
   const user = await getLoggedInUser()
   if (!user) return null
@@ -28,7 +29,7 @@ export default async function TransactionHistory({
   const account = bankRecordId ? await getAccount({ bankRecordId, userId: user.id }) : null
 
   if (!account) {
-    return <div>Couldn&apos;t fetch account</div>
+    return <div>{t('loadError')}</div>
   }
 
   const accountTransactions = account.transactions || []
@@ -54,10 +55,7 @@ export default async function TransactionHistory({
     <div className='home transactions'>
       <div className='home-content'>
         <div className='transactions-header'>
-          <HeaderBox
-            title='Transaction History'
-            subtext='See your bank details and transactions.'
-          />
+          <HeaderBox title={t('title')} subtext={t('subtext')} />
         </div>
 
         <div className='space-y-6'>
@@ -70,7 +68,7 @@ export default async function TransactionHistory({
               </p>
             </div>
             <div className='transactions-account-balance'>
-              <p className='text-14'>Current balance</p>
+              <p className='text-14'>{t('currentBalance')}</p>
               <p className='text-center text-24 font-bold'>
                 {format.number(account.data.currentBalance, 'currency')}
               </p>

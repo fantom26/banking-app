@@ -1,4 +1,4 @@
-import { useFormatter } from 'next-intl'
+import { useFormatter, useTranslations } from 'next-intl'
 
 import { Link } from '@/app/_i18n/navigation'
 import { getTransactionStatus, lastPathSegment, removeSpecialCharacters } from '@/app/_lib/utils'
@@ -39,6 +39,13 @@ const ExternalLink = ({ href, children }: { href: string; children: React.ReactN
   </a>
 )
 
+// Turns Plaid fields keyed by name into rows, labelling each field with `label`
+const toRows = <Field extends string>(
+  fields: Partial<Record<Field, string>>,
+  label: (field: Field) => string
+): DetailRow[] =>
+  (Object.entries(fields) as [Field, string][]).map(([field, value]) => [label(field), value])
+
 const toUrl = (website: string) => (website.startsWith('http') ? website : `https://${website}`)
 
 // FOOD_AND_DRINK_COFFEE -> Food and drink coffee
@@ -49,14 +56,13 @@ const humanize = (value: string) => {
 
 const TransactionDetails = ({ transaction, closeHref }: TransactionDetailsProps) => {
   const format = useFormatter()
+  const t = useTranslations('TransactionDetails')
 
   if (!transaction) {
     return (
       <section className='flex flex-col gap-2 px-6 py-8'>
-        <h2 className='header-2'>Transaction details</h2>
-        <p className='text-14 text-gray-600'>
-          Select a transaction and click More to see its details.
-        </p>
+        <h2 className='header-2'>{t('title')}</h2>
+        <p className='text-14 text-gray-600'>{t('empty')}</p>
       </section>
     )
   }
@@ -75,9 +81,9 @@ const TransactionDetails = ({ transaction, closeHref }: TransactionDetailsProps)
   return (
     <section className='flex flex-col gap-5 px-6 py-8'>
       <div className='flex items-center justify-between'>
-        <h2 className='header-2'>Transaction details</h2>
+        <h2 className='header-2'>{t('title')}</h2>
         <Link href={closeHref} scroll={false} className='text-14 font-semibold text-gray-600'>
-          Close
+          {t('close')}
         </Link>
       </div>
 
@@ -95,49 +101,62 @@ const TransactionDetails = ({ transaction, closeHref }: TransactionDetailsProps)
       </div>
 
       <DetailSection
-        title='Overview'
+        title={t('sections.overview')}
         rows={[
-          ['Date', format.dateTime(new Date(plaid?.datetime ?? transaction.date), 'withTime')],
           [
-            'Authorized',
+            t('rows.date'),
+            format.dateTime(new Date(plaid?.datetime ?? transaction.date), 'withTime')
+          ],
+          [
+            t('rows.authorized'),
             plaid?.authorizedDate && format.dateTime(new Date(plaid.authorizedDate), 'date')
           ],
-          ['Channel', humanize(transaction.paymentChannel)],
-          ['Category', plaid?.categoryDetailed && humanize(plaid.categoryDetailed)],
-          ['Currency', plaid?.currency],
-          ['Check number', plaid?.checkNumber],
-          ['Account owner', plaid?.accountOwner],
-          ['Transaction ID', transaction.id],
-          ['Pending transaction ID', plaid?.pendingTransactionId]
+          [t('rows.channel'), humanize(transaction.paymentChannel)],
+          [t('rows.category'), plaid?.categoryDetailed && humanize(plaid.categoryDetailed)],
+          [t('rows.currency'), plaid?.currency],
+          [t('rows.checkNumber'), plaid?.checkNumber],
+          [t('rows.accountOwner'), plaid?.accountOwner],
+          [t('rows.transactionId'), transaction.id],
+          [t('rows.pendingTransactionId'), plaid?.pendingTransactionId]
         ]}
       />
 
       {plaid && (
         <>
           <DetailSection
-            title='Merchant'
+            title={t('sections.merchant')}
             rows={[
-              ['Name', plaid.merchantName],
+              [t('rows.name'), plaid.merchantName],
               [
-                'Website',
+                t('rows.website'),
                 plaid.website && (
                   <ExternalLink href={toUrl(plaid.website)}>{plaid.website}</ExternalLink>
                 )
               ],
-              ['Description', plaid.originalDescription]
+              [t('rows.description'), plaid.originalDescription]
             ]}
           />
-          <DetailSection title='Location' rows={Object.entries(plaid.location)} />
-          <DetailSection title='Payment info' rows={Object.entries(plaid.paymentMeta)} />
+          <DetailSection
+            title={t('sections.location')}
+            rows={toRows(plaid.location, (field) => t(`location.${field}`))}
+          />
+          <DetailSection
+            title={t('sections.paymentInfo')}
+            rows={toRows(plaid.paymentMeta, (field) => t(`paymentMeta.${field}`))}
+          />
           {plaid.counterparties.map((counterparty, index) => (
             <DetailSection
               key={`${counterparty.name}-${index}`}
-              title={plaid.counterparties.length > 1 ? `Counterparty ${index + 1}` : 'Counterparty'}
+              title={
+                plaid.counterparties.length > 1
+                  ? t('sections.counterpartyNumbered', { index: index + 1 })
+                  : t('sections.counterparty')
+              }
               rows={[
-                ['Name', counterparty.name],
-                ['Type', humanize(counterparty.type)],
+                [t('rows.name'), counterparty.name],
+                [t('rows.type'), humanize(counterparty.type)],
                 [
-                  'Website',
+                  t('rows.website'),
                   counterparty.website && (
                     <ExternalLink key='website' href={toUrl(counterparty.website)}>
                       {counterparty.website}
@@ -152,12 +171,15 @@ const TransactionDetails = ({ transaction, closeHref }: TransactionDetailsProps)
 
       {transfer && (
         <DetailSection
-          title='Transfer'
+          title={t('sections.transfer')}
           rows={[
-            ['Direction', transfer.direction === 'sent' ? 'Sent' : 'Received'],
-            ['Recipient email', transfer.email],
+            [t('rows.direction'), t(`direction.${transfer.direction}`)],
+            [t('rows.recipientEmail'), transfer.email],
             // transfer_url points at the Dwolla API, which needs auth, so show its ID instead of a link.
-            ['Dwolla transfer ID', transfer.transferUrl && lastPathSegment(transfer.transferUrl)]
+            [
+              t('rows.dwollaTransferId'),
+              transfer.transferUrl && lastPathSegment(transfer.transferUrl)
+            ]
           ]}
         />
       )}

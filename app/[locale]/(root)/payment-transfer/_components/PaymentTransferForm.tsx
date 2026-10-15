@@ -3,6 +3,7 @@
 import { useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useTranslations } from 'next-intl'
 import { useForm } from 'react-hook-form'
 
 import Icon from '@/app/_components/Icon'
@@ -26,6 +27,7 @@ import { BankDropdown } from './BankDropdown'
 
 const PaymentTransferForm = ({ accounts }: PaymentTransferFormProps) => {
   const router = useRouter()
+  const t = useTranslations('Transfer')
   const [isLoading, setIsLoading] = useState(false)
 
   const form = useForm<TransferFormParams>({
@@ -53,7 +55,7 @@ const PaymentTransferForm = ({ accounts }: PaymentTransferFormProps) => {
       }
     } catch (error) {
       console.error('Submitting create transfer request failed: ', error)
-      form.setError('root', { message: 'Something went wrong. Please try again.' })
+      form.setError('root', { message: t('genericError') })
     }
 
     setIsLoading(false)
@@ -70,10 +72,10 @@ const PaymentTransferForm = ({ accounts }: PaymentTransferFormProps) => {
               <div className='payment-transfer_form-item pt-5 pb-6'>
                 <div className='payment-transfer_form-content'>
                   <FormLabel className='text-14 font-medium text-gray-700'>
-                    Select Source Bank
+                    {t('sourceBankLabel')}
                   </FormLabel>
                   <FormDescription className='text-12 font-normal text-gray-600'>
-                    Select the bank account you want to transfer funds from
+                    {t('sourceBankDescription')}
                   </FormDescription>
                 </div>
                 <div className='flex w-full flex-col'>
@@ -99,17 +101,16 @@ const PaymentTransferForm = ({ accounts }: PaymentTransferFormProps) => {
               <div className='payment-transfer_form-item pt-5 pb-6'>
                 <div className='payment-transfer_form-content'>
                   <FormLabel className='text-14 font-medium text-gray-700'>
-                    Transfer Note (Optional)
+                    {t('noteLabel')}
                   </FormLabel>
                   <FormDescription className='text-12 font-normal text-gray-600'>
-                    Please provide any additional information or instructions related to the
-                    transfer
+                    {t('noteDescription')}
                   </FormDescription>
                 </div>
                 <div className='flex w-full flex-col'>
                   <FormControl>
                     <Textarea
-                      placeholder='Write a short note here'
+                      placeholder={t('notePlaceholder')}
                       className='input-class'
                       {...field}
                     />
@@ -122,10 +123,8 @@ const PaymentTransferForm = ({ accounts }: PaymentTransferFormProps) => {
         />
 
         <div className='payment-transfer_form-details'>
-          <h2 className='text-18 font-semibold text-gray-900'>Bank account details</h2>
-          <p className='text-16 font-normal text-gray-600'>
-            Enter the bank account details of the recipient
-          </p>
+          <h2 className='text-18 font-semibold text-gray-900'>{t('recipientHeading')}</h2>
+          <p className='text-16 font-normal text-gray-600'>{t('recipientDescription')}</p>
         </div>
 
         <FormField
@@ -135,11 +134,11 @@ const PaymentTransferForm = ({ accounts }: PaymentTransferFormProps) => {
             <FormItem className='border-t border-gray-200'>
               <div className='payment-transfer_form-item py-5'>
                 <FormLabel className='w-full max-w-[280px] text-14 font-medium text-gray-700'>
-                  Recipient&apos;s Email Address
+                  {t('emailLabel')}
                 </FormLabel>
                 <div className='flex w-full flex-col'>
                   <FormControl>
-                    <Input placeholder='ex: johndoe@gmail.com' className='input-class' {...field} />
+                    <Input placeholder={t('emailPlaceholder')} className='input-class' {...field} />
                   </FormControl>
                   <FormMessage className='text-12 text-red-500' />
                 </div>
@@ -155,12 +154,12 @@ const PaymentTransferForm = ({ accounts }: PaymentTransferFormProps) => {
             <FormItem className='border-t border-gray-200'>
               <div className='payment-transfer_form-item pt-6 pb-5'>
                 <FormLabel className='w-full max-w-[280px] text-14 font-medium text-gray-700'>
-                  Receiver&apos;s Plaid Sharable Id
+                  {t('sharableIdLabel')}
                 </FormLabel>
                 <div className='flex w-full flex-col'>
                   <FormControl>
                     <Input
-                      placeholder='Enter the public account number'
+                      placeholder={t('sharableIdPlaceholder')}
                       className='input-class'
                       {...field}
                     />
@@ -179,11 +178,15 @@ const PaymentTransferForm = ({ accounts }: PaymentTransferFormProps) => {
             <FormItem className='border-y border-gray-200'>
               <div className='payment-transfer_form-item py-5'>
                 <FormLabel className='w-full max-w-[280px] text-14 font-medium text-gray-700'>
-                  Amount
+                  {t('amountLabel')}
                 </FormLabel>
                 <div className='flex w-full flex-col'>
                   <FormControl>
-                    <Input placeholder='ex: 5.00' className='input-class' {...field} />
+                    <Input
+                      placeholder={t('amountPlaceholder')}
+                      className='input-class'
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage className='text-12 text-red-500' />
                 </div>
@@ -200,10 +203,10 @@ const PaymentTransferForm = ({ accounts }: PaymentTransferFormProps) => {
           <Button type='submit' className='payment-transfer_btn' disabled={isLoading}>
             {isLoading ? (
               <>
-                <Icon name='loader' className='size-5 animate-spin' /> &nbsp; Sending...
+                <Icon name='loader' className='size-5 animate-spin' /> &nbsp; {t('sending')}
               </>
             ) : (
-              'Transfer Funds'
+              t('submit')
             )}
           </Button>
         </div>
