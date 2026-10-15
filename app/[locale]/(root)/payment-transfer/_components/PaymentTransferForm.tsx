@@ -2,8 +2,6 @@
 
 import { useState } from 'react'
 
-import { useRouter } from 'next/navigation'
-
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 
@@ -20,6 +18,7 @@ import {
 } from '@/app/_components/ui/form'
 import { Input } from '@/app/_components/ui/input'
 import { Textarea } from '@/app/_components/ui/textarea'
+import { useRouter } from '@/app/_i18n/navigation'
 import { transferFunds } from '@/app/_lib/actions/transfer.actions'
 import { type TransferFormParams, transferFormSchema } from '@/app/_lib/utils'
 

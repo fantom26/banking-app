@@ -1,8 +1,6 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 
 import { cn } from 'cn'
 
@@ -14,6 +12,7 @@ import {
   SheetTitle,
   SheetTrigger
 } from '@/app/_components/ui/sheet'
+import { Link, usePathname } from '@/app/_i18n/navigation'
 import { sidebarLinks } from '@/app/[locale]/(root)/_lib/constants'
 
 import Footer from './Footer'

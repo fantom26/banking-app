@@ -1,7 +1,7 @@
 import Image from 'next/image'
-import Link from 'next/link'
 
 import Icon from '@/app/_components/Icon'
+import { Link } from '@/app/_i18n/navigation'
 import { formatAmount } from '@/app/_lib/utils'
 
 import Copy from './Copy'

@@ -1,8 +1,11 @@
+import { useLocale } from 'next-intl'
+
 import Icon from '@/app/_components/Icon'
 import { signOut } from '@/app/_lib/actions/auth.actions'
 
 const Footer = ({ user, type = 'desktop' }: FooterProps) => {
   const isMobile = type === 'mobile'
+  const locale = useLocale()
 
   return (
     <footer className='footer'>
@@ -17,7 +20,7 @@ const Footer = ({ user, type = 'desktop' }: FooterProps) => {
         <p className='truncate text-14 font-normal text-gray-600'>{user.email}</p>
       </div>
 
-      <form action={signOut}>
+      <form action={signOut.bind(null, locale)}>
         <button
           type='submit'
           className={isMobile ? 'footer_image-mobile' : 'footer_image'}

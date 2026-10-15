@@ -1,7 +1,9 @@
 'use server'
 
-import { redirect } from 'next/navigation'
+import { hasLocale } from 'next-intl'
 
+import { redirect } from '@/app/_i18n/navigation'
+import { routing } from '@/app/_i18n/routing'
 import { createAdminClient } from '@/app/_lib/supabase/admin'
 import { createClient } from '@/app/_lib/supabase/server'
 import { extractCustomerIdFromUrl, signInFormSchema, signUpFormSchema } from '@/app/_lib/utils'
@@ -12,7 +14,11 @@ import { toUser } from './user.actions'
 type AuthActionResult = { error: string }
 type SignUpActionResult = AuthActionResult | { user: User }
 
-export async function signIn(input: unknown): Promise<AuthActionResult> {
+// next/root-params is unavailable in Server Actions, so callers pass the current locale
+const toLocale = (locale: unknown) =>
+  hasLocale(routing.locales, locale) ? locale : routing.defaultLocale
+
+export async function signIn(input: unknown, locale: unknown): Promise<AuthActionResult> {
   const parsed = signInFormSchema.safeParse(input)
   if (!parsed.success) return { error: 'Invalid email or password' }
 
@@ -20,7 +26,7 @@ export async function signIn(input: unknown): Promise<AuthActionResult> {
   const { error } = await supabase.auth.signInWithPassword(parsed.data)
   if (error) return { error: error.message }
 
-  redirect('/')
+  return redirect({ href: '/', locale: toLocale(locale) })
 }
 
 export async function signUp(input: unknown): Promise<SignUpActionResult> {
@@ -80,9 +86,9 @@ export async function signUp(input: unknown): Promise<SignUpActionResult> {
   }
 }
 
-export async function signOut() {
+export async function signOut(locale: unknown) {
   const supabase = await createClient()
   await supabase.auth.signOut()
 
-  redirect('/sign-in')
+  redirect({ href: '/sign-in', locale: toLocale(locale) })
 }

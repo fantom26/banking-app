@@ -1,6 +1,5 @@
-import Link from 'next/link'
-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/app/_components/ui/tabs'
+import { Link } from '@/app/_i18n/navigation'
 import { Pagination } from '@/app/[locale]/(root)/_components/Pagination'
 import TransactionsTable from '@/app/[locale]/(root)/_components/TransactionsTable'
 

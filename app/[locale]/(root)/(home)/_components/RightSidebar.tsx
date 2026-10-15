@@ -1,6 +1,5 @@
-import Link from 'next/link'
-
 import Icon from '@/app/_components/Icon'
+import { Link } from '@/app/_i18n/navigation'
 import BankCard from '@/app/[locale]/(root)/_components/BankCard'
 import RightSidebar from '@/app/[locale]/(root)/_components/RightSidebar'
 import { countTransactionCategories } from '@/app/[locale]/(root)/(home)/_lib/utils'

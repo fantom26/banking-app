@@ -3,15 +3,16 @@
 import { useState } from 'react'
 
 import Image from 'next/image'
-import Link from 'next/link'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useLocale } from 'next-intl'
 import { useForm } from 'react-hook-form'
 
 import Icon from '@/app/_components/Icon'
 import PlaidLink from '@/app/_components/PlaidLinks'
 import { Button } from '@/app/_components/ui/button'
 import { Form } from '@/app/_components/ui/form'
+import { Link } from '@/app/_i18n/navigation'
 import { signIn, signUp } from '@/app/_lib/actions/auth.actions'
 import {
   signInFormSchema,
@@ -25,6 +26,7 @@ import CustomInput from './CustomInput'
 type AuthFormValues = SignInParams | SignUpParams
 
 const AuthForm = ({ type }: AuthFormProps) => {
+  const locale = useLocale()
   const [user, setUser] = useState<User | null>(null)
 
   const formSchema = type === 'sign-in' ? signInFormSchema : signUpFormSchema
@@ -51,7 +53,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
     const result =
       type === 'sign-up' && 'firstName' in data
         ? await signUp(data)
-        : await signIn({ email: data.email, password: data.password })
+        : await signIn({ email: data.email, password: data.password }, locale)
 
     if ('user' in result) setUser(result.user)
     else form.setError('root', { message: result.error })

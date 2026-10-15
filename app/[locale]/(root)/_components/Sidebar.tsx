@@ -1,13 +1,12 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 
 import { cn } from 'cn'
 
 import Icon from '@/app/_components/Icon'
 import PlaidLink from '@/app/_components/PlaidLinks'
+import { Link, usePathname } from '@/app/_i18n/navigation'
 import { sidebarLinks } from '@/app/[locale]/(root)/_lib/constants'
 
 import Footer from './Footer'

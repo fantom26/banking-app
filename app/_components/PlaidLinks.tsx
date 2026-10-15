@@ -2,11 +2,10 @@
 
 import { useCallback, useEffect, useState } from 'react'
 
-import { useRouter } from 'next/navigation'
-
 import { PlaidLinkOnSuccess, PlaidLinkOptions, usePlaidLink } from 'react-plaid-link'
 
 import { Button } from '@/app/_components/ui/button'
+import { useRouter } from '@/app/_i18n/navigation'
 import { createLinkToken, exchangePublicToken } from '@/app/_lib/actions/bank.actions'
 
 import Icon from './Icon'
