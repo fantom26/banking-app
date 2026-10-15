@@ -115,22 +115,8 @@ export function formUrlQuery({ params, key, value }: UrlQueryParams) {
   )
 }
 
-export function extractCustomerIdFromUrl(url: string) {
-  // Split the URL string by '/'
-  const parts = url.split('/')
-
-  // Extract the last part, which represents the customer ID
-  const customerId = parts[parts.length - 1]
-
-  return customerId
-}
-
-export function encryptId(id: string) {
-  return btoa(id)
-}
-
-export function decryptId(id: string) {
-  return atob(id)
+export function lastPathSegment(url: string) {
+  return url.split('/').pop() ?? ''
 }
 
 export const getTransactionStatus = (date: Date) => {

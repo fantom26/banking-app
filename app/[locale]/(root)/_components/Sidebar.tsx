@@ -8,6 +8,7 @@ import Icon from '@/app/_components/Icon'
 import PlaidLink from '@/app/_components/PlaidLinks'
 import { Link, usePathname } from '@/app/_i18n/navigation'
 import { sidebarLinks } from '@/app/[locale]/(root)/_lib/constants'
+import { isActiveRoute } from '@/app/[locale]/(root)/_lib/utils'
 
 import Footer from './Footer'
 
@@ -29,7 +30,7 @@ const Sidebar = ({ user }: SiderbarProps) => {
         </Link>
 
         {sidebarLinks.map((link) => {
-          const isActive = pathName === link.route || pathName.startsWith(`${link.route}/`)
+          const isActive = isActiveRoute(pathName, link.route)
           return (
             <Link
               key={link.label}

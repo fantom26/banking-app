@@ -3,7 +3,7 @@
 import { ChartData } from 'chart.js'
 
 import AnimatedCounter from './AnimatedCounter'
-import DoughnutChart from './DonughnutChart'
+import DoughnutChart from './DoughnutChart'
 
 const TotalBalanceBox = ({
   accounts = [],

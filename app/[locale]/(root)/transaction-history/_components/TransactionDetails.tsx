@@ -3,6 +3,7 @@ import {
   formatAmount,
   formatDateTime,
   getTransactionStatus,
+  lastPathSegment,
   removeSpecialCharacters
 } from '@/app/_lib/utils'
 import { CategoryBadge } from '@/app/[locale]/(root)/_components/TransactionsTable'
@@ -158,7 +159,7 @@ const TransactionDetails = ({ transaction, closeHref }: TransactionDetailsProps)
             ['Direction', transfer.direction === 'sent' ? 'Sent' : 'Received'],
             ['Recipient email', transfer.email],
             // transfer_url points at the Dwolla API, which needs auth, so show its ID instead of a link.
-            ['Dwolla transfer ID', transfer.transferUrl?.split('/').pop()]
+            ['Dwolla transfer ID', transfer.transferUrl && lastPathSegment(transfer.transferUrl)]
           ]}
         />
       )}

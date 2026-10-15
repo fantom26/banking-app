@@ -6,7 +6,7 @@ import { redirect } from '@/app/_i18n/navigation'
 import { routing } from '@/app/_i18n/routing'
 import { createAdminClient } from '@/app/_lib/supabase/admin'
 import { createClient } from '@/app/_lib/supabase/server'
-import { extractCustomerIdFromUrl, signInFormSchema, signUpFormSchema } from '@/app/_lib/utils'
+import { lastPathSegment, signInFormSchema, signUpFormSchema } from '@/app/_lib/utils'
 
 import { createDwollaCustomer } from './dwolla.actions'
 import { toUser } from './user.actions'
@@ -67,7 +67,7 @@ export async function signUp(input: unknown): Promise<SignUpActionResult> {
     const { data: row, error: rowError } = await admin
       .from('users')
       .update({
-        dwolla_customer_id: extractCustomerIdFromUrl(dwollaCustomerUrl),
+        dwolla_customer_id: lastPathSegment(dwollaCustomerUrl),
         dwolla_customer_url: dwollaCustomerUrl
       })
       .eq('id', userId)

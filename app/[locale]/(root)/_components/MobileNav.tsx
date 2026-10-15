@@ -14,6 +14,7 @@ import {
 } from '@/app/_components/ui/sheet'
 import { Link, usePathname } from '@/app/_i18n/navigation'
 import { sidebarLinks } from '@/app/[locale]/(root)/_lib/constants'
+import { isActiveRoute } from '@/app/[locale]/(root)/_lib/utils'
 
 import Footer from './Footer'
 
@@ -21,7 +22,7 @@ const MobileNav = ({ user }: MobileNavProps) => {
   const pathname = usePathname()
 
   return (
-    <section className='w-fulll max-w-[264px]'>
+    <section className='w-full max-w-[264px]'>
       <Sheet>
         <SheetTrigger aria-label='Open navigation'>
           <Icon name='menu' className='size-[30px] cursor-pointer text-gray-700' />
@@ -35,7 +36,7 @@ const MobileNav = ({ user }: MobileNavProps) => {
           <div className='mobilenav-sheet'>
             <nav className='flex h-full flex-col gap-6 pt-16 text-white'>
               {sidebarLinks.map((item) => {
-                const isActive = pathname === item.route || pathname.startsWith(`${item.route}/`)
+                const isActive = isActiveRoute(pathname, item.route)
 
                 return (
                   <SheetClose asChild key={item.route}>

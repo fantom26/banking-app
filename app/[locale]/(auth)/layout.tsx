@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-export default function RootLayout({ children }: LayoutProps<'/[locale]'>) {
+export default function AuthLayout({ children }: LayoutProps<'/[locale]'>) {
   return (
     <main className='flex min-h-screen w-full justify-between font-inter'>
       {children}

@@ -11,7 +11,7 @@ import {
 
 import { plaidClient } from '@/app/_lib/plaid'
 import { createAdminClient } from '@/app/_lib/supabase/admin'
-import { encryptId, parseStringify } from '@/app/_lib/utils'
+import { parseStringify } from '@/app/_lib/utils'
 
 import { addFundingSource } from './dwolla.actions'
 import { getLoggedInUser } from './user.actions'
@@ -82,7 +82,7 @@ export const exchangePublicToken = async ({ publicToken }: exchangePublicTokenPr
       accountId: accountData.account_id,
       accessToken,
       fundingSourceUrl,
-      sharableId: encryptId(accountData.account_id)
+      sharableId: btoa(accountData.account_id)
     })
 
     revalidatePath('/')
