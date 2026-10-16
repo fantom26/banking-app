@@ -1,9 +1,8 @@
 import { cn } from 'cn'
 
 import { Progress } from '@/app/_components/ui/progress'
+import CategoryIcon from '@/app/[locale]/(root)/_components/CategoryIcon'
 import { topCategoryStyles } from '@/app/[locale]/(root)/(home)/_lib/constants'
-
-import CategoryIcon from './CategoryIcon'
 
 const Category = ({ category }: CategoryProps) => {
   const {

@@ -1,8 +1,8 @@
 import { useTranslations } from 'next-intl'
 
+import BankCard from '@/app/_components/BankCard'
 import Icon from '@/app/_components/Icon'
 import { Link } from '@/app/_i18n/navigation'
-import BankCard from '@/app/[locale]/(root)/_components/BankCard'
 import RightSidebar from '@/app/[locale]/(root)/_components/RightSidebar'
 import { countTransactionCategories } from '@/app/[locale]/(root)/(home)/_lib/utils'
 
@@ -40,23 +40,29 @@ const HomeRightSidebar = ({ user, banks, transactions }: RightSidebarProps) => {
         </div>
         {banks?.length > 0 && (
           <div className='relative flex flex-1 flex-col items-center justify-center gap-5'>
-            <div className='relative z-10'>
+            <Link
+              href={`/transaction-history/?id=${banks[0].bankRecordId}`}
+              className='relative z-10 w-full rounded-xl outline-none focus-visible:ring-3 focus-visible:ring-ring/30'
+            >
               <BankCard
-                key={banks[0].id}
-                account={banks[0]}
-                userName={`${user.firstName} ${user.lastName}`}
-                showBalance={false}
+                name={banks[0].name}
+                subtitle={banks[0].officialName}
+                mask={banks[0].mask}
+                holder={`${user.firstName} ${user.lastName}`}
               />
-            </div>
+            </Link>
             {banks[1] && (
-              <div className='absolute top-8 right-0 z-0 w-[90%]'>
+              <Link
+                href={`/transaction-history/?id=${banks[1].bankRecordId}`}
+                className='absolute top-8 right-0 z-0 w-[90%] rounded-xl outline-none focus-visible:ring-3 focus-visible:ring-ring/30'
+              >
                 <BankCard
-                  key={banks[1].id}
-                  account={banks[1]}
-                  userName={`${user.firstName} ${user.lastName}`}
-                  showBalance={false}
+                  name={banks[1].name}
+                  subtitle={banks[1].officialName}
+                  mask={banks[1].mask}
+                  holder={`${user.firstName} ${user.lastName}`}
                 />
-              </div>
+              </Link>
             )}
           </div>
         )}

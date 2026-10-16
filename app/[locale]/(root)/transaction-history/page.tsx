@@ -6,7 +6,7 @@ import { getLoggedInUser } from '@/app/_lib/actions/user.actions'
 import PageHeader from '@/app/[locale]/(root)/_components/PageHeader'
 import { Pagination } from '@/app/[locale]/(root)/_components/Pagination'
 import RightSidebar from '@/app/[locale]/(root)/_components/RightSidebar'
-import TransactionsTable from '@/app/[locale]/(root)/_components/TransactionsTable'
+import TransactionList from '@/app/[locale]/(root)/_components/TransactionList'
 import TransactionDetails from '@/app/[locale]/(root)/transaction-history/_components/TransactionDetails'
 
 export default async function TransactionHistory({
@@ -74,9 +74,15 @@ export default async function TransactionHistory({
           </div>
 
           <section className='flex w-full flex-col gap-6'>
-            <TransactionsTable
-              transactions={currentTransactions || []}
-              showActions
+            <TransactionList
+              variant='table'
+              transactions={currentTransactions}
+              rowHref={(transaction) =>
+                qs.stringifyUrl(
+                  { url: '/transaction-history', query: { id, page, tx: transaction.id } },
+                  { skipNull: true, skipEmptyString: true }
+                )
+              }
               selectedId={selectedTransaction?.id}
             />
             {totalPages > 1 && (

@@ -1,8 +1,11 @@
+import { cn } from 'cn'
 import { useFormatter, useTranslations } from 'next-intl'
 
 import { Link } from '@/app/_i18n/navigation'
-import { getTransactionStatus, lastPathSegment, removeSpecialCharacters } from '@/app/_lib/utils'
-import { CategoryBadge } from '@/app/[locale]/(root)/_components/TransactionsTable'
+import { signedAmount } from '@/app/_lib/finance'
+import { humanize, lastPathSegment, removeSpecialCharacters } from '@/app/_lib/utils'
+import CategoryChip from '@/app/[locale]/(root)/_components/CategoryChip'
+import StatusChip from '@/app/[locale]/(root)/_components/StatusChip'
 
 type TransactionDetailsProps = {
   transaction?: Transaction
@@ -48,12 +51,6 @@ const toRows = <Field extends string>(
 
 const toUrl = (website: string) => (website.startsWith('http') ? website : `https://${website}`)
 
-// FOOD_AND_DRINK_COFFEE -> Food and drink coffee
-const humanize = (value: string) => {
-  const text = value.toLowerCase().replaceAll('_', ' ')
-  return text.charAt(0).toUpperCase() + text.slice(1)
-}
-
 const TransactionDetails = ({ transaction, closeHref }: TransactionDetailsProps) => {
   const format = useFormatter()
   const t = useTranslations('TransactionDetails')
@@ -71,12 +68,7 @@ const TransactionDetails = ({ transaction, closeHref }: TransactionDetailsProps)
   const plaid = details?.source === 'plaid' ? details : null
   const transfer = details?.source === 'transfer' ? details : null
 
-  const amount = format.number(transaction.amount, 'currency')
-  const isDebit = transaction.type === 'debit'
-  const isNegative = isDebit || transaction.amount < 0
-  const status = transaction.pending
-    ? 'Processing'
-    : getTransactionStatus(new Date(transaction.date))
+  const amount = signedAmount(transaction)
 
   return (
     <section className='flex flex-col gap-5 px-6 py-8'>
@@ -91,12 +83,16 @@ const TransactionDetails = ({ transaction, closeHref }: TransactionDetailsProps)
         <p className='text-16 font-semibold text-gray-900'>
           {removeSpecialCharacters(transaction.name)}
         </p>
-        <p className={`text-24 font-bold ${isNegative ? 'text-[#f04438]' : 'text-[#039855]'}`}>
-          {isDebit ? `-${amount}` : amount}
+        <p
+          className={cn('text-stat font-bold tracking-tight tabular-nums', {
+            'text-success': amount > 0
+          })}
+        >
+          {format.number(amount, 'signedCurrency')}
         </p>
         <div className='flex flex-wrap gap-2'>
-          <CategoryBadge category={status} />
-          <CategoryBadge category={transaction.category} />
+          <StatusChip pending={transaction.pending} />
+          <CategoryChip category={transaction.category} />
         </div>
       </div>
 

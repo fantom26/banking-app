@@ -91,28 +91,32 @@
     "topCategories": "Categorías principales",
     "bankAccounts": "Cuentas bancarias: {count}",
     "totalCurrentBalance": "Saldo actual total",
-    "chartLabel": "Bancos"
+    "chartLabel": "Bancos",
+    "otherAccounts": "Otras cuentas"
   },
   "Pagination": {
-    "previous": "Anterior",
-    "next": "Siguiente"
+    "label": "Paginación",
+    "previous": "Página anterior",
+    "next": "Página siguiente",
+    "page": "Página {page}"
   },
   "Transactions": {
     "columns": {
       "transaction": "Transacción",
-      "amount": "Monto",
-      "status": "Estado",
-      "date": "Fecha",
-      "channel": "Canal",
       "category": "Categoría",
-      "actions": "Acciones"
+      "status": "Estado",
+      "amount": "Monto"
     },
-    "actionsLabel": "Acciones de la transacción",
-    "more": "Más"
+    "empty": "Aún no hay transacciones",
+    "channels": {
+      "online": "En línea",
+      "in store": "En tienda",
+      "other": "Otro"
+    }
   },
   "TransactionDetails": {
     "title": "Detalles de la transacción",
-    "empty": "Selecciona una transacción y haz clic en Más para ver sus detalles.",
+    "empty": "Selecciona una transacción para ver sus detalles.",
     "close": "Cerrar",
     "sections": {
       "overview": "Resumen",
@@ -213,6 +217,34 @@
     "amountPositive": "El monto debe ser mayor que 0",
     "senderBankRequired": "Selecciona una cuenta bancaria válida",
     "sharableIdMin": "Ingresa un ID compartible válido"
+  },
+  "BankCard": {
+    "holder": "Titular",
+    "endingIn": "terminada en"
+  },
+  "Status": {
+    "pending": "Pendiente",
+    "posted": "Registrada"
+  },
+  "Categories": {
+    "INCOME": "Ingresos",
+    "TRANSFER_IN": "Transferencia recibida",
+    "TRANSFER_OUT": "Transferencia enviada",
+    "LOAN_PAYMENTS": "Pagos de préstamos",
+    "LOAN_DISBURSEMENTS": "Desembolsos de préstamos",
+    "BANK_FEES": "Comisiones bancarias",
+    "ENTERTAINMENT": "Entretenimiento",
+    "FOOD_AND_DRINK": "Comida y bebida",
+    "GENERAL_MERCHANDISE": "Compras",
+    "HOME_IMPROVEMENT": "Mejoras del hogar",
+    "MEDICAL": "Salud",
+    "PERSONAL_CARE": "Cuidado personal",
+    "GENERAL_SERVICES": "Servicios",
+    "GOVERNMENT_AND_NON_PROFIT": "Gobierno y ONG",
+    "TRANSPORTATION": "Transporte",
+    "TRAVEL": "Viajes",
+    "RENT_AND_UTILITIES": "Alquiler y servicios",
+    "OTHER": "Otros"
   },
   "UserMenu": {
     "label": "Menú de la cuenta de {name}"

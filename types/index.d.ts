@@ -124,12 +124,6 @@ declare type NewDwollaCustomerParams = {
   ssn: string
 }
 
-declare interface CreditCardProps {
-  account: Account
-  userName: string
-  showBalance?: boolean
-}
-
 declare interface BankInfoProps {
   account: Account
   isActive: boolean
@@ -173,17 +167,6 @@ declare interface RecentTransactionsProps {
   transactions: Transaction[]
   bankRecordId: string
   page: number
-}
-
-declare interface CategoryBadgeProps {
-  category: string
-}
-
-declare interface TransactionTableProps {
-  transactions: Transaction[]
-  // Adds the Actions column whose "More" item opens the details sidebar
-  showActions?: boolean
-  selectedId?: string
 }
 
 declare interface CategoryProps {

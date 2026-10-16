@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/app/_components/ui/tabs'
 import { Link } from '@/app/_i18n/navigation'
 import { Pagination } from '@/app/[locale]/(root)/_components/Pagination'
-import TransactionsTable from '@/app/[locale]/(root)/_components/TransactionsTable'
+import TransactionList from '@/app/[locale]/(root)/_components/TransactionList'
 
 import BankInfo from './BankInfo'
 import { BankTabItem } from './BankTabItem'
@@ -52,7 +52,7 @@ const RecentTransactions = ({
             <TabsContent value={account.bankRecordId} key={account.id} className='space-y-4'>
               <BankInfo account={account} isActive={isActive} type='full' />
 
-              <TransactionsTable transactions={currentTransactions} />
+              <TransactionList transactions={currentTransactions} />
               {totalPages > 1 && (
                 <div className='my-4 w-full'>
                   <Pagination totalPages={totalPages} page={page} />

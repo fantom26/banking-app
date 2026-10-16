@@ -1,10 +1,11 @@
 'use client'
 
-import { ChartData } from 'chart.js'
 import { useTranslations } from 'next-intl'
 
+import { Card } from '@/app/_components/ui/card'
+
 import AnimatedCounter from './AnimatedCounter'
-import DoughnutChart from './DoughnutChart'
+import BalanceSplitChart from './BalanceSplitChart'
 
 const TotalBalanceBox = ({
   accounts = [],
@@ -13,32 +14,17 @@ const TotalBalanceBox = ({
 }: TotalBalanceBoxProps) => {
   const t = useTranslations('HomePage')
 
-  const chartData: ChartData<'doughnut'> = {
-    datasets: [
-      {
-        label: t('chartLabel'),
-        data: accounts.map((a) => a.currentBalance),
-        backgroundColor: ['#0747b6', '#2265d8', '#2f91fa']
-      }
-    ],
-    labels: accounts.map((a) => a.name)
-  }
-
   return (
-    <section className='total-balance'>
-      <div className='total-balance-chart'>
-        <DoughnutChart data={chartData} />
+    <Card size='lg' className='gap-6'>
+      <div className='flex flex-col gap-2'>
+        <h2 className='text-title font-semibold'>{t('bankAccounts', { count: totalBanks })}</h2>
+        <p className='text-body text-muted-foreground'>{t('totalCurrentBalance')}</p>
+        <p className='text-hero font-bold tracking-tight tabular-nums'>
+          <AnimatedCounter amount={totalCurrentBalance} />
+        </p>
       </div>
-      <div className='flex flex-col gap-6'>
-        <h2 className='header-2'>{t('bankAccounts', { count: totalBanks })}</h2>
-        <div className='flex flex-col gap-2'>
-          <p className='total-balance-label'>{t('totalCurrentBalance')}</p>
-          <p className='flex-center total-balance-amount gap-2'>
-            <AnimatedCounter amount={totalCurrentBalance} />
-          </p>
-        </div>
-      </div>
-    </section>
+      <BalanceSplitChart accounts={accounts} />
+    </Card>
   )
 }
 

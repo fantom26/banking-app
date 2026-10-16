@@ -60,6 +60,12 @@ export function formUrlQuery({ params, key, value }: UrlQueryParams) {
   )
 }
 
+// FOOD_AND_DRINK_COFFEE -> Food and drink coffee
+export const humanize = (value: string) => {
+  const text = value.toLowerCase().replaceAll('_', ' ')
+  return text.charAt(0).toUpperCase() + text.slice(1)
+}
+
 export function lastPathSegment(url: string) {
   return url.split('/').pop() ?? ''
 }

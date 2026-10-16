@@ -61,28 +61,32 @@
     "topCategories": "Top categories",
     "bankAccounts": "Bank Accounts: {count}",
     "totalCurrentBalance": "Total Current Balance",
-    "chartLabel": "Banks"
+    "chartLabel": "Banks",
+    "otherAccounts": "Other accounts"
   },
   "Pagination": {
-    "previous": "Prev",
-    "next": "Next"
+    "label": "Pagination",
+    "previous": "Previous page",
+    "next": "Next page",
+    "page": "Page {page}"
   },
   "Transactions": {
     "columns": {
       "transaction": "Transaction",
-      "amount": "Amount",
-      "status": "Status",
-      "date": "Date",
-      "channel": "Channel",
       "category": "Category",
-      "actions": "Actions"
+      "status": "Status",
+      "amount": "Amount"
     },
-    "actionsLabel": "Transaction actions",
-    "more": "More"
+    "empty": "No transactions yet",
+    "channels": {
+      "online": "Online",
+      "in store": "In store",
+      "other": "Other"
+    }
   },
   "TransactionDetails": {
     "title": "Transaction details",
-    "empty": "Select a transaction and click More to see its details.",
+    "empty": "Select a transaction to see its details.",
     "close": "Close",
     "sections": {
       "overview": "Overview",
@@ -183,6 +187,34 @@
     "amountPositive": "Amount must be greater than 0",
     "senderBankRequired": "Please select a valid bank account",
     "sharableIdMin": "Please select a valid sharable Id"
+  },
+  "BankCard": {
+    "holder": "Card holder",
+    "endingIn": "ending in"
+  },
+  "Status": {
+    "pending": "Pending",
+    "posted": "Posted"
+  },
+  "Categories": {
+    "INCOME": "Income",
+    "TRANSFER_IN": "Transfer in",
+    "TRANSFER_OUT": "Transfer out",
+    "LOAN_PAYMENTS": "Loan payments",
+    "LOAN_DISBURSEMENTS": "Loan disbursements",
+    "BANK_FEES": "Bank fees",
+    "ENTERTAINMENT": "Entertainment",
+    "FOOD_AND_DRINK": "Food & drink",
+    "GENERAL_MERCHANDISE": "Shopping",
+    "HOME_IMPROVEMENT": "Home improvement",
+    "MEDICAL": "Medical",
+    "PERSONAL_CARE": "Personal care",
+    "GENERAL_SERVICES": "Services",
+    "GOVERNMENT_AND_NON_PROFIT": "Government & non-profit",
+    "TRANSPORTATION": "Transportation",
+    "TRAVEL": "Travel",
+    "RENT_AND_UTILITIES": "Rent & utilities",
+    "OTHER": "Other"
   },
   "UserMenu": {
     "label": "Account menu for {name}"

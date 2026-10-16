@@ -91,28 +91,32 @@
     "topCategories": "Principales catégories",
     "bankAccounts": "Comptes bancaires : {count}",
     "totalCurrentBalance": "Solde actuel total",
-    "chartLabel": "Banques"
+    "chartLabel": "Banques",
+    "otherAccounts": "Autres comptes"
   },
   "Pagination": {
-    "previous": "Précédent",
-    "next": "Suivant"
+    "label": "Pagination",
+    "previous": "Page précédente",
+    "next": "Page suivante",
+    "page": "Page {page}"
   },
   "Transactions": {
     "columns": {
       "transaction": "Transaction",
-      "amount": "Montant",
-      "status": "Statut",
-      "date": "Date",
-      "channel": "Canal",
       "category": "Catégorie",
-      "actions": "Actions"
+      "status": "Statut",
+      "amount": "Montant"
     },
-    "actionsLabel": "Actions sur la transaction",
-    "more": "Plus"
+    "empty": "Aucune transaction pour l’instant",
+    "channels": {
+      "online": "En ligne",
+      "in store": "En magasin",
+      "other": "Autre"
+    }
   },
   "TransactionDetails": {
     "title": "Détails de la transaction",
-    "empty": "Sélectionnez une transaction et cliquez sur Plus pour voir ses détails.",
+    "empty": "Sélectionnez une transaction pour voir ses détails.",
     "close": "Fermer",
     "sections": {
       "overview": "Aperçu",
@@ -213,6 +217,34 @@
     "amountPositive": "Le montant doit être supérieur à 0",
     "senderBankRequired": "Veuillez sélectionner un compte bancaire valide",
     "sharableIdMin": "Veuillez saisir un ID partageable valide"
+  },
+  "BankCard": {
+    "holder": "Titulaire",
+    "endingIn": "se terminant par"
+  },
+  "Status": {
+    "pending": "En attente",
+    "posted": "Comptabilisée"
+  },
+  "Categories": {
+    "INCOME": "Revenus",
+    "TRANSFER_IN": "Virement entrant",
+    "TRANSFER_OUT": "Virement sortant",
+    "LOAN_PAYMENTS": "Remboursements de prêt",
+    "LOAN_DISBURSEMENTS": "Décaissements de prêt",
+    "BANK_FEES": "Frais bancaires",
+    "ENTERTAINMENT": "Divertissement",
+    "FOOD_AND_DRINK": "Restauration",
+    "GENERAL_MERCHANDISE": "Achats",
+    "HOME_IMPROVEMENT": "Amélioration de l’habitat",
+    "MEDICAL": "Santé",
+    "PERSONAL_CARE": "Soins personnels",
+    "GENERAL_SERVICES": "Services",
+    "GOVERNMENT_AND_NON_PROFIT": "Administrations et associations",
+    "TRANSPORTATION": "Transport",
+    "TRAVEL": "Voyages",
+    "RENT_AND_UTILITIES": "Loyer et charges",
+    "OTHER": "Autre"
   },
   "UserMenu": {
     "label": "Menu du compte de {name}"

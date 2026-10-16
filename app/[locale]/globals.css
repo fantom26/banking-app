@@ -47,6 +47,7 @@
   --cover-graphite-ink: #f1f4f8;
   --cover-frost: linear-gradient(135deg, #e9eff6, #c7d5e4);
   --cover-frost-ink: #1a2230;
+  --card-chip: linear-gradient(135deg, #ecdcab, #b99c5d);
 
   --elevation-card: 0 1px 2px rgb(16 24 40 / 0.04), 0 1px 3px rgb(16 24 40 / 0.03);
   --elevation-raised: 0 1px 2px rgb(16 24 40 / 0.06), 0 0 0 1px var(--border);
