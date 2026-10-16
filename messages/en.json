@@ -1,10 +1,10 @@
 {
   "Metadata": {
-    "title": "Horizon",
-    "description": "Horizon is a banking app that helps you manage your finances and achieve your financial goals."
+    "title": "Vaultly",
+    "description": "Vaultly brings your linked US bank accounts, balances and transfers into one clear view."
   },
   "Common": {
-    "logoAlt": "Horizon logo"
+    "appName": "Vaultly"
   },
   "Auth": {
     "signInTitle": "Sign In",

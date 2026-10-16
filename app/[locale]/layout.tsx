@@ -1,4 +1,4 @@
-import { IBM_Plex_Serif, Inter } from 'next/font/google'
+import { Geist } from 'next/font/google'
 import { notFound } from 'next/navigation'
 
 import type { Metadata } from 'next'
@@ -9,14 +9,8 @@ import { routing } from '@/app/_i18n/routing'
 
 import './globals.css'
 
-const inter = Inter({
-  variable: '--font-inter',
-  subsets: ['latin']
-})
-
-const ibmPlexSerif = IBM_Plex_Serif({
-  variable: '--font-ibm-plex-serif',
-  weight: ['400', '700'],
+const geist = Geist({
+  variable: '--font-geist-sans',
   subsets: ['latin']
 })
 
@@ -37,7 +31,7 @@ export default async function RootLayout({ children, params }: LayoutProps<'/[lo
   if (!hasLocale(routing.locales, locale)) notFound()
 
   return (
-    <html lang={locale} className={`${inter.variable} ${ibmPlexSerif.variable} h-full antialiased`}>
+    <html lang={locale} className={`${geist.variable} h-full antialiased`}>
       <body className='flex min-h-full flex-col'>
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>

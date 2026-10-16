@@ -16,7 +16,7 @@ const BankCard = ({ account, userName, showBalance }: CreditCardProps) => {
         <div className='bank-card_content'>
           <div>
             <h2 className='text-16 font-semibold text-white'>{account.name || userName}</h2>
-            <p className='font-ibm-plex-serif font-black text-white'>
+            <p className='font-bold text-white'>
               {format.number(account.currentBalance, 'currency')}
             </p>
           </div>

@@ -6,7 +6,7 @@ export default function AuthLayout({ children }: LayoutProps<'/[locale]'>) {
   const t = useTranslations('Auth')
 
   return (
-    <main className='flex min-h-screen w-full justify-between font-inter'>
+    <main className='flex min-h-screen w-full justify-between'>
       {children}
       <div className='auth-asset'>
         <div>

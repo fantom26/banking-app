@@ -2,13 +2,12 @@
 
 import { useState } from 'react'
 
-import Image from 'next/image'
-
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useLocale, useTranslations } from 'next-intl'
 import { useForm } from 'react-hook-form'
 
 import Icon from '@/app/_components/Icon'
+import Logo from '@/app/_components/Logo'
 import PlaidLink from '@/app/_components/PlaidLinks'
 import { Button } from '@/app/_components/ui/button'
 import { Form } from '@/app/_components/ui/form'
@@ -28,7 +27,6 @@ type AuthFormValues = SignInParams | SignUpParams
 const AuthForm = ({ type }: AuthFormProps) => {
   const locale = useLocale()
   const t = useTranslations('Auth')
-  const tCommon = useTranslations('Common')
   const [user, setUser] = useState<User | null>(null)
 
   const formSchema = type === 'sign-in' ? signInFormSchema : signUpFormSchema
@@ -65,8 +63,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
     <section className='auth-form'>
       <header className='flex flex-col gap-5 md:gap-8'>
         <Link href='/' className='flex cursor-pointer items-center gap-1'>
-          <Image src='/icons/logo.svg' width={34} height={34} alt={tCommon('logoAlt')} />
-          <h1 className='font-ibm-plex-serif text-26 font-bold text-black-1'>Horizon</h1>
+          <Logo size='lg' />
         </Link>
 
         <div className='flex flex-col gap-1 md:gap-3'>

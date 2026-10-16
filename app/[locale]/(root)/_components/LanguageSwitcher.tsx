@@ -52,7 +52,7 @@ const LanguageSwitcher = ({ type = 'desktop' }: { type?: 'mobile' | 'desktop' })
           <span className={cn({ 'max-xl:hidden': !isMobile })}>{localeLabels[locale]}</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className='bg-white' align='start'>
+      <DropdownMenuContent align='start'>
         <DropdownMenuRadioGroup value={locale} onValueChange={switchLocale}>
           {routing.locales.map((value) => (
             <DropdownMenuRadioItem key={value} value={value} lang={value}>

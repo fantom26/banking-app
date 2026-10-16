@@ -36,7 +36,7 @@ const TransactionActions = ({ transactionId }: { transactionId: string }) => {
           <Icon name='more-horizontal' />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className='bg-white' align='end'>
+      <DropdownMenuContent align='end'>
         <DropdownMenuItem onSelect={showDetails}>{t('more')}</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
