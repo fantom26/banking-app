@@ -1,4 +1,3 @@
-import qs from 'query-string'
 import { z } from 'zod'
 
 // Error messages are keys of the Validation messages; FormMessage translates them
@@ -40,26 +39,6 @@ export const removeSpecialCharacters = (value: string) => {
   return value.replace(/[^\w\s]/gi, '')
 }
 
-interface UrlQueryParams {
-  params: string
-  key: string
-  value: string
-}
-
-export function formUrlQuery({ params, key, value }: UrlQueryParams) {
-  const currentUrl = qs.parse(params)
-
-  currentUrl[key] = value
-
-  return qs.stringifyUrl(
-    {
-      url: window.location.pathname,
-      query: currentUrl
-    },
-    { skipNull: true }
-  )
-}
-
 // FOOD_AND_DRINK_COFFEE -> Food and drink coffee
 export const humanize = (value: string) => {
   const text = value.toLowerCase().replaceAll('_', ' ')
@@ -68,12 +47,4 @@ export const humanize = (value: string) => {
 
 export function lastPathSegment(url: string) {
   return url.split('/').pop() ?? ''
-}
-
-export const getTransactionStatus = (date: Date) => {
-  const today = new Date()
-  const twoDaysAgo = new Date(today)
-  twoDaysAgo.setDate(today.getDate() - 2)
-
-  return date > twoDaysAgo ? 'Processing' : 'Success'
 }
