@@ -12,17 +12,10 @@ export default async function Transfer() {
 
   const accounts = await getAccounts({ userId: user.id })
 
-  if (!accounts) return
-
-  const accountsData = accounts?.data
-
   return (
     <>
       <PageHeader title={t('title')} subtitle={t('subtext')} />
-
-      <section className='size-full'>
-        <PaymentTransferForm accounts={accountsData} />
-      </section>
+      <PaymentTransferForm accounts={accounts.data} />
     </>
   )
 }

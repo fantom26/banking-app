@@ -1,15 +1,13 @@
 import { cn } from 'cn'
 import { useFormatter, useTranslations } from 'next-intl'
 
-import { Link } from '@/app/_i18n/navigation'
 import { signedAmount } from '@/app/_lib/finance'
 import { humanize, lastPathSegment, removeSpecialCharacters } from '@/app/_lib/utils'
 import CategoryChip from '@/app/[locale]/(root)/_components/CategoryChip'
 import StatusChip from '@/app/[locale]/(root)/_components/StatusChip'
 
 type TransactionDetailsProps = {
-  transaction?: Transaction
-  closeHref: string
+  transaction: Transaction
 }
 
 type DetailRow = [label: string, value: React.ReactNode]
@@ -22,13 +20,13 @@ const DetailSection = ({ title, rows }: { title: string; rows: DetailRow[] }) =>
   if (filledRows.length === 0) return null
 
   return (
-    <section className='flex flex-col gap-3 border-t border-gray-200 pt-5'>
-      <h3 className='text-14 font-semibold text-gray-900'>{title}</h3>
+    <section className='flex flex-col gap-3 border-t pt-5'>
+      <h3 className='text-sm font-semibold'>{title}</h3>
       <dl className='flex flex-col gap-2.5'>
         {filledRows.map(([label, value]) => (
-          <div key={label} className='flex justify-between gap-4 text-14'>
-            <dt className='shrink-0 text-gray-600'>{label}</dt>
-            <dd className='text-right font-medium break-all text-gray-900'>{value}</dd>
+          <div key={label} className='flex justify-between gap-4 text-sm'>
+            <dt className='shrink-0 text-muted-foreground'>{label}</dt>
+            <dd className='text-right font-medium break-all'>{value}</dd>
           </div>
         ))}
       </dl>
@@ -37,7 +35,12 @@ const DetailSection = ({ title, rows }: { title: string; rows: DetailRow[] }) =>
 }
 
 const ExternalLink = ({ href, children }: { href: string; children: React.ReactNode }) => (
-  <a href={href} target='_blank' rel='noreferrer' className='text-blue-600 hover:underline'>
+  <a
+    href={href}
+    target='_blank'
+    rel='noreferrer'
+    className='font-semibold text-accent-foreground hover:underline'
+  >
     {children}
   </a>
 )
@@ -51,18 +54,9 @@ const toRows = <Field extends string>(
 
 const toUrl = (website: string) => (website.startsWith('http') ? website : `https://${website}`)
 
-const TransactionDetails = ({ transaction, closeHref }: TransactionDetailsProps) => {
+const TransactionDetails = ({ transaction }: TransactionDetailsProps) => {
   const format = useFormatter()
   const t = useTranslations('TransactionDetails')
-
-  if (!transaction) {
-    return (
-      <section className='flex flex-col gap-2 px-6 py-8'>
-        <h2 className='header-2'>{t('title')}</h2>
-        <p className='text-14 text-gray-600'>{t('empty')}</p>
-      </section>
-    )
-  }
 
   const { details } = transaction
   const plaid = details?.source === 'plaid' ? details : null
@@ -71,18 +65,9 @@ const TransactionDetails = ({ transaction, closeHref }: TransactionDetailsProps)
   const amount = signedAmount(transaction)
 
   return (
-    <section className='flex flex-col gap-5 px-6 py-8'>
-      <div className='flex items-center justify-between'>
-        <h2 className='header-2'>{t('title')}</h2>
-        <Link href={closeHref} scroll={false} className='text-14 font-semibold text-gray-600'>
-          {t('close')}
-        </Link>
-      </div>
-
+    <div className='flex flex-col gap-5 px-5 pb-6'>
       <div className='flex flex-col gap-2'>
-        <p className='text-16 font-semibold text-gray-900'>
-          {removeSpecialCharacters(transaction.name)}
-        </p>
+        <p className='text-body font-semibold'>{removeSpecialCharacters(transaction.name)}</p>
         <p
           className={cn('text-stat font-bold tracking-tight tabular-nums', {
             'text-success': amount > 0
@@ -179,7 +164,7 @@ const TransactionDetails = ({ transaction, closeHref }: TransactionDetailsProps)
           ]}
         />
       )}
-    </section>
+    </div>
   )
 }
 

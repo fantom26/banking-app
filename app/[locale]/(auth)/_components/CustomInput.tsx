@@ -1,6 +1,6 @@
 import { Control, FieldPath, FieldValues } from 'react-hook-form'
 
-import { FormControl, FormField, FormLabel, FormMessage } from '@/app/_components/ui/form'
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/app/_components/ui/form'
 import { Input } from '@/app/_components/ui/input'
 
 interface CustomInputProps<T extends FieldValues> {
@@ -21,20 +21,17 @@ const CustomInput = <T extends FieldValues>({
       control={control}
       name={name}
       render={({ field }) => (
-        <div className='form-item'>
-          <FormLabel className='form-label'>{label}</FormLabel>
-          <div className='flex w-full flex-col'>
-            <FormControl>
-              <Input
-                placeholder={placeholder}
-                className='input-class'
-                type={name === 'password' ? 'password' : 'text'}
-                {...field}
-              />
-            </FormControl>
-            <FormMessage className='mt-2 form-message' />
-          </div>
-        </div>
+        <FormItem className='flex flex-col gap-1.5 space-y-0'>
+          <FormLabel className='text-caption font-medium'>{label}</FormLabel>
+          <FormControl>
+            <Input
+              placeholder={placeholder}
+              type={name === 'password' ? 'password' : 'text'}
+              {...field}
+            />
+          </FormControl>
+          <FormMessage className='text-caption' />
+        </FormItem>
       )}
     />
   )

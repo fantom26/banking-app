@@ -3,9 +3,11 @@ import { z } from 'zod'
 
 import { getAccount, getAccounts } from '@/app/_lib/actions/account.actions'
 import { getLoggedInUser } from '@/app/_lib/actions/user.actions'
+import LinkFirstBank from '@/app/[locale]/(root)/_components/LinkFirstBank'
 import PageHeader from '@/app/[locale]/(root)/_components/PageHeader'
+import MyCards from '@/app/[locale]/(root)/(home)/_components/MyCards'
 import RecentTransactions from '@/app/[locale]/(root)/(home)/_components/RecentTransactions'
-import RightSidebar from '@/app/[locale]/(root)/(home)/_components/RightSidebar'
+import TopCategories from '@/app/[locale]/(root)/(home)/_components/TopCategories'
 import TotalBalanceBox from '@/app/[locale]/(root)/(home)/_components/TotalBalanceBox'
 
 const Home = async ({ searchParams }: PageProps<'/[locale]'>) => {
@@ -16,40 +18,44 @@ const Home = async ({ searchParams }: PageProps<'/[locale]'>) => {
 
   const accounts = await getAccounts({ userId: user.id })
 
-  const selectedId = z.uuid().safeParse(id)
-  const bankRecordId = selectedId.success ? selectedId.data : accounts.data[0]?.bankRecordId
+  if (accounts.data.length === 0) {
+    return (
+      <>
+        <PageHeader title={t('welcome', { name: user.firstName })} subtitle={t('emptySubtext')} />
+        <LinkFirstBank user={user} />
+      </>
+    )
+  }
 
-  const account = bankRecordId ? await getAccount({ bankRecordId, userId: user.id }) : null
+  const selectedId = z.uuid().safeParse(id)
+  const selected =
+    accounts.data.find((a) => selectedId.success && a.bankRecordId === selectedId.data) ??
+    accounts.data[0]
+
+  const account = await getAccount({ bankRecordId: selected.bankRecordId, userId: user.id })
+  const transactions = account?.transactions ?? []
 
   return (
     <>
-      <PageHeader
-        title={t.rich('welcome', {
-          name: user.firstName,
-          highlight: (chunks) => <span className='text-bankGradient'>{chunks}</span>
-        })}
-        subtitle={t('subtext')}
-      />
-      <section className='flex gap-6'>
-        <div className='flex min-w-0 flex-1 flex-col gap-8'>
-          <TotalBalanceBox
-            accounts={accounts.data}
-            totalBanks={accounts.totalBanks}
-            totalCurrentBalance={accounts.totalCurrentBalance}
-          />
-          <RecentTransactions
-            accounts={accounts.data}
-            transactions={account?.transactions ?? []}
-            bankRecordId={bankRecordId ?? ''}
-            page={1}
-          />
-        </div>
-        <RightSidebar
+      <PageHeader title={t('welcome', { name: user.firstName })} subtitle={t('subtext')} />
+
+      <div className='grid gap-4 md:grid-cols-2 xl:grid-cols-[minmax(0,1fr)_380px]'>
+        <TotalBalanceBox
           user={user}
-          transactions={account?.transactions ?? []}
-          banks={accounts.data.slice(0, 2)}
+          accounts={accounts.data}
+          totalBanks={accounts.totalBanks}
+          totalCurrentBalance={accounts.totalCurrentBalance}
+          className='md:col-span-2 xl:col-span-1'
         />
-      </section>
+        <MyCards accounts={accounts.data} holder={`${user.firstName} ${user.lastName}`} />
+        <RecentTransactions
+          accounts={accounts.data}
+          account={selected}
+          transactions={transactions}
+          className='md:order-last md:col-span-2 xl:order-0 xl:col-span-1'
+        />
+        <TopCategories transactions={transactions} />
+      </div>
     </>
   )
 }

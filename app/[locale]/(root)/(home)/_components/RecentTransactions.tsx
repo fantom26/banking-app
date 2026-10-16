@@ -1,68 +1,57 @@
-import { useTranslations } from 'next-intl'
+import { cn } from 'cn'
+import { useFormatter, useTranslations } from 'next-intl'
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/app/_components/ui/tabs'
+import { Button } from '@/app/_components/ui/button'
+import { Card, CardAction, CardHeader, CardTitle } from '@/app/_components/ui/card'
 import { Link } from '@/app/_i18n/navigation'
-import { Pagination } from '@/app/[locale]/(root)/_components/Pagination'
+import { humanize } from '@/app/_lib/utils'
 import TransactionList from '@/app/[locale]/(root)/_components/TransactionList'
 
-import BankInfo from './BankInfo'
-import { BankTabItem } from './BankTabItem'
+import AccountSwitcher from './AccountSwitcher'
+
+type RecentTransactionsProps = {
+  accounts: Account[]
+  account: Account
+  transactions: Transaction[]
+  className?: string
+}
 
 const RecentTransactions = ({
   accounts,
-  transactions = [],
-  bankRecordId,
-  page = 1
+  account,
+  transactions,
+  className
 }: RecentTransactionsProps) => {
   const t = useTranslations('HomePage')
-  const rowsPerPage = 10
-  const totalPages = Math.ceil(transactions.length / rowsPerPage)
-
-  const indexOfLastTransaction = page * rowsPerPage
-  const indexOfFirstTransaction = indexOfLastTransaction - rowsPerPage
-
-  const currentTransactions = transactions.slice(indexOfFirstTransaction, indexOfLastTransaction)
+  const format = useFormatter()
 
   return (
-    <section className='recent-transactions'>
-      <header className='flex items-center justify-between'>
-        <h2 className='recent-transactions-label'>{t('recentTransactions')}</h2>
-        <Link href={`/transaction-history/?id=${bankRecordId}`} className='view-all-btn'>
-          {t('viewAll')}
-        </Link>
-      </header>
+    <Card className={cn('min-w-0 gap-3', className)}>
+      <CardHeader>
+        <CardTitle>{t('recentTransactions')}</CardTitle>
+        <CardAction>
+          <Button asChild variant='link' className='text-caption'>
+            <Link href={`/transaction-history?id=${account.bankRecordId}`}>{t('viewAll')}</Link>
+          </Button>
+        </CardAction>
+      </CardHeader>
 
-      <Tabs defaultValue={bankRecordId} className='w-full'>
-        <TabsList className='recent-transactions-tablist'>
-          {accounts.map((account: Account) => {
-            const isActive = bankRecordId === account.bankRecordId
+      {accounts.length > 1 && (
+        <AccountSwitcher accounts={accounts} selectedId={account.bankRecordId} />
+      )}
 
-            return (
-              <TabsTrigger key={account.id} value={account.bankRecordId}>
-                <BankTabItem key={account.id} account={account} isActive={isActive} />
-              </TabsTrigger>
-            )
-          })}
-        </TabsList>
+      <p className='text-caption text-muted-foreground'>
+        {[
+          account.name,
+          account.subtype && humanize(account.subtype),
+          format.number(account.currentBalance, 'currency')
+        ]
+          .filter(Boolean)
+          .join(' · ')}
+      </p>
 
-        {accounts.map((account: Account) => {
-          const isActive = bankRecordId === account.bankRecordId
-
-          return (
-            <TabsContent value={account.bankRecordId} key={account.id} className='space-y-4'>
-              <BankInfo account={account} isActive={isActive} type='full' />
-
-              <TransactionList transactions={currentTransactions} />
-              {totalPages > 1 && (
-                <div className='my-4 w-full'>
-                  <Pagination totalPages={totalPages} page={page} />
-                </div>
-              )}
-            </TabsContent>
-          )
-        })}
-      </Tabs>
-    </section>
+      <TransactionList transactions={transactions.slice(0, 10)} />
+    </Card>
   )
 }
 

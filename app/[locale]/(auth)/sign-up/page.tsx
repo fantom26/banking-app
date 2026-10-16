@@ -1,11 +1,7 @@
 import AuthForm from '@/app/[locale]/(auth)/_components/AuthForm'
 
 const SignUp = () => {
-  return (
-    <section className='flex-center size-full max-sm:px-6'>
-      <AuthForm type='sign-up' />
-    </section>
-  )
+  return <AuthForm type='sign-up' />
 }
 
 export default SignUp

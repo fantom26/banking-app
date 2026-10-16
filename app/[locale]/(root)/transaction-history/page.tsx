@@ -1,13 +1,16 @@
 import { getFormatter, getTranslations } from 'next-intl/server'
 import qs from 'query-string'
 
+import BankCard from '@/app/_components/BankCard'
+import { Card } from '@/app/_components/ui/card'
 import { getAccount, getAccounts } from '@/app/_lib/actions/account.actions'
 import { getLoggedInUser } from '@/app/_lib/actions/user.actions'
+import LinkFirstBank from '@/app/[locale]/(root)/_components/LinkFirstBank'
 import PageHeader from '@/app/[locale]/(root)/_components/PageHeader'
 import { Pagination } from '@/app/[locale]/(root)/_components/Pagination'
-import RightSidebar from '@/app/[locale]/(root)/_components/RightSidebar'
 import TransactionList from '@/app/[locale]/(root)/_components/TransactionList'
 import TransactionDetails from '@/app/[locale]/(root)/transaction-history/_components/TransactionDetails'
+import TransactionDetailsSheet from '@/app/[locale]/(root)/transaction-history/_components/TransactionDetailsSheet'
 
 export default async function TransactionHistory({
   searchParams
@@ -20,19 +23,30 @@ export default async function TransactionHistory({
   if (!user) return null
 
   const accounts = await getAccounts({ userId: user.id })
+  const header = <PageHeader title={t('title')} subtitle={t('subtext')} />
 
-  if (!accounts) return
-
-  const accountsData = accounts?.data
-  const bankRecordId = (id as string) || accountsData[0]?.bankRecordId
-
-  const account = bankRecordId ? await getAccount({ bankRecordId, userId: user.id }) : null
-
-  if (!account) {
-    return <div>{t('loadError')}</div>
+  if (accounts.data.length === 0) {
+    return (
+      <>
+        {header}
+        <LinkFirstBank user={user} />
+      </>
+    )
   }
 
-  const accountTransactions = account.transactions || []
+  const bankRecordId = (id as string) || accounts.data[0].bankRecordId
+  const account = await getAccount({ bankRecordId, userId: user.id })
+
+  if (!account) {
+    return (
+      <>
+        {header}
+        <Card className='py-10 text-center text-body text-muted-foreground'>{t('loadError')}</Card>
+      </>
+    )
+  }
+
+  const accountTransactions = account.transactions
   const rowsPerPage = 10
   const totalPages = Math.ceil(accountTransactions.length / rowsPerPage)
 
@@ -53,49 +67,66 @@ export default async function TransactionHistory({
 
   return (
     <>
-      <PageHeader title={t('title')} subtitle={t('subtext')} />
+      {header}
 
-      <div className='flex gap-6'>
-        <div className='min-w-0 flex-1 space-y-6'>
-          <div className='transactions-account'>
-            <div className='flex flex-col gap-2'>
-              <h2 className='text-18 font-bold text-white'>{account.data.name}</h2>
-              <p className='text-14 text-blue-25'>{account.data.officialName}</p>
-              <p className='text-14 font-semibold tracking-[1.1px] text-white'>
-                ●●●● ●●●● ●●●● {account.data.mask}
-              </p>
-            </div>
-            <div className='transactions-account-balance'>
-              <p className='text-14'>{t('currentBalance')}</p>
-              <p className='text-center text-24 font-bold'>
-                {format.number(account.data.currentBalance, 'currency')}
-              </p>
-            </div>
-          </div>
-
-          <section className='flex w-full flex-col gap-6'>
-            <TransactionList
-              variant='table'
-              transactions={currentTransactions}
-              rowHref={(transaction) =>
-                qs.stringifyUrl(
-                  { url: '/transaction-history', query: { id, page, tx: transaction.id } },
-                  { skipNull: true, skipEmptyString: true }
-                )
-              }
-              selectedId={selectedTransaction?.id}
-            />
-            {totalPages > 1 && (
-              <div className='my-4 w-full'>
-                <Pagination totalPages={totalPages} page={currentPage} />
-              </div>
-            )}
-          </section>
+      <Card className='gap-4 sm:flex-row sm:items-center'>
+        <div className='w-24 shrink-0 max-sm:hidden'>
+          <BankCard
+            name={account.data.name}
+            mask={account.data.mask}
+            holder={`${user.firstName} ${user.lastName}`}
+          />
         </div>
-        <RightSidebar>
-          <TransactionDetails transaction={selectedTransaction} closeHref={closeDetailsHref} />
-        </RightSidebar>
-      </div>
+        <div className='flex min-w-0 flex-1 flex-col gap-0.5'>
+          <h2 className='truncate text-title font-semibold'>{account.data.name}</h2>
+          {account.data.officialName && (
+            <p className='truncate text-caption text-muted-foreground'>
+              {account.data.officialName}
+            </p>
+          )}
+          <p className='text-caption text-muted-foreground tabular-nums'>
+            •••• {account.data.mask}
+          </p>
+        </div>
+        <div className='flex flex-col gap-0.5 sm:items-end'>
+          <span className='text-caption text-muted-foreground'>{t('currentBalance')}</span>
+          <span className='text-stat font-bold tracking-tight tabular-nums'>
+            {format.number(account.data.currentBalance, 'currency')}
+          </span>
+        </div>
+      </Card>
+
+      <Card className='gap-0 pt-2 pb-4'>
+        <TransactionList
+          variant='table'
+          transactions={currentTransactions}
+          rowHref={(transaction) =>
+            qs.stringifyUrl(
+              { url: '/transaction-history', query: { id, page, tx: transaction.id } },
+              { skipNull: true, skipEmptyString: true }
+            )
+          }
+          selectedId={selectedTransaction?.id}
+        />
+        {totalPages > 1 && (
+          <div className='flex flex-wrap items-center justify-between gap-2.5 pt-4 text-sm text-muted-foreground'>
+            <span>
+              {t('showing', {
+                from: indexOfFirstTransaction + 1,
+                to: Math.min(indexOfLastTransaction, accountTransactions.length),
+                total: accountTransactions.length
+              })}
+            </span>
+            <Pagination totalPages={totalPages} page={currentPage} />
+          </div>
+        )}
+      </Card>
+
+      {selectedTransaction && (
+        <TransactionDetailsSheet closeHref={closeDetailsHref}>
+          <TransactionDetails transaction={selectedTransaction} />
+        </TransactionDetailsSheet>
+      )}
     </>
   )
 }

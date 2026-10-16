@@ -1,14 +1,19 @@
 'use client'
+
 import { useState } from 'react'
+
+import { cn } from 'cn'
+import { useTranslations } from 'next-intl'
 
 import Icon from '@/app/_components/Icon'
 import { Button } from '@/app/_components/ui/button'
 
-const Copy = ({ title }: { title: string }) => {
+const Copy = ({ value, label }: { value: string; label: string }) => {
+  const t = useTranslations('Copy')
   const [hasCopied, setHasCopied] = useState(false)
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(title)
+    navigator.clipboard.writeText(value)
     setHasCopied(true)
 
     setTimeout(() => {
@@ -17,16 +22,24 @@ const Copy = ({ title }: { title: string }) => {
   }
 
   return (
-    <Button
-      data-state='closed'
-      className='mt-3 flex max-w-[320px] gap-4'
-      variant='secondary'
-      onClick={copyToClipboard}
-    >
-      <p className='line-clamp-1 w-full max-w-full text-xs font-medium text-black-2'>{title}</p>
-
-      <Icon name={hasCopied ? 'check' : 'copy'} className='mr-2 size-4' />
-    </Button>
+    <div className='flex flex-col gap-1.5'>
+      <span className='text-caption text-muted-foreground'>{label}</span>
+      <Button
+        variant='outline'
+        onClick={copyToClipboard}
+        aria-label={t('copy', { label })}
+        className='w-full justify-between gap-3 font-medium'
+      >
+        <span className='truncate tabular-nums'>{value}</span>
+        <Icon
+          name={hasCopied ? 'check' : 'copy'}
+          className={cn('text-muted-foreground', { 'text-success': hasCopied })}
+        />
+      </Button>
+      <span aria-live='polite' className='sr-only'>
+        {hasCopied ? t('copied') : ''}
+      </span>
+    </div>
   )
 }
 

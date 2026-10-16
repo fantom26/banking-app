@@ -7,11 +7,10 @@
     "appName": "Vaultly"
   },
   "Auth": {
-    "signInTitle": "Iniciar sesión",
-    "signUpTitle": "Registrarse",
-    "linkAccountTitle": "Vincular cuenta",
-    "enterDetails": "Ingresa tus datos",
-    "linkAccountSubtitle": "Vincula tu cuenta para comenzar",
+    "signInTitle": "Hola de nuevo",
+    "signUpTitle": "Crea tu cuenta",
+    "linkAccountTitle": "Vincula tu banco",
+    "linkAccountSubtitle": "Conecta una cuenta bancaria de EE. UU. a través de Plaid para empezar.",
     "fields": {
       "firstName": {
         "label": "Nombre",
@@ -55,13 +54,29 @@
       }
     },
     "signInButton": "Iniciar sesión",
-    "signUpButton": "Registrarse",
-    "loading": "Cargando...",
+    "signUpButton": "Crear cuenta",
+    "loading": "Cargando…",
     "noAccount": "¿No tienes una cuenta?",
     "haveAccount": "¿Ya tienes una cuenta?",
     "signUpLink": "Regístrate",
     "signInLink": "Inicia sesión",
-    "imageAlt": "Imagen de autenticación"
+    "signInSubtitle": "Inicia sesión para ver tus cuentas y transferencias.",
+    "signUpSubtitle": "Verificaremos tu identidad antes de que vincules cuentas bancarias de EE. UU.",
+    "panel": {
+      "badge": "Cuentas bancarias de EE. UU. · Conectadas con Plaid",
+      "title": "Todas tus cuentas, una vista clara de tu dinero.",
+      "holder": "Avery Reyes",
+      "cards": {
+        "checking": {
+          "name": "First Plains Bank",
+          "subtitle": "Cuenta corriente"
+        },
+        "savings": {
+          "name": "Cascade Credit Union",
+          "subtitle": "Ahorro de alto rendimiento"
+        }
+      }
+    }
   },
   "Navigation": {
     "home": "Panel",
@@ -82,17 +97,22 @@
     "linkBankHint": "Abre la ventana segura de Plaid"
   },
   "HomePage": {
-    "welcome": "¡Hola, <highlight>{name}</highlight>!",
-    "subtext": "Este es el subtexto de la página de inicio.",
+    "welcome": "Hola de nuevo, {name}",
+    "subtext": "Esto es lo que está pasando hoy con tus cuentas.",
     "recentTransactions": "Transacciones recientes",
     "viewAll": "Ver todo",
-    "myBanks": "Mis bancos",
-    "addBank": "Agregar banco",
     "topCategories": "Categorías principales",
-    "bankAccounts": "Cuentas bancarias: {count}",
+    "bankAccounts": "{count, plural, one {# cuenta bancaria} other {# cuentas bancarias}}",
     "totalCurrentBalance": "Saldo actual total",
     "chartLabel": "Bancos",
-    "otherAccounts": "Otras cuentas"
+    "otherAccounts": "Otras cuentas",
+    "emptySubtext": "Vincula una cuenta para empezar.",
+    "myCards": "Mis tarjetas",
+    "transfer": "Transferir",
+    "available": "Saldo disponible",
+    "accountSwitcher": "Elige una cuenta",
+    "categoryCount": "{count, plural, one {# transacción} other {# transacciones}}",
+    "noCategories": "Aún no hay categorías"
   },
   "Pagination": {
     "label": "Paginación",
@@ -116,7 +136,6 @@
   },
   "TransactionDetails": {
     "title": "Detalles de la transacción",
-    "empty": "Selecciona una transacción para ver sus detalles.",
     "close": "Cerrar",
     "sections": {
       "overview": "Resumen",
@@ -168,38 +187,47 @@
     }
   },
   "MyBanks": {
-    "title": "Mis cuentas bancarias",
-    "subtext": "Administra tus actividades bancarias sin esfuerzo.",
-    "yourCards": "Tus tarjetas"
+    "title": "Cuentas",
+    "subtext": "Tus cuentas bancarias de EE. UU. vinculadas y sus saldos.",
+    "currentBalance": "Saldo actual",
+    "sharableId": "ID para compartir",
+    "viewTransactions": "Ver transacciones"
   },
   "Transfer": {
-    "title": "Transferencia de pago",
-    "subtext": "Proporciona los detalles o notas relacionados con la transferencia",
-    "sourceBankLabel": "Selecciona el banco de origen",
-    "sourceBankDescription": "Selecciona la cuenta bancaria desde la que quieres transferir fondos",
-    "noteLabel": "Nota de la transferencia (opcional)",
-    "noteDescription": "Proporciona cualquier información o instrucción adicional relacionada con la transferencia",
-    "notePlaceholder": "Escribe una nota breve aquí",
-    "recipientHeading": "Datos de la cuenta bancaria",
-    "recipientDescription": "Ingresa los datos de la cuenta bancaria del destinatario",
-    "emailLabel": "Correo electrónico del destinatario",
-    "emailPlaceholder": "ej.: juanperez@gmail.com",
-    "sharableIdLabel": "ID compartible de Plaid del destinatario",
-    "sharableIdPlaceholder": "Ingresa el número de cuenta público",
+    "title": "Transferir fondos",
+    "subtext": "Envía dinero a otro usuario de Vaultly por ACH.",
+    "sourceBankLabel": "Desde",
+    "noteLabel": "Nota de la transferencia",
+    "noteDescription": "Obligatoria · la verá el destinatario",
+    "notePlaceholder": "p. ej., alquiler de octubre",
+    "emailLabel": "Correo del destinatario",
+    "emailPlaceholder": "nombre@ejemplo.com",
+    "sharableIdLabel": "Para",
+    "sharableIdPlaceholder": "Pega el ID para compartir del destinatario",
     "amountLabel": "Monto",
-    "amountPlaceholder": "ej.: 5.00",
+    "amountPlaceholder": "0.00",
     "submit": "Transferir fondos",
-    "sending": "Enviando...",
+    "sending": "Enviando…",
     "genericError": "Algo salió mal. Inténtalo de nuevo.",
-    "bankPlaceholder": "Selecciona un banco",
+    "bankPlaceholder": "Selecciona una cuenta",
     "noBanks": "No hay cuentas bancarias vinculadas",
-    "bankListLabel": "Selecciona un banco para mostrar"
+    "bankListLabel": "Tus cuentas",
+    "sharableIdDescription": "Pide al destinatario el ID para compartir de su página Cuentas.",
+    "available": "Disponible: {amount}",
+    "summary": "Resumen",
+    "summaryTo": "Para",
+    "summaryFrom": "Desde",
+    "summaryMethod": "Método",
+    "methodAch": "Transferencia bancaria ACH",
+    "total": "Total",
+    "achNote": "Se envía por ACH a través de Dwolla. Revisa los datos del destinatario antes de enviar."
   },
   "TransactionHistory": {
-    "title": "Historial de transacciones",
-    "subtext": "Consulta los datos de tu banco y tus transacciones.",
+    "title": "Transacciones",
+    "subtext": "Todas las transacciones registradas y pendientes de esta cuenta.",
     "currentBalance": "Saldo actual",
-    "loadError": "No se pudo cargar la cuenta"
+    "loadError": "No se pudo cargar esta cuenta.",
+    "showing": "Mostrando {from}–{to} de {total}"
   },
   "Validation": {
     "invalidEmail": "Correo electrónico no válido",
@@ -245,6 +273,15 @@
     "TRAVEL": "Viajes",
     "RENT_AND_UTILITIES": "Alquiler y servicios",
     "OTHER": "Otros"
+  },
+  "EmptyState": {
+    "title": "Vincula tu primer banco",
+    "description": "Vaultly reúne en una sola vista los saldos y transacciones de las cuentas bancarias de EE. UU. que vincules, y te permite enviar dinero a otros usuarios de Vaultly.",
+    "note": "Abre la ventana segura de Plaid"
+  },
+  "Copy": {
+    "copy": "Copiar {label}",
+    "copied": "Copiado"
   },
   "UserMenu": {
     "label": "Menú de la cuenta de {name}"

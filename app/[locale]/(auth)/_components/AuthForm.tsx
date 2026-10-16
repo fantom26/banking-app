@@ -24,6 +24,8 @@ import CustomInput from './CustomInput'
 
 type AuthFormValues = SignInParams | SignUpParams
 
+type FieldName = keyof SignUpParams
+
 const AuthForm = ({ type }: AuthFormProps) => {
   const locale = useLocale()
   const t = useTranslations('Auth')
@@ -59,133 +61,98 @@ const AuthForm = ({ type }: AuthFormProps) => {
     else form.setError('root', { message: result.error })
   }
 
-  return (
-    <section className='auth-form'>
-      <header className='flex flex-col gap-5 md:gap-8'>
-        <Link href='/' className='flex cursor-pointer items-center gap-1'>
-          <Logo size='lg' />
-        </Link>
+  const title = user
+    ? t('linkAccountTitle')
+    : type === 'sign-in'
+      ? t('signInTitle')
+      : t('signUpTitle')
+  const subtitle = user
+    ? t('linkAccountSubtitle')
+    : type === 'sign-in'
+      ? t('signInSubtitle')
+      : t('signUpSubtitle')
 
-        <div className='flex flex-col gap-1 md:gap-3'>
-          <h1 className='text-24 font-semibold text-gray-900 lg:text-36'>
-            {user
-              ? t('linkAccountTitle')
-              : type === 'sign-in'
-                ? t('signInTitle')
-                : t('signUpTitle')}
-            <p className='text-16 font-normal text-gray-600'>
-              {user ? t('linkAccountSubtitle') : t('enterDetails')}
-            </p>
-          </h1>
-        </div>
+  const input = (name: FieldName) => (
+    <CustomInput
+      control={form.control}
+      name={name}
+      label={t(`fields.${name}.label`)}
+      placeholder={t(`fields.${name}.placeholder`)}
+    />
+  )
+
+  return (
+    <section className='flex w-full max-w-105 flex-col gap-7'>
+      <Link
+        href='/'
+        className='w-fit rounded-md outline-none focus-visible:ring-3 focus-visible:ring-ring/30'
+      >
+        <Logo size='lg' />
+      </Link>
+
+      <header className='flex flex-col gap-2'>
+        <h1 className='text-3xl font-semibold tracking-tight md:text-4xl'>{title}</h1>
+        <p className='text-body text-muted-foreground'>{subtitle}</p>
       </header>
+
       {user ? (
-        <div className='flex flex-col gap-4'>
-          <PlaidLink user={user} size='lg' className='w-full' />
-        </div>
+        <PlaidLink user={user} size='lg' className='w-full' />
       ) : (
         <>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
+            <form onSubmit={form.handleSubmit(onSubmit)} className='flex flex-col gap-3.5'>
               {type === 'sign-up' && (
                 <>
-                  <div className='flex gap-4'>
-                    <CustomInput
-                      control={form.control}
-                      name='firstName'
-                      label={t('fields.firstName.label')}
-                      placeholder={t('fields.firstName.placeholder')}
-                    />
-                    <CustomInput
-                      control={form.control}
-                      name='lastName'
-                      label={t('fields.lastName.label')}
-                      placeholder={t('fields.lastName.placeholder')}
-                    />
+                  <div className='grid gap-3 sm:grid-cols-2'>
+                    {input('firstName')}
+                    {input('lastName')}
                   </div>
-                  <CustomInput
-                    control={form.control}
-                    name='address1'
-                    label={t('fields.address1.label')}
-                    placeholder={t('fields.address1.placeholder')}
-                  />
-                  <CustomInput
-                    control={form.control}
-                    name='city'
-                    label={t('fields.city.label')}
-                    placeholder={t('fields.city.placeholder')}
-                  />
-                  <div className='flex gap-4'>
-                    <CustomInput
-                      control={form.control}
-                      name='state'
-                      label={t('fields.state.label')}
-                      placeholder={t('fields.state.placeholder')}
-                    />
-                    <CustomInput
-                      control={form.control}
-                      name='postalCode'
-                      label={t('fields.postalCode.label')}
-                      placeholder={t('fields.postalCode.placeholder')}
-                    />
+                  {input('address1')}
+                  <div className='grid gap-3 sm:grid-cols-[1.6fr_0.7fr_1fr]'>
+                    {input('city')}
+                    {input('state')}
+                    {input('postalCode')}
                   </div>
-                  <div className='flex gap-4'>
-                    <CustomInput
-                      control={form.control}
-                      name='dateOfBirth'
-                      label={t('fields.dateOfBirth.label')}
-                      placeholder={t('fields.dateOfBirth.placeholder')}
-                    />
-                    <CustomInput
-                      control={form.control}
-                      name='ssn'
-                      label={t('fields.ssn.label')}
-                      placeholder={t('fields.ssn.placeholder')}
-                    />
+                  <div className='grid gap-3 sm:grid-cols-2'>
+                    {input('dateOfBirth')}
+                    {input('ssn')}
                   </div>
                 </>
               )}
 
-              <CustomInput
-                control={form.control}
-                name='email'
-                label={t('fields.email.label')}
-                placeholder={t('fields.email.placeholder')}
-              />
+              {input('email')}
+              {input('password')}
 
-              <CustomInput
-                control={form.control}
-                name='password'
-                label={t('fields.password.label')}
-                placeholder={t('fields.password.placeholder')}
-              />
+              {errors.root && (
+                <p role='alert' className='text-sm text-destructive'>
+                  {errors.root.message}
+                </p>
+              )}
 
-              {errors.root && <p className='form-message'>{errors.root.message}</p>}
-
-              <div className='flex flex-col gap-4'>
-                <Button type='submit' disabled={isSubmitting} className='form-btn'>
-                  {isSubmitting ? (
-                    <>
-                      <Icon name='loader' className='size-5 animate-spin' /> &nbsp; {t('loading')}
-                    </>
-                  ) : type === 'sign-in' ? (
-                    t('signInButton')
-                  ) : (
-                    t('signUpButton')
-                  )}
-                </Button>
-              </div>
+              <Button type='submit' size='lg' disabled={isSubmitting} className='mt-1.5 w-full'>
+                {isSubmitting ? (
+                  <>
+                    <Icon name='loader' className='animate-spin' />
+                    {t('loading')}
+                  </>
+                ) : type === 'sign-in' ? (
+                  t('signInButton')
+                ) : (
+                  t('signUpButton')
+                )}
+              </Button>
             </form>
           </Form>
 
-          <footer className='flex justify-center gap-1'>
-            <p className='text-14 font-normal text-gray-600'>
-              {type === 'sign-in' ? t('noAccount') : t('haveAccount')}
-            </p>
-            <Link href={type === 'sign-in' ? '/sign-up' : '/sign-in'} className='form-link'>
+          <p className='flex flex-wrap justify-center gap-1.5 text-sm text-muted-foreground'>
+            {type === 'sign-in' ? t('noAccount') : t('haveAccount')}
+            <Link
+              href={type === 'sign-in' ? '/sign-up' : '/sign-in'}
+              className='font-semibold text-accent-foreground hover:underline'
+            >
               {type === 'sign-in' ? t('signUpLink') : t('signInLink')}
             </Link>
-          </footer>
+          </p>
         </>
       )}
     </section>

@@ -91,8 +91,6 @@ declare type Bank = {
   sharableId: string
 }
 
-declare type AccountTypes = 'depository' | 'credit' | 'loan ' | 'investment' | 'other'
-
 declare type CategoryCount = {
   name: string
   count: number
@@ -124,12 +122,6 @@ declare type NewDwollaCustomerParams = {
   ssn: string
 }
 
-declare interface BankInfoProps {
-  account: Account
-  isActive: boolean
-  type: 'full' | 'card'
-}
-
 declare interface PaginationProps {
   page: number
   totalPages: number
@@ -137,40 +129,6 @@ declare interface PaginationProps {
 
 declare interface AuthFormProps {
   type: 'sign-in' | 'sign-up'
-}
-
-declare interface BankDropdownProps {
-  accounts: Account[]
-  setValue?: UseFormSetValue<unknown>
-  otherStyles?: string
-}
-
-declare interface BankTabItemProps {
-  account: Account
-  isActive: boolean
-}
-
-declare interface TotalBalanceBoxProps {
-  accounts: Account[]
-  totalBanks: number
-  totalCurrentBalance: number
-}
-
-declare interface RightSidebarProps {
-  user: User
-  transactions: Transaction[]
-  banks: Account[]
-}
-
-declare interface RecentTransactionsProps {
-  accounts: Account[]
-  transactions: Transaction[]
-  bankRecordId: string
-  page: number
-}
-
-declare interface CategoryProps {
-  category: CategoryCount
 }
 
 declare interface PaymentTransferFormProps {
