@@ -321,7 +321,7 @@
 }
 
 @utility plaidlink-default {
-  @apply flex cursor-pointer flex-row justify-start! gap-3 rounded-lg bg-transparent!;
+  @apply flex cursor-pointer flex-row justify-start! gap-3 rounded-lg bg-transparent! md:p-3 xl:justify-start 2xl:p-4;
 }
 
 @utility auth-asset {
@@ -385,7 +385,7 @@
 }
 
 @utility footer {
-  @apply flex flex-col gap-2 py-6;
+  @apply flex flex-col gap-4 py-6;
 }
 
 @utility footer_row {

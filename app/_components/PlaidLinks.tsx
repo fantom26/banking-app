@@ -51,9 +51,9 @@ const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
       {t('connectBank')}
     </Button>
   ) : (
-    <Button onClick={() => open()} className='plaidlink-default'>
+    <Button onClick={() => open()} className='plaidlink-default max-xl:justify-center!'>
       <Icon name='landmark' className='size-6 text-gray-500' />
-      <p className='text-[16px] font-semibold text-black-2'>{t('connectBank')}</p>
+      <p className='text-[16px] font-semibold text-black-2 max-xl:hidden'>{t('connectBank')}</p>
     </Button>
   )
 }

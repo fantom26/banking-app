@@ -25,13 +25,13 @@ const Footer = ({ user, type = 'desktop' }: FooterProps) => {
           <p className='truncate text-14 font-normal text-gray-600'>{user.email}</p>
         </div>
 
-        <form action={signOut.bind(null, locale)}>
+        <form className='max-xl:w-full' action={signOut.bind(null, locale)}>
           <button
             type='submit'
             className={isMobile ? 'footer_image-mobile' : 'footer_image'}
             aria-label={t('logOut')}
           >
-            <Icon name='log-out' className='size-5 text-gray-500' />
+            <Icon name='log-out' className='size-6 text-gray-500' />
           </button>
         </form>
       </div>

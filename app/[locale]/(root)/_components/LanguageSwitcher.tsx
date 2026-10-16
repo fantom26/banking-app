@@ -48,7 +48,7 @@ const LanguageSwitcher = ({ type = 'desktop' }: { type?: 'mobile' | 'desktop' })
             'max-xl:justify-center': !isMobile
           })}
         >
-          <Icon name='languages' className='size-5 text-gray-500' />
+          <Icon name='languages' className='size-6 text-gray-500' />
           <span className={cn({ 'max-xl:hidden': !isMobile })}>{localeLabels[locale]}</span>
         </Button>
       </DropdownMenuTrigger>
