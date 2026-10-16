@@ -1,6 +1,5 @@
 'use client'
 
-import { cn } from 'cn'
 import { useTranslations } from 'next-intl'
 
 import Icon from '@/app/_components/Icon'
@@ -8,6 +7,7 @@ import PlaidLink from '@/app/_components/PlaidLinks'
 import { Button } from '@/app/_components/ui/button'
 import { Card } from '@/app/_components/ui/card'
 import { Link } from '@/app/_i18n/navigation'
+import { cn } from '@/app/_lib/cn'
 
 import AnimatedCounter from './AnimatedCounter'
 import BalanceSplitChart from './BalanceSplitChart'

@@ -4,7 +4,6 @@ import { useTransition } from 'react'
 
 import { useSearchParams } from 'next/navigation'
 
-import { cn } from 'cn'
 import { hasLocale, useLocale, useTranslations } from 'next-intl'
 
 import Icon from '@/app/_components/Icon'
@@ -21,6 +20,7 @@ import {
 import { usePathname, useRouter } from '@/app/_i18n/navigation'
 import { type Locale, localeLabels, routing } from '@/app/_i18n/routing'
 import { signOut } from '@/app/_lib/actions/auth.actions'
+import { cn } from '@/app/_lib/cn'
 
 const UserMenu = ({ user, className }: { user: User; className?: string }) => {
   const t = useTranslations('UserMenu')

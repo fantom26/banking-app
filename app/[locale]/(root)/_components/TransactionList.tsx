@@ -1,7 +1,7 @@
-import { cn } from 'cn'
 import { useFormatter, useTranslations } from 'next-intl'
 
 import { Link } from '@/app/_i18n/navigation'
+import { cn } from '@/app/_lib/cn'
 import { groupByDay, signedAmount } from '@/app/_lib/finance'
 import { humanize, removeSpecialCharacters } from '@/app/_lib/utils'
 

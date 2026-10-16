@@ -1,5 +1,6 @@
-import { cn } from 'cn'
 import { useTranslations } from 'next-intl'
+
+import { cn } from '@/app/_lib/cn'
 
 const sizes = {
   sm: { mark: 'size-7', name: 'text-[19px]' },

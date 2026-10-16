@@ -1,8 +1,9 @@
 'use client'
 
 import * as SheetPrimitive from '@radix-ui/react-dialog'
-import { cn } from 'cn'
 import { XIcon } from 'lucide-react'
+
+import { cn } from '@/app/_lib/cn'
 
 import { Button } from './button'
 

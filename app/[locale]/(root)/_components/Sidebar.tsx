@@ -1,6 +1,5 @@
 'use client'
 
-import { cn } from 'cn'
 import { useLocale, useTranslations } from 'next-intl'
 
 import Icon from '@/app/_components/Icon'
@@ -8,6 +7,7 @@ import Logo from '@/app/_components/Logo'
 import PlaidLink from '@/app/_components/PlaidLinks'
 import { Link, usePathname } from '@/app/_i18n/navigation'
 import { signOut } from '@/app/_lib/actions/auth.actions'
+import { cn } from '@/app/_lib/cn'
 import { sidebarLinks } from '@/app/[locale]/(root)/_lib/constants'
 import { isActiveRoute } from '@/app/[locale]/(root)/_lib/utils'
 

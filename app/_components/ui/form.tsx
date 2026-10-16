@@ -2,7 +2,6 @@ import * as React from 'react'
 
 import * as LabelPrimitive from '@radix-ui/react-label'
 import { Slot } from '@radix-ui/react-slot'
-import { cn } from 'cn'
 import { type Messages, useTranslations } from 'next-intl'
 import {
   Controller,
@@ -12,6 +11,8 @@ import {
   FormProvider,
   useFormContext
 } from 'react-hook-form'
+
+import { cn } from '@/app/_lib/cn'
 
 import { Label } from './label'
 

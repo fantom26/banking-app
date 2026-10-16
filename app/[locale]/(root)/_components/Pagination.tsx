@@ -2,11 +2,11 @@
 
 import { useSearchParams } from 'next/navigation'
 
-import { cn } from 'cn'
 import { useTranslations } from 'next-intl'
 
 import Icon from '@/app/_components/Icon'
 import { Link, usePathname } from '@/app/_i18n/navigation'
+import { cn } from '@/app/_lib/cn'
 
 const pageItems = (page: number, totalPages: number) => {
   const pages = [...new Set([1, page - 1, page, page + 1, totalPages])]

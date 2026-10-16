@@ -9,11 +9,11 @@ import {
   LinearScale,
   Tooltip
 } from 'chart.js'
-import { cn } from 'cn'
 import { useFormatter, useTranslations } from 'next-intl'
 import { Bar } from 'react-chartjs-2'
 
 import { useChartColors } from '@/app/_lib/chart-colors'
+import { cn } from '@/app/_lib/cn'
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip)
 

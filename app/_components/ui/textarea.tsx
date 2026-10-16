@@ -1,4 +1,4 @@
-import { cn } from 'cn'
+import { cn } from '@/app/_lib/cn'
 
 function Textarea({ className, ...props }: React.ComponentProps<'textarea'>) {
   return (

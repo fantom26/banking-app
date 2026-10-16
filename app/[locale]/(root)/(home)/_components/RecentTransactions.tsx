@@ -1,9 +1,9 @@
-import { cn } from 'cn'
 import { useFormatter, useTranslations } from 'next-intl'
 
 import { Button } from '@/app/_components/ui/button'
 import { Card, CardAction, CardHeader, CardTitle } from '@/app/_components/ui/card'
 import { Link } from '@/app/_i18n/navigation'
+import { cn } from '@/app/_lib/cn'
 import { humanize } from '@/app/_lib/utils'
 import TransactionList from '@/app/[locale]/(root)/_components/TransactionList'
 

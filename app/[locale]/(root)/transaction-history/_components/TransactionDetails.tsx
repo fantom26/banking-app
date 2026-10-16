@@ -1,6 +1,6 @@
-import { cn } from 'cn'
 import { useFormatter, useTranslations } from 'next-intl'
 
+import { cn } from '@/app/_lib/cn'
 import { signedAmount } from '@/app/_lib/finance'
 import { humanize, lastPathSegment, removeSpecialCharacters } from '@/app/_lib/utils'
 import CategoryChip from '@/app/[locale]/(root)/_components/CategoryChip'

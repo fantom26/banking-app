@@ -1,7 +1,7 @@
-import { cn } from 'cn'
 import { useTranslations } from 'next-intl'
 
 import { Card, CardHeader, CardTitle } from '@/app/_components/ui/card'
+import { cn } from '@/app/_lib/cn'
 import { countTransactionCategories } from '@/app/[locale]/(root)/(home)/_lib/utils'
 
 import Category from './Category'

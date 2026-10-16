@@ -1,10 +1,10 @@
 'use client'
 
-import { cn } from 'cn'
 import { useTranslations } from 'next-intl'
 
 import Icon from '@/app/_components/Icon'
 import { Link, usePathname } from '@/app/_i18n/navigation'
+import { cn } from '@/app/_lib/cn'
 import { sidebarLinks } from '@/app/[locale]/(root)/_lib/constants'
 import { isActiveRoute } from '@/app/[locale]/(root)/_lib/utils'
 

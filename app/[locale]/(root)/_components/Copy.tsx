@@ -2,11 +2,11 @@
 
 import { useState } from 'react'
 
-import { cn } from 'cn'
 import { useTranslations } from 'next-intl'
 
 import Icon from '@/app/_components/Icon'
 import { Button } from '@/app/_components/ui/button'
+import { cn } from '@/app/_lib/cn'
 
 const Copy = ({ value, label }: { value: string; label: string }) => {
   const t = useTranslations('Copy')

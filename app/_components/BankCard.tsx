@@ -1,5 +1,6 @@
-import { cn } from 'cn'
 import { useTranslations } from 'next-intl'
+
+import { cn } from '@/app/_lib/cn'
 
 import Icon from './Icon'
 
