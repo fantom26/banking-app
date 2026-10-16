@@ -7,7 +7,7 @@
     "appName": "Vaultly"
   },
   "Auth": {
-    "signInTitle": "Bon retour",
+    "signInTitle": "Ravi de vous revoir",
     "signUpTitle": "Créez votre compte",
     "linkAccountTitle": "Liez votre banque",
     "linkAccountSubtitle": "Connectez un compte bancaire américain via Plaid pour commencer.",
@@ -30,11 +30,11 @@
       },
       "state": {
         "label": "État",
-        "placeholder": "Exemple : NY"
+        "placeholder": "NY"
       },
       "postalCode": {
         "label": "Code postal",
-        "placeholder": "Exemple : 11101"
+        "placeholder": "11101"
       },
       "dateOfBirth": {
         "label": "Date de naissance",

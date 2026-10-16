@@ -30,11 +30,11 @@
       },
       "state": {
         "label": "Estado",
-        "placeholder": "Ejemplo: NY"
+        "placeholder": "NY"
       },
       "postalCode": {
         "label": "Código postal",
-        "placeholder": "Ejemplo: 11101"
+        "placeholder": "11101"
       },
       "dateOfBirth": {
         "label": "Fecha de nacimiento",
