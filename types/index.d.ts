@@ -136,23 +136,9 @@ declare interface BankInfoProps {
   type: 'full' | 'card'
 }
 
-declare interface HeaderBoxProps {
-  title: string | React.ReactNode
-  subtext: string
-}
-
-declare interface MobileNavProps {
-  user: User
-}
-
 declare interface PaginationProps {
   page: number
   totalPages: number
-}
-
-declare interface PlaidLinkProps {
-  user: User
-  variant?: 'primary'
 }
 
 declare interface AuthFormProps {
@@ -176,19 +162,10 @@ declare interface TotalBalanceBoxProps {
   totalCurrentBalance: number
 }
 
-declare interface FooterProps {
-  user: User
-  type?: 'mobile' | 'desktop'
-}
-
 declare interface RightSidebarProps {
   user: User
   transactions: Transaction[]
   banks: Account[]
-}
-
-declare interface SiderbarProps {
-  user: User
 }
 
 declare interface RecentTransactionsProps {

@@ -34,16 +34,22 @@
     "imageAlt": "Auth image"
   },
   "Navigation": {
-    "home": "Home",
-    "myBanks": "My Banks",
-    "transactionHistory": "Transaction History",
-    "transferFunds": "Transfer Funds",
-    "openMenu": "Open navigation",
+    "home": "Dashboard",
+    "myBanks": "Accounts",
+    "transactionHistory": "Transactions",
+    "transferFunds": "Transfers",
+    "short": {
+      "home": "Home",
+      "myBanks": "Accounts",
+      "transactionHistory": "Activity",
+      "transferFunds": "Transfer"
+    },
     "menuTitle": "Navigation",
     "logOut": "Log out"
   },
   "PlaidLink": {
-    "connectBank": "Connect bank"
+    "linkBank": "Link a bank",
+    "linkBankHint": "Opens Plaid’s secure window"
   },
   "HomePage": {
     "welcome": "Hello <highlight>{name}</highlight>!",
@@ -177,6 +183,9 @@
     "amountPositive": "Amount must be greater than 0",
     "senderBankRequired": "Please select a valid bank account",
     "sharableIdMin": "Please select a valid sharable Id"
+  },
+  "UserMenu": {
+    "label": "Account menu for {name}"
   },
   "LanguageSwitcher": {
     "label": "Language"

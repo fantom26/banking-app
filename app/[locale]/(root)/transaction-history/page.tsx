@@ -3,7 +3,7 @@ import qs from 'query-string'
 
 import { getAccount, getAccounts } from '@/app/_lib/actions/account.actions'
 import { getLoggedInUser } from '@/app/_lib/actions/user.actions'
-import HeaderBox from '@/app/[locale]/(root)/_components/HeaderBox'
+import PageHeader from '@/app/[locale]/(root)/_components/PageHeader'
 import { Pagination } from '@/app/[locale]/(root)/_components/Pagination'
 import RightSidebar from '@/app/[locale]/(root)/_components/RightSidebar'
 import TransactionsTable from '@/app/[locale]/(root)/_components/TransactionsTable'
@@ -52,13 +52,11 @@ export default async function TransactionHistory({
   )
 
   return (
-    <div className='home transactions'>
-      <div className='home-content'>
-        <div className='transactions-header'>
-          <HeaderBox title={t('title')} subtext={t('subtext')} />
-        </div>
+    <>
+      <PageHeader title={t('title')} subtitle={t('subtext')} />
 
-        <div className='space-y-6'>
+      <div className='flex gap-6'>
+        <div className='min-w-0 flex-1 space-y-6'>
           <div className='transactions-account'>
             <div className='flex flex-col gap-2'>
               <h2 className='text-18 font-bold text-white'>{account.data.name}</h2>
@@ -88,10 +86,10 @@ export default async function TransactionHistory({
             )}
           </section>
         </div>
+        <RightSidebar>
+          <TransactionDetails transaction={selectedTransaction} closeHref={closeDetailsHref} />
+        </RightSidebar>
       </div>
-      <RightSidebar>
-        <TransactionDetails transaction={selectedTransaction} closeHref={closeDetailsHref} />
-      </RightSidebar>
-    </div>
+    </>
   )
 }

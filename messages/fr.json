@@ -64,16 +64,22 @@
     "imageAlt": "Image d’authentification"
   },
   "Navigation": {
-    "home": "Accueil",
-    "myBanks": "Mes banques",
-    "transactionHistory": "Historique des transactions",
-    "transferFunds": "Transférer des fonds",
-    "openMenu": "Ouvrir la navigation",
+    "home": "Tableau de bord",
+    "myBanks": "Comptes",
+    "transactionHistory": "Transactions",
+    "transferFunds": "Virements",
+    "short": {
+      "home": "Accueil",
+      "myBanks": "Comptes",
+      "transactionHistory": "Activité",
+      "transferFunds": "Virement"
+    },
     "menuTitle": "Navigation",
     "logOut": "Se déconnecter"
   },
   "PlaidLink": {
-    "connectBank": "Connecter une banque"
+    "linkBank": "Lier une banque",
+    "linkBankHint": "Ouvre la fenêtre sécurisée de Plaid"
   },
   "HomePage": {
     "welcome": "Bonjour <highlight>{name}</highlight> !",
@@ -207,6 +213,9 @@
     "amountPositive": "Le montant doit être supérieur à 0",
     "senderBankRequired": "Veuillez sélectionner un compte bancaire valide",
     "sharableIdMin": "Veuillez saisir un ID partageable valide"
+  },
+  "UserMenu": {
+    "label": "Menu du compte de {name}"
   },
   "LanguageSwitcher": {
     "label": "Langue"

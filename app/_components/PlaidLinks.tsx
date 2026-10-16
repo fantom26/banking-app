@@ -11,7 +11,11 @@ import { createLinkToken, exchangePublicToken } from '@/app/_lib/actions/bank.ac
 
 import Icon from './Icon'
 
-const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
+type PlaidLinkProps = Omit<React.ComponentProps<typeof Button>, 'onClick' | 'disabled'> & {
+  user: User
+}
+
+const PlaidLink = ({ user, children, ...buttonProps }: PlaidLinkProps) => {
   const router = useRouter()
   const t = useTranslations('PlaidLink')
   const locale = useLocale()
@@ -46,14 +50,14 @@ const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
 
   const { open, ready } = usePlaidLink(config)
 
-  return variant === 'primary' ? (
-    <Button onClick={() => open()} disabled={!ready} className='plaidlink-primary'>
-      {t('connectBank')}
-    </Button>
-  ) : (
-    <Button onClick={() => open()} className='plaidlink-default max-xl:justify-center!'>
-      <Icon name='landmark' className='size-6 text-gray-500' />
-      <p className='text-[16px] font-semibold text-black-2 max-xl:hidden'>{t('connectBank')}</p>
+  return (
+    <Button {...buttonProps} onClick={() => open()} disabled={!ready}>
+      {children ?? (
+        <>
+          <Icon name='link' />
+          {t('linkBank')}
+        </>
+      )}
     </Button>
   )
 }

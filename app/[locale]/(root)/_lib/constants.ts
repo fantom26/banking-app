@@ -7,12 +7,12 @@ export const sidebarLinks: {
   key: 'home' | 'myBanks' | 'transactionHistory' | 'transferFunds'
 }[] = [
   {
-    icon: 'house',
+    icon: 'layout-grid',
     route: '/',
     key: 'home'
   },
   {
-    icon: 'circle-dollar-sign',
+    icon: 'landmark',
     route: '/my-banks',
     key: 'myBanks'
   },
@@ -22,7 +22,7 @@ export const sidebarLinks: {
     key: 'transactionHistory'
   },
   {
-    icon: 'send',
+    icon: 'arrow-left-right',
     route: '/payment-transfer',
     key: 'transferFunds'
   }

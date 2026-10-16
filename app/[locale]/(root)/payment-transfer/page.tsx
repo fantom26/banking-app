@@ -2,7 +2,7 @@ import { getTranslations } from 'next-intl/server'
 
 import { getAccounts } from '@/app/_lib/actions/account.actions'
 import { getLoggedInUser } from '@/app/_lib/actions/user.actions'
-import HeaderBox from '@/app/[locale]/(root)/_components/HeaderBox'
+import PageHeader from '@/app/[locale]/(root)/_components/PageHeader'
 import PaymentTransferForm from '@/app/[locale]/(root)/payment-transfer/_components/PaymentTransferForm'
 
 export default async function Transfer() {
@@ -17,12 +17,12 @@ export default async function Transfer() {
   const accountsData = accounts?.data
 
   return (
-    <section className='payment-transfer'>
-      <HeaderBox title={t('title')} subtext={t('subtext')} />
+    <>
+      <PageHeader title={t('title')} subtitle={t('subtext')} />
 
-      <section className='size-full pt-5'>
+      <section className='size-full'>
         <PaymentTransferForm accounts={accountsData} />
       </section>
-    </section>
+    </>
   )
 }

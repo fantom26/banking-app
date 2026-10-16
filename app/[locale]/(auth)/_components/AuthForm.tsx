@@ -81,7 +81,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
       </header>
       {user ? (
         <div className='flex flex-col gap-4'>
-          <PlaidLink user={user} variant='primary' />
+          <PlaidLink user={user} size='lg' className='w-full' />
         </div>
       ) : (
         <>
