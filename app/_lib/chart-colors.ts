@@ -8,7 +8,7 @@ export type ChartColors = {
   border: string
 }
 
-let cached: ChartColors | null = null
+let cached: { theme: string | null; colors: ChartColors } | null = null
 
 export function getChartColors(): ChartColors {
   const styles = getComputedStyle(document.documentElement)
@@ -23,8 +23,16 @@ export function getChartColors(): ChartColors {
   }
 }
 
-const subscribe = () => () => {}
+const subscribe = (onChange: () => void) => {
+  const observer = new MutationObserver(onChange)
+  observer.observe(document.documentElement, { attributeFilter: ['data-theme'] })
+  return () => observer.disconnect()
+}
 
-const getSnapshot = () => (cached ??= getChartColors())
+const getSnapshot = () => {
+  const theme = document.documentElement.getAttribute('data-theme')
+  if (cached?.theme !== theme) cached = { theme, colors: getChartColors() }
+  return cached.colors
+}
 
 export const useChartColors = () => useSyncExternalStore(subscribe, getSnapshot, () => null)

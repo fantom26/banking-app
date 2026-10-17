@@ -30,6 +30,7 @@ import {
   Shapes,
   ShieldCheck,
   ShoppingBag,
+  SunMoon,
   Utensils,
   Wrench
 } from 'lucide-react'
@@ -66,6 +67,7 @@ const icons = {
   shapes: Shapes,
   'shield-check': ShieldCheck,
   'shopping-bag': ShoppingBag,
+  'sun-moon': SunMoon,
   utensils: Utensils,
   wrench: Wrench
 } satisfies Record<string, LucideIcon>

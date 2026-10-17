@@ -258,5 +258,11 @@
   },
   "LanguageSwitcher": {
     "label": "Language"
+  },
+  "Theme": {
+    "label": "Theme",
+    "system": "System",
+    "light": "Light",
+    "dark": "Dark"
   }
 }

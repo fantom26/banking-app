@@ -2,7 +2,10 @@
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
 
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
 :root {
+  color-scheme: light;
   --radius: 10px;
 
   --background: #f2f4f7;
@@ -52,6 +55,50 @@
   --elevation-card: 0 1px 2px rgb(16 24 40 / 0.04), 0 1px 3px rgb(16 24 40 / 0.03);
   --elevation-raised: 0 1px 2px rgb(16 24 40 / 0.06), 0 0 0 1px var(--border);
   --elevation-plastic: 0 18px 36px -18px rgb(11 40 80 / 0.45);
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  --background: #0c0f13;
+  --foreground: #e9edf2;
+  --card: #161b22;
+  --card-foreground: #e9edf2;
+  --popover: #161b22;
+  --popover-foreground: #e9edf2;
+  --primary: #3d9bff;
+  --primary-foreground: #0c0f13;
+  --secondary: #1d232c;
+  --secondary-foreground: #e9edf2;
+  --muted: #1d232c;
+  --muted-foreground: #a3adbd;
+  --placeholder: #8b95a5;
+  --accent: #132438;
+  --accent-foreground: #79b9ff;
+  --destructive: #ff8a80;
+  --destructive-muted: #3a1c1c;
+  --success: #5fd39a;
+  --success-muted: #11291e;
+  --border: #29313c;
+  --input: #36404c;
+  --ring: #3d9bff;
+
+  --sidebar: #101419;
+  --sidebar-foreground: #a3adbd;
+  --sidebar-accent: #1d232c;
+  --sidebar-accent-foreground: #e9edf2;
+  --sidebar-primary: #79b9ff;
+  --sidebar-border: #29313c;
+
+  --chart-1: #3987e5;
+  --chart-2: #d95926;
+  --chart-3: #199e70;
+  --chart-4: #c98500;
+  --chart-5: #d55181;
+
+  --elevation-card: none;
+  --elevation-raised: 0 0 0 1px var(--border);
+  --elevation-plastic: 0 18px 36px -18px rgb(0 0 0 / 0.7);
 }
 
 @theme inline {

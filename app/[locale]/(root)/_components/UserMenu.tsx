@@ -1,6 +1,6 @@
 'use client'
 
-import { useTransition } from 'react'
+import { useState, useTransition } from 'react'
 
 import { useSearchParams } from 'next/navigation'
 
@@ -21,16 +21,19 @@ import { usePathname, useRouter } from '@/app/_i18n/navigation'
 import { type Locale, localeLabels, routing } from '@/app/_i18n/routing'
 import { signOut } from '@/app/_lib/actions/auth.actions'
 import { cn } from '@/app/_lib/cn'
+import { getTheme, saveTheme, type Theme, themes } from '@/app/_lib/theme'
 
 const UserMenu = ({ user, className }: { user: User; className?: string }) => {
   const t = useTranslations('UserMenu')
   const tNav = useTranslations('Navigation')
   const tLanguage = useTranslations('LanguageSwitcher')
+  const tTheme = useTranslations('Theme')
   const locale = useLocale() as Locale
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const [isPending, startTransition] = useTransition()
+  const [theme, setTheme] = useState<Theme>(getTheme)
 
   const initials = `${user.firstName[0] ?? ''}${user.lastName[0] ?? ''}`.toUpperCase()
 
@@ -41,6 +44,14 @@ const UserMenu = ({ user, className }: { user: User; className?: string }) => {
     startTransition(() =>
       router.replace(query ? `${pathname}?${query}` : pathname, { locale: next })
     )
+  }
+
+  const switchTheme = (next: string) => {
+    const value = themes.find((theme) => theme === next)
+    if (!value) return
+
+    saveTheme(value)
+    setTheme(value)
   }
 
   return (
@@ -71,6 +82,18 @@ const UserMenu = ({ user, className }: { user: User; className?: string }) => {
           {routing.locales.map((value) => (
             <DropdownMenuRadioItem key={value} value={value} lang={value} className='py-1.5'>
               {localeLabels[value]}
+            </DropdownMenuRadioItem>
+          ))}
+        </DropdownMenuRadioGroup>
+        <DropdownMenuSeparator />
+        <DropdownMenuLabel className='flex items-center gap-2 px-2'>
+          <Icon name='sun-moon' className='size-3.5' />
+          {tTheme('label')}
+        </DropdownMenuLabel>
+        <DropdownMenuRadioGroup value={theme} onValueChange={switchTheme}>
+          {themes.map((value) => (
+            <DropdownMenuRadioItem key={value} value={value} className='py-1.5'>
+              {tTheme(value)}
             </DropdownMenuRadioItem>
           ))}
         </DropdownMenuRadioGroup>

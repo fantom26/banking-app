@@ -61,6 +61,12 @@ The app is US-only (see the Dwolla note), so the locales target people who live 
 - Other locales override English key by key. A string that isn't translated yet shows in English instead of failing.
 - Form validation errors are message keys in the zod schemas (`app/_lib/utils.ts`), translated where `FormMessage` renders them.
 
+### Theme
+
+- Users pick System, Light or Dark in the user menu. The choice is saved to `localStorage` and applied as `data-theme` on `<html>` (`app/_lib/theme.ts`).
+- An inline script in `<head>` (`app/_components/ThemeScript.tsx`) sets the theme before the first paint, so the page doesn't flash the wrong theme. This follows the Next.js guide on [preventing flash before hydration](https://nextjs.org/docs/app/guides/preventing-flash-before-hydration#themes).
+- The theme is stored in `localStorage` rather than a cookie, because reading a cookie in the root layout would opt the whole app out of static prerendering.
+
 ## Future ideas
 
 [] add i18n

@@ -5,6 +5,7 @@ import type { Metadata } from 'next'
 import { hasLocale, NextIntlClientProvider } from 'next-intl'
 import { getTranslations } from 'next-intl/server'
 
+import ThemeScript from '@/app/_components/ThemeScript'
 import { routing } from '@/app/_i18n/routing'
 
 import './globals.css'
@@ -31,7 +32,10 @@ export default async function RootLayout({ children, params }: LayoutProps<'/[lo
   if (!hasLocale(routing.locales, locale)) notFound()
 
   return (
-    <html lang={locale} className={`${geist.variable} h-full antialiased`}>
+    <html lang={locale} className={`${geist.variable} h-full antialiased`} suppressHydrationWarning>
+      <head>
+        <ThemeScript />
+      </head>
       <body className='flex min-h-full flex-col'>
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>
