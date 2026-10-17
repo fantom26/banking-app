@@ -12,9 +12,13 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
+  DropdownMenuPortal,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
   DropdownMenuTrigger
 } from '@/app/_components/ui/dropdown-menu'
 import { usePathname, useRouter } from '@/app/_i18n/navigation'
@@ -74,29 +78,46 @@ const UserMenu = ({ user, className }: { user: User; className?: string }) => {
           <span className='truncate text-caption font-normal'>{user.email}</span>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuLabel className='flex items-center gap-2 px-2'>
-          <Icon name='languages' className='size-3.5' />
-          {tLanguage('label')}
-        </DropdownMenuLabel>
-        <DropdownMenuRadioGroup value={locale} onValueChange={switchLocale}>
-          {routing.locales.map((value) => (
-            <DropdownMenuRadioItem key={value} value={value} lang={value} className='py-1.5'>
-              {localeLabels[value]}
-            </DropdownMenuRadioItem>
-          ))}
-        </DropdownMenuRadioGroup>
-        <DropdownMenuSeparator />
-        <DropdownMenuLabel className='flex items-center gap-2 px-2'>
-          <Icon name='sun-moon' className='size-3.5' />
-          {tTheme('label')}
-        </DropdownMenuLabel>
-        <DropdownMenuRadioGroup value={theme} onValueChange={switchTheme}>
-          {themes.map((value) => (
-            <DropdownMenuRadioItem key={value} value={value} className='py-1.5'>
-              {tTheme(value)}
-            </DropdownMenuRadioItem>
-          ))}
-        </DropdownMenuRadioGroup>
+        <DropdownMenuSub>
+          <DropdownMenuSubTrigger className='px-2 py-1.5'>
+            <Icon name='languages' />
+            {tLanguage('label')}
+            <span className='flex-1 truncate text-right text-muted-foreground'>
+              {localeLabels[locale]}
+            </span>
+          </DropdownMenuSubTrigger>
+          <DropdownMenuPortal>
+            <DropdownMenuSubContent className='min-w-40 p-1.5'>
+              <DropdownMenuRadioGroup value={locale} onValueChange={switchLocale}>
+                {routing.locales.map((value) => (
+                  <DropdownMenuRadioItem key={value} value={value} lang={value} className='py-1.5'>
+                    {localeLabels[value]}
+                  </DropdownMenuRadioItem>
+                ))}
+              </DropdownMenuRadioGroup>
+            </DropdownMenuSubContent>
+          </DropdownMenuPortal>
+        </DropdownMenuSub>
+        <DropdownMenuSub>
+          <DropdownMenuSubTrigger className='px-2 py-1.5'>
+            <Icon name='sun-moon' />
+            {tTheme('label')}
+            <span className='flex-1 truncate text-right text-muted-foreground'>
+              {tTheme(theme)}
+            </span>
+          </DropdownMenuSubTrigger>
+          <DropdownMenuPortal>
+            <DropdownMenuSubContent className='min-w-40 p-1.5'>
+              <DropdownMenuRadioGroup value={theme} onValueChange={switchTheme}>
+                {themes.map((value) => (
+                  <DropdownMenuRadioItem key={value} value={value} className='py-1.5'>
+                    {tTheme(value)}
+                  </DropdownMenuRadioItem>
+                ))}
+              </DropdownMenuRadioGroup>
+            </DropdownMenuSubContent>
+          </DropdownMenuPortal>
+        </DropdownMenuSub>
         <DropdownMenuSeparator />
         <DropdownMenuItem
           className='px-2 py-1.5'
